@@ -14,3 +14,10 @@
 		*Gênero
 		*Categoria
 		*Unidade	
+		
+# 28 de outubro de 2015
+	*Criação das classes
+		*Venda
+		*DaoCliente
+	*Criação da interface
+		*DaoCrud		
