@@ -1,0 +1,50 @@
+CREATE DATABASE tb4bim;
+
+CREATE TABLE `tb4bim`.`cliente`(  
+  `id_c` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(60),
+  `telefone` VARCHAR(18),
+  `endereco` VARCHAR(60),
+  `cidade` VARCHAR(20),
+  `estado` VARCHAR(2),
+  `email` VARCHAR(60),
+  `genero` CHAR(1),
+  PRIMARY KEY (`id_c`)
+);
+
+CREATE TABLE `tb4bim`.`usuario`(  
+  `id_u` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_c` INT(11) NOT NULL,
+  `cliente` VARCHAR(20) NOT NULL,
+  `senha` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_u`),
+  UNIQUE INDEX `usuario` (`id_c`),
+  CONSTRAINT `usuario` FOREIGN KEY (`id_c`) REFERENCES `tb4bim`.`cliente`(`id_c`)
+);
+
+
+CREATE TABLE `tb4bim`.`produto`(  
+  `cod_p` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `cod_barra` INT NOT NULL,
+  `categoria` VARCHAR(30) NOT NULL,
+  `descricao` VARCHAR(255) NOT NULL,
+  `unidade` INT NOT NULL,
+  `custo` DECIMAL(13,2) NOT NULL,
+  `marge_lucro` DECIMAL(13,2) NOT NULL,
+  PRIMARY KEY (`id_p`)
+);
+
+CREATE TABLE `tb4bim`.`venda`(  
+  `cod_v` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_c` INT(11) NOT NULL,
+  `cliente` VARCHAR(60) NOT NULL,
+  `cod_p` INT(11) NOT NULL,
+  `produto` VARCHAR(255) NOT NULL,
+  `vtotal` DECIMAL(13,2) NOT NULL,
+  `vpagamento` DECIMAL(13,2) NOT NULL,
+  `troco` DECIMAL(13,2) NOT NULL,
+  `data` DATE NOT NULL,
+  `hora` TIME NOT NULL,
+  PRIMARY KEY (`cod_v`)
+);
+

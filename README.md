@@ -20,4 +20,6 @@
 		*Venda
 		*DaoCliente
 	*Criação da interface
-		*DaoCrud		
+		*DaoCrud
+	*Arquivo txt
+		*SCRIPT_DO_BANCO.TXT	
