@@ -22,4 +22,12 @@
 	*Criação da interface
 		*DaoCrud
 	*Arquivo txt
-		*SCRIPT_DO_BANCO.TXT	
+		*SCRIPT_DO_BANCO.TXT
+	*Criação dos métodos da classe DaoCliente
+		*inserir
+		*Atualizar
+# 29 de outubro de 2015
+	*Criação dos métodos da classe DaoCliente
+		*Deletar
+		*BuscarUm
+		*Listar		
