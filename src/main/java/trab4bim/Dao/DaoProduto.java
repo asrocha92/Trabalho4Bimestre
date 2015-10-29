@@ -2,6 +2,7 @@ package trab4bim.Dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -57,9 +58,17 @@ public class DaoProduto implements CrudDao<Produto>{
 		
 	}
 
-	public void deletar(int tipo) {
-		// TODO Auto-generated method stub
-		
+	public void deletar(int id) {
+		try {
+			ps = Conexao.con
+					.prepareStatement("DELETE FROM PRODUTO WHERE COD_P =" + id);
+			int res = ps.executeUpdate();
+			ps.close();
+			JOptionPane.showMessageDialog(null, res
+					+ ", Usuário excluido com sucesso.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Produto buscarUm(int id) {
