@@ -7,20 +7,19 @@ package trab4bim.Dao;
  * 			   para trabalhar dados do cliente. 
  */
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import trab4bim.classes.Cliente;
 
 public class DaoCliente implements CrudDao<Cliente> {
 
-	Connection con;
+	private PreparedStatement ps;
 
 	public void inserir(Cliente c) {
-		PreparedStatement ps;
 		try {
-			ps = con.prepareStatement("INSERT INTO CLIENTE (NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps = Conexao.con.prepareStatement("INSERT INTO CLIENTE (NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getTelefone());
 			ps.setString(3, c.getEndreco());
@@ -28,13 +27,30 @@ public class DaoCliente implements CrudDao<Cliente> {
 			ps.setString(5, c.getEstado().getNome());
 			ps.setString(6, c.getEmail());
 			ps.setString(7, c.getGenero().getNome());
+			ps.executeUpdate();
+			ps.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void atualizar(Cliente c) {
-		// TODO Auto-generated method stub
+		try {
+			ps = Conexao.con.prepareStatement("UPDATE CLIENTE SET NOME = ?"
+					+ " TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?,"
+					+ " EMAIL = ?, GENERO = ? WHERE ID ="+c.getId());
+			ps.setString(1, c.getNome());
+			ps.setString(2, c.getTelefone());
+			ps.setString(3, c.getEndreco());
+			ps.setString(4, c.getCidade());
+			ps.setString(5, c.getEstado().getNome());
+			ps.setString(6, c.getEmail());
+			ps.setString(7, c.getGenero().getNome());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deletar(int tipo) {
