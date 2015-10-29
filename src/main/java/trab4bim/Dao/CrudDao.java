@@ -16,7 +16,7 @@ public interface CrudDao <T>{
 	
 	public void deletar(int tipo);
 	
-	public T buscarUm(T tipo);
+	public T buscarUm(int id);
 	
 	public List<T> listar();  
 }
