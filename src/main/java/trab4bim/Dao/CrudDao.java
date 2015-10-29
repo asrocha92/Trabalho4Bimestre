@@ -12,7 +12,7 @@ public interface CrudDao <T>{
 
 	public void inserir(T tipo);
 	
-	public T atualizar();
+	public void atualizar(T tipo);
 	
 	public void deletar(int tipo);
 	

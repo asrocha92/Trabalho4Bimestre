@@ -12,7 +12,7 @@ public class Produto {
 	private int codigo;
 	private Categoria categoria;
 	private String descricao;
-	private Unidade unidade;
+	private int unidade;
 	private BigDecimal custo;
 	private BigDecimal margenLucro;
 	
@@ -41,10 +41,10 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Unidade getUnidade() {
+	public int getUnidade() {
 		return unidade;
 	}
-	public void setUnidade(Unidade unidade) {
+	public void setUnidade(int unidade) {
 		this.unidade = unidade;
 	}
 	public BigDecimal getCusto() {
