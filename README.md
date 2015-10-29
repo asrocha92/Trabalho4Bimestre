@@ -41,4 +41,5 @@
 		*Inserir
 		*Atualizar
 		*Deletar
-		*BuscarUm				
+		*BuscarUm
+		*Listar				

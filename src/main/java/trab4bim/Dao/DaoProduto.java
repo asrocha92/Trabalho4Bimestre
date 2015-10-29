@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -97,7 +98,24 @@ public class DaoProduto implements CrudDao<Produto>{
 	}
 
 	public List<Produto> listar() {
-		// TODO Auto-generated method stub
+		lista = new ArrayList<Produto>();
+		try {
+			st = Conexao.con.createStatement();
+			rs = st.executeQuery("SELECT COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO "
+					+ "FROM PRODUTO");
+			while(rs.next()){
+				lista.add(p = new Produto(rs.getInt("COD_P") , rs.getInt("COD_BARRA"),
+						Categoria.valueOf(Categoria.class ,rs.getString("CATEGORIA")),
+						rs.getString("DESCRICAO"), rs.getInt("UNIDADE"), rs.getBigDecimal("CUSTO"),
+						rs.getBigDecimal("MARGE_LUCRO")));
+			}
+			rs.close();
+			st.close();
+			if(lista != null)
+				return lista;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
