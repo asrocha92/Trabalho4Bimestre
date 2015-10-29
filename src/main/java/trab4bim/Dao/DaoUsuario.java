@@ -34,7 +34,18 @@ public class DaoUsuario implements CrudDao<Usuario>{
 	}
 
 	public void atualizar(Usuario u) {
-		
+		try {
+			ps = Conexao.con.prepareStatement("UPDATE USUARIO SET ID_C = ?, CLIENTE = ?, SENHA =? WHERE ID_U"+u.getId());
+			ps.setInt(1, u.getIdCliente());
+			ps.setString(2, u.getCliente());
+			ps.setString(3, u.getSenha());
+			ps.executeUpdate();
+			ps.close();
+			JOptionPane.showMessageDialog(null, "Usuário atualizado com\n"
+													 + "Sucesso");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deletar(int id_u) {
