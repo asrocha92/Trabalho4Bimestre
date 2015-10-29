@@ -23,11 +23,20 @@
 		*DaoCrud
 	*Arquivo txt
 		*SCRIPT_DO_BANCO.TXT
-	*Criação dos métodos da classe DaoCliente
-		*inserir
+	*Criação e implementação dos métodos da classe DaoCliente
+		*Inserir
 		*Atualizar
 # 29 de outubro de 2015
-	*Criação dos métodos da classe DaoCliente
+	*Criação e implementação dos métodos da classe DaoCliente
 		*Deletar
 		*BuscarUm
-		*Listar		
+		*Listar
+	*Criação e implementação dos métodos da classe DaoUsuário
+		*Inserir
+		*Atualizar
+		*Deletar
+		*BuscarUm
+		*Listar
+	*Criação e implementação dos métodos da classe DaoProduto
+		*Inserir
+		*Atualizar				

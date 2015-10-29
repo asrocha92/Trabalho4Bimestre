@@ -15,6 +15,11 @@ public class Usuario {
 	private String cliente;
 	private String senha;
 	
+	//Contrutores da classe Usuario
+	public Usuario(){}
+
+	public Usuario(int id_u, int id_c, String cliente){}
+	
 	//métodos geters e serts necessários para o usuário
 	public int getIdCliente() {
 		return idCliente;

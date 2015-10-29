@@ -8,7 +8,7 @@ package trab4bim.classes;
 import java.math.BigDecimal;
 
 public class Produto {
-	private int id;
+	private int cod;
 	private int codigo;
 	private Categoria categoria;
 	private String descricao;
@@ -17,16 +17,16 @@ public class Produto {
 	private BigDecimal margenLucro;
 	
 	//criação dos geters e seters
-	public int getId() {
-		return id;
+	public int getCod() {
+		return cod;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCod(int id) {
+		this.cod = id;
 	}
-	public int getCodigo() {
+	public int getCodBarra() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodBarra(int codigo) {
 		this.codigo = codigo;
 	}
 	public Categoria getCategoria() {

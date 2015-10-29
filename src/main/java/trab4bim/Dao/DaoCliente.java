@@ -41,7 +41,8 @@ public class DaoCliente implements CrudDao<Cliente> {
 			ps.setString(7, c.getGenero().getNome());
 			ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, "Cliente: "+c.getNome()+"\n Cadastrado com sucesso.");
+			JOptionPane.showMessageDialog(null, "Cliente: " + c.getNome()
+					+ "\n Cadastrado com sucesso.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,7 +62,8 @@ public class DaoCliente implements CrudDao<Cliente> {
 			ps.setString(7, c.getGenero().getNome());
 			ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, "Cliente: "+c.getNome()+"\n Atualizado com sucesso.");
+			JOptionPane.showMessageDialog(null, "Cliente: " + c.getNome()
+					+ "\n Atualizado com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -92,8 +94,10 @@ public class DaoCliente implements CrudDao<Cliente> {
 						Estado.valueOf(Estado.class, rs.getString("ESTADO")),
 						rs.getString("EMAIL"), Genero.valueOf(Genero.class,
 								rs.getString("GENERO")));
-				return c;
 			}
+			rs.close();
+			st.close();
+			return c;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,16 +110,18 @@ public class DaoCliente implements CrudDao<Cliente> {
 			st = Conexao.con.createStatement();
 			rs = st.executeQuery("SELECT NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO "
 					+ "FROM CLIENTE");
-			while (rs.next()){
+			while (rs.next()) {
 				lista.add(c = new Cliente(rs.getString("NOME"), rs
 						.getString("TELEFONE"), rs.getString("ENDERECO"), rs
 						.getString("CIDADE"), Estado.valueOf(Estado.class,
 						rs.getString("ESTADO")), rs.getString("EMAIL"), Genero
 						.valueOf(Genero.class, rs.getString("GENERO"))));
 			}
-			
-			if(lista != null)
+			rs.close();
+			st.close();
+			if (lista != null)
 				return lista;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
