@@ -49,7 +49,13 @@ public class DaoUsuario implements CrudDao<Usuario>{
 	}
 
 	public void deletar(int id_u) {
-		
+		try {
+			ps = Conexao.con.prepareStatement("DELETE FROM USUARIO WHERE ID = "+id_u);
+			int res = ps.executeUpdate();
+			JOptionPane.showMessageDialog(null, res+", usuário excluido com sucesso.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Usuario buscarUm(int id_u) {
