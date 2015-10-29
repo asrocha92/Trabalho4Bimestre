@@ -8,6 +8,10 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import trab4bim.classes.Categoria;
+import trab4bim.classes.Cliente;
+import trab4bim.classes.Estado;
+import trab4bim.classes.Genero;
 import trab4bim.classes.Produto;
 
 public class DaoProduto implements CrudDao<Produto>{
@@ -72,7 +76,23 @@ public class DaoProduto implements CrudDao<Produto>{
 	}
 
 	public Produto buscarUm(int id) {
-		// TODO Auto-generated method stub
+		try {
+			st = Conexao.con.createStatement();
+			rs = st.executeQuery("SELECT COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO "
+					+ "FROM PRODUTO WHERE COD_P = " + id);
+			rs.next();
+			if (rs.getString("NOME") != null) {
+				p = new Produto(id , rs.getInt("COD_BARRA"),
+						Categoria.valueOf(Categoria.class ,rs.getString("CATEGORIA")),
+						rs.getString("DESCRICAO"), rs.getInt("UNIDADE"), rs.getBigDecimal("CUSTO"),
+						rs.getBigDecimal("MARGE_LUCRO"));
+			}
+			rs.close();
+			st.close();
+			return p;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

@@ -39,4 +39,6 @@
 		*Listar
 	*Criação e implementação dos métodos da classe DaoProduto
 		*Inserir
-		*Atualizar				
+		*Atualizar
+		*Deletar
+		*BuscarUm				
