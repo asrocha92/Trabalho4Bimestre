@@ -1,5 +1,6 @@
 package trab4bim.Dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +19,11 @@ public class DaoUsuario implements CrudDao<Usuario> {
 	private ResultSet rs = null;
 	private Usuario u = null;
 	private List<Usuario> lista = null;
+	private Connection con;
 
 	public void inserir(Usuario u) {
 		try {
-			ps = Conexao.con
+			ps = con
 					.prepareStatement("INSERT INTO USUARIO (ID_C, CLIENTE, SENHA) VALUES (?, ?, ?)");
 			ps.setInt(1, u.getIdCliente());
 			ps.setString(2, u.getCliente());
@@ -37,7 +39,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public void atualizar(Usuario u) {
 		try {
-			ps = Conexao.con
+			ps = con
 					.prepareStatement("UPDATE USUARIO SET ID_C = ?, CLIENTE = ?, SENHA =? WHERE ID_U"
 							+ u.getId());
 			ps.setInt(1, u.getIdCliente());
@@ -54,7 +56,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public void deletar(int id_u) {
 		try {
-			ps = Conexao.con
+			ps = con
 					.prepareStatement("DELETE FROM USUARIO WHERE ID_U = "
 							+ id_u);
 			int res = ps.executeUpdate();
@@ -68,7 +70,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public Usuario buscarUm(int id_u) {
 		try {
-			st = Conexao.con.createStatement();
+			st = con.createStatement();
 			rs = st.executeQuery("SELECT ID_C, CLIENTE, SENHA FROM USUARIO WHERE ID_U = "
 					+ id_u);
 			rs.next();
@@ -87,7 +89,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 	public List<Usuario> listar() {
 		lista = new ArrayList<Usuario>();
 		try {
-			st = Conexao.con.createStatement();
+			st = con.createStatement();
 			rs = st.executeQuery("SELECT ID_U, ID_C, CLIENTE, SENHA FROM USUARIO");
 			while (rs.next()) {
 				lista.add(new Usuario(rs.getInt("ID_U"), rs.getInt("ID_C"), rs

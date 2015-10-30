@@ -12,37 +12,36 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-	
-	public static Connection con;
+	private Connection con;
 	
 	private static Conexao inst;
-	private Conexao(){}
-	
-	public static Conexao getInstace(int valor){
-		if(inst == null)
+	private Conexao(){}	
+	public static Conexao getInstace(){
+		if(inst == null )
 			return inst = new Conexao();
 		return inst;
 	}
 	
-	public static void conOpen(){
+	public Connection conOpen(){
 		String driverName = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost/tb4bim";
 		String user = "root";
 		String pass = "'123'";
 		try {
 			Class.forName(driverName);
-			con = DriverManager.getConnection(url, user, pass);
+			return con = DriverManager.getConnection(url, user, pass);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static void conClose(){
+	public void conClose(){
 		try {
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	};
-	
+	}
+		
 }

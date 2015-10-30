@@ -7,36 +7,69 @@ package trab4bim.classes;
  */
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Venda {
-	private Cliente cliente;
-	private Produto produto;
+	private int cod_v;
+	private int id_c;
+	private int cod_p;
+	private String cliente;
+	private String produto;
 	private BigDecimal vTotal;
+	private BigDecimal vPago;
 	private BigDecimal troco;
-	private Timestamp dataFC;
-	private Timestamp horaFC;
-	
-	//Métodos geters e seters
-	public Cliente getCliente() {
+	private Date data;
+	private Time hora;
+
+	public Venda() {
+	}
+
+	public Venda(int cod_v, int id_c, int cod_p, String cliente,String produto,
+			BigDecimal vTotal, BigDecimal vPago, BigDecimal troco, Date data,
+			Time hora) {
+		this.cod_v = cod_v;
+		this.id_c = id_c;
+		this.cliente = cliente;
+		this.produto = produto;
+		this.vTotal = vTotal;
+		this.vPago = vPago;
+		this.troco = troco;
+		this.data = data;
+		this.hora = hora;
+
+	}
+
+	// Métodos geters e seters
+	public int getCod_v() {
+		return cod_v;
+	}
+	public int getId_c() {
+		return id_c;
+	}
+	public int getCod_p() {
+		return cod_p;
+	}
+	public String getCliente() {
 		return cliente;
 	}
-	public Produto getProduto() {
+	public String getProduto() {
 		return produto;
 	}
 	public BigDecimal getvTotal() {
 		return vTotal;
 	}
+	public BigDecimal getvPago() {
+		return vPago;
+	}
 	public BigDecimal getTroco() {
 		return troco;
 	}
-	public Timestamp getDataFC() {
-		return dataFC;
+	public Date getData() {
+		return data;
 	}
-	public Timestamp getHoraFC() {
-		return horaFC;
+	public Time getHora() {
+		return hora;
 	}
-	
-	
-
 }

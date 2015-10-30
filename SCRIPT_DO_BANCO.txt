@@ -31,7 +31,7 @@ CREATE TABLE `tb4bim`.`produto`(
   `unidade` INT NOT NULL,
   `custo` DECIMAL(13,2) NOT NULL,
   `marge_lucro` DECIMAL(13,2) NOT NULL,
-  PRIMARY KEY (`id_p`)
+  PRIMARY KEY (`cod_p`)
 );
 
 CREATE TABLE `tb4bim`.`venda`(  

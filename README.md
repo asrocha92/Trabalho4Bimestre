@@ -42,4 +42,6 @@
 		*Atualizar
 		*Deletar
 		*BuscarUm
-		*Listar				
+		*Listar
+	*Criação e implementação dos métodos da classe DaoVenda
+		*Inserir				

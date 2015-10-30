@@ -7,6 +7,7 @@ package trab4bim.Dao;
  * 			   para trabalhar dados do cliente. 
  */
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,11 +28,11 @@ public class DaoCliente implements CrudDao<Cliente> {
 	private ResultSet rs = null;
 	private Cliente c = null;
 	private List<Cliente> lista = null;
-
+	private Connection con = Conexao.getInstace().conOpen();
+	
 	public void inserir(Cliente c) {
 		try {
-			ps = Conexao.con
-					.prepareStatement("INSERT INTO CLIENTE (NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps = con.prepareStatement("INSERT INTO CLIENTE (NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getTelefone());
 			ps.setString(3, c.getEndreco());
@@ -50,7 +51,7 @@ public class DaoCliente implements CrudDao<Cliente> {
 
 	public void atualizar(Cliente c) {
 		try {
-			ps = Conexao.con.prepareStatement("UPDATE CLIENTE SET NOME = ?"
+			ps = con.prepareStatement("UPDATE CLIENTE SET NOME = ?"
 					+ " TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?,"
 					+ " EMAIL = ?, GENERO = ? WHERE ID_C =" + c.getId());
 			ps.setString(1, c.getNome());
@@ -71,7 +72,7 @@ public class DaoCliente implements CrudDao<Cliente> {
 
 	public void deletar(int id) {
 		try {
-			ps = Conexao.con
+			ps = con
 					.prepareStatement("DELETE FROM CLIENTE WHERE ID_C =" + id);
 			int res = ps.executeUpdate();
 			ps.close();
@@ -84,7 +85,7 @@ public class DaoCliente implements CrudDao<Cliente> {
 
 	public Cliente buscarUm(int id) {
 		try {
-			st = Conexao.con.createStatement();
+			st = con.createStatement();
 			rs = st.executeQuery("SELECT NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO "
 					+ "FROM CLIENTE WHERE ID_C = " + id);
 			rs.next();
@@ -107,7 +108,7 @@ public class DaoCliente implements CrudDao<Cliente> {
 	public List<Cliente> listar() {
 		lista = new ArrayList<Cliente>();
 		try {
-			st = Conexao.con.createStatement();
+			st = con.createStatement();
 			rs = st.executeQuery("SELECT NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO "
 					+ "FROM CLIENTE");
 			while (rs.next()) {
