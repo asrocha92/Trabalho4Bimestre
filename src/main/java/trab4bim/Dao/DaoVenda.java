@@ -10,14 +10,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import trab4bim.classes.Cliente;
+import trab4bim.classes.Estado;
+import trab4bim.classes.Genero;
 import trab4bim.classes.Venda;
 
 /**
  * 
  * @author Alex Santos Rocha, 29/10/2015 - 19:23:06
  *
- *	Comentario: Classe DaoVenda implementa DaoCrud e 
- *	através implementa métodos que se relacionem com um banco de dados.
+ *         Comentario: Classe DaoVenda implementa DaoCrud e através implementa
+ *         métodos que se relacionem com um banco de dados.
  *
  */
 public class DaoVenda implements CrudDao<Venda> {
@@ -53,7 +55,7 @@ public class DaoVenda implements CrudDao<Venda> {
 		try {
 			ps = con.prepareStatement("UPDATE VENDA SET ID_C = ?, CLIENTE = ?, COD_P = ?,"
 					+ " PRODUTO = ?, VTOTAL = ?, VPAGAMENTO = ?, TROCO = ?, DATA = ?,"
-					+ " HORA = ? WHERE COD_V ="+vd.getCod_v());
+					+ " HORA = ? WHERE COD_V =" + vd.getCod_v());
 			ps.setInt(1, vd.getId_c());
 			ps.setString(2, vd.getCliente());
 			ps.setInt(3, vd.getCod_p());
@@ -73,8 +75,7 @@ public class DaoVenda implements CrudDao<Venda> {
 
 	public void deletar(int cod_v) {
 		try {
-			ps = con
-					.prepareStatement("DELETE FROM VENDA WHERE COD_V =" + cod_v);
+			ps = con.prepareStatement("DELETE FROM VENDA WHERE COD_V =" + cod_v);
 			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, res
@@ -84,8 +85,27 @@ public class DaoVenda implements CrudDao<Venda> {
 		}
 	}
 
-	public Venda buscarUm(int id) {
-		// TODO Auto-generated method stub
+	public Venda buscarUm(int cod_v) {
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT ID_C, CLIENTE, COD_P,"
+					+ "PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA"
+					+ "FROM venda WHERE COD_V = " + cod_v);
+			rs.next();
+			if (rs.getString("NOME") != null) {
+				v = new Venda(rs.getInt("ID_C"), rs.getInt("COD_P"),
+						rs.getString("CLIENTE"), rs.getString("PRODUTO"),
+						rs.getBigDecimal("VTOTAL"),
+						rs.getBigDecimal("VPAGAMENTO"),
+						rs.getBigDecimal("TROCO"), rs.getDate("DATA"),
+						rs.getTime("HORA"));
+			}
+			rs.close();
+			st.close();
+			return v;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

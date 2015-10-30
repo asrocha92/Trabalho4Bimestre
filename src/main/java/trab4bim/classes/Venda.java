@@ -38,6 +38,19 @@ public class Venda {
 		this.troco = troco;
 		this.data = data;
 		this.hora = hora;
+	}
+	
+	public Venda(int id_c, int cod_p, String cliente,String produto,
+			BigDecimal vTotal, BigDecimal vPago, BigDecimal troco, Date data,
+			Time hora) {
+		this.id_c = id_c;
+		this.cliente = cliente;
+		this.produto = produto;
+		this.vTotal = vTotal;
+		this.vPago = vPago;
+		this.troco = troco;
+		this.data = data;
+		this.hora = hora;
 
 	}
 
