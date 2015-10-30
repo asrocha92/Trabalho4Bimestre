@@ -5,13 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import trab4bim.classes.Cliente;
-import trab4bim.classes.Estado;
-import trab4bim.classes.Genero;
 import trab4bim.classes.Venda;
 
 /**
@@ -27,7 +25,7 @@ public class DaoVenda implements CrudDao<Venda> {
 	private Statement st = null;
 	private ResultSet rs = null;
 	private Venda v = null;
-	private List<Cliente> lista = null;
+	private List<Venda> lista = null;
 	private Connection con = Conexao.getInstace().conOpen();
 
 	public void inserir(Venda vd) {
@@ -92,7 +90,7 @@ public class DaoVenda implements CrudDao<Venda> {
 					+ "PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA"
 					+ "FROM venda WHERE COD_V = " + cod_v);
 			rs.next();
-			if (rs.getString("NOME") != null) {
+			if (rs.getString("CLIENTE") != null) {
 				v = new Venda(rs.getInt("ID_C"), rs.getInt("COD_P"),
 						rs.getString("CLIENTE"), rs.getString("PRODUTO"),
 						rs.getBigDecimal("VTOTAL"),
@@ -110,7 +108,25 @@ public class DaoVenda implements CrudDao<Venda> {
 	}
 
 	public List<Venda> listar() {
-		// TODO Auto-generated method stub
+		lista = new ArrayList<Venda>();
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT ID_C, CLIENTE, COD_P,"
+					+ "PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA FROM VENDA");
+			while (rs.next()) {
+				lista.add(v = new Venda(rs.getInt("ID_C"), rs.getInt("COD_P"),
+						rs.getString("CLIENTE"), rs.getString("PRODUTO"), rs
+								.getBigDecimal("VTOTAL"), rs
+								.getBigDecimal("VPAGAMENTO"), rs
+								.getBigDecimal("TROCO"), rs.getDate("DATA"), rs
+								.getTime("HORA")));
+			}
+			rs.close();
+			st.close();
+			return lista;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

@@ -29,7 +29,7 @@ public class DaoCliente implements CrudDao<Cliente> {
 	private Cliente c = null;
 	private List<Cliente> lista = null;
 	private Connection con = Conexao.getInstace().conOpen();
-	
+
 	public void inserir(Cliente c) {
 		try {
 			ps = con.prepareStatement("INSERT INTO CLIENTE (NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -72,8 +72,7 @@ public class DaoCliente implements CrudDao<Cliente> {
 
 	public void deletar(int id) {
 		try {
-			ps = con
-					.prepareStatement("DELETE FROM CLIENTE WHERE ID_C =" + id);
+			ps = con.prepareStatement("DELETE FROM CLIENTE WHERE ID_C =" + id);
 			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, res

@@ -9,7 +9,6 @@ package trab4bim.classes;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 
 public class Venda {
 	private int cod_v;
