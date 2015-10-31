@@ -1,7 +1,11 @@
 package trab4bim.tabelas;
+/**
+ * @author Alex Santos Rocha, 31/10/2015 - 19:55:50
+ * 
+ * Comentario: carrega o modelo da tabela de clientes armazenados no banco
+ */
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -54,16 +58,21 @@ public class TableCliente extends AbstractTableModel{
 		}
 	}
 	
-	public void listar(){
+	public List<Cliente> listar(){
 		DaoCliente c = new DaoCliente();
-		lista = c.listar();
+		this.fireTableStructureChanged();
+		return lista = c.listar();
 	}
 
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-//		returnCliente(lista.get(rowIndex));
-		return false;
+	public void adicionarLista(Cliente c){
+		this.lista.add(c);
+		listar();
 	}
 	
-
+	public void atualizarLista(int indice, Cliente c){
+		lista.set(indice, c);
+		this.fireTableStructureChanged();
+	}
+	
+	
 }

@@ -51,16 +51,16 @@ public class DaoCliente implements CrudDao<Cliente> {
 
 	public void atualizar(Cliente c) {
 		try {
-			ps = con.prepareStatement("UPDATE CLIENTE SET NOME = ?"
+			ps = con.prepareStatement("UPDATE CLIENTE SET NOME = ?,"
 					+ " TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?,"
-					+ " EMAIL = ?, GENERO = ? WHERE ID_C =" + c.getId());
+					+ " EMAIL = ?, GENERO = ? WHERE ID_C = " + c.getId());
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getTelefone());
 			ps.setString(3, c.getEndreco());
 			ps.setString(4, c.getCidade());
-			ps.setString(5, c.getEstado().getNome());
+			ps.setString(5, c.getEstado().name());
 			ps.setString(6, c.getEmail());
-			ps.setString(7, c.getGenero().getNome());
+			ps.setString(7, c.getGenero().name());
 			ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Cliente: " + c.getNome()
