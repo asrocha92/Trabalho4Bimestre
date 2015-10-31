@@ -44,4 +44,14 @@
 		*BuscarUm
 		*Listar
 	*Criação e implementação dos métodos da classe DaoVenda
-		*Inserir				
+		*Inserir
+# 30 de outubro de 2015
+	*Métodos implementados da classe DaoVenda
+		*Atualizar
+		*Deletar
+		*Buscar
+		*Listar
+# 31 de outubro de 2015
+	*Tela principal criada.
+	*ModuraAbstrata pronta
+	*Tela cadastro de cliente						
