@@ -37,9 +37,9 @@ public class DaoCliente implements CrudDao<Cliente> {
 			ps.setString(2, c.getTelefone());
 			ps.setString(3, c.getEndreco());
 			ps.setString(4, c.getCidade());
-			ps.setString(5, c.getEstado().getNome());
+			ps.setString(5, c.getEstado().name());
 			ps.setString(6, c.getEmail());
-			ps.setString(7, c.getGenero().getNome());
+			ps.setString(7, c.getGenero().name());
 			ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Cliente: " + c.getNome()
@@ -127,5 +127,12 @@ public class DaoCliente implements CrudDao<Cliente> {
 		}
 		return null;
 	}
+
+	//get que retorna um tipo de coneção
+	public Connection getCon() {
+		return con;
+	}
+	
+	
 
 }

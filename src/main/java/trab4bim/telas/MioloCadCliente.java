@@ -1,16 +1,28 @@
 package trab4bim.telas;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
 import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import trab4bim.Dao.DaoCliente;
+import trab4bim.classes.Cliente;
+import trab4bim.classes.Estado;
+import trab4bim.classes.Genero;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -22,6 +34,9 @@ public class MioloCadCliente extends JPanel {
 	private JTextField txt_email;
 	private JTable table;
 	private JTextField txt_id;
+	private JComboBox<String> cbx_estado;
+	private JComboBox<String> cbx_genero;
+	private DaoCliente c = new DaoCliente();
 
 	/**
 	 * Create the panel.
@@ -134,7 +149,7 @@ public class MioloCadCliente extends JPanel {
 		gbc_lblEstado.gridy = 6;
 		add(lblEstado, gbc_lblEstado);
 		
-		JComboBox cbx_estado = new JComboBox();
+		cbx_estado = new JComboBox<String>();
 		cbx_estado.setPreferredSize(new Dimension(115, 20));
 		GridBagConstraints gbc_cbx_estado = new GridBagConstraints();
 		gbc_cbx_estado.ipadx = 99;
@@ -171,7 +186,7 @@ public class MioloCadCliente extends JPanel {
 		gbc_lblGenro.gridy = 8;
 		add(lblGenro, gbc_lblGenro);
 		
-		JComboBox cbx_genero = new JComboBox();
+		cbx_genero = new JComboBox<String>();
 		cbx_genero.setPreferredSize(new Dimension(115, 20));
 		GridBagConstraints gbc_cbx_genero = new GridBagConstraints();
 		gbc_cbx_genero.ipadx = 99;
@@ -229,22 +244,33 @@ public class MioloCadCliente extends JPanel {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-
-	}
-
-	protected void deletar() {
-		// TODO Auto-generated method stub
 		
-	}
-
-	protected void atualizar() {
-		// TODO Auto-generated method stub
+		//lista os dados das enum no cbxEstado e cbxGenero
+		listarEnumCBX();
 		
+		//iniciar conexão
+		c.getCon();		
+	}
+	
+	public void listarEnumCBX(){
+		for(Estado e : Estado.values()) cbx_estado.addItem(e.name());
+		for(Genero g : Genero.values()) cbx_genero.addItem(g.name());
 	}
 
 	protected void cadastrar() {
-		// TODO Auto-generated method stub
-		
+		c.inserir(new Cliente(txt_nome.getText(), txt_telefone.getText(), txt_endereco.getText(),
+				txt_cidade.getText(),
+				Estado.valueOf(String.valueOf(cbx_estado.getSelectedItem())),
+				txt_email.getText(),
+				Genero.valueOf(String.valueOf(cbx_genero.getSelectedItem())) 
+				));
 	}
 
+	protected void deletar() {
+		System.out.println(Estado.valueOf(String.valueOf(cbx_estado.getSelectedItem())).name());
+	}
+	
+	protected void atualizar() {
+		
+	}
 }

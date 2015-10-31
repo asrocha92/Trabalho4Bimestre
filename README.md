@@ -54,4 +54,5 @@
 # 31 de outubro de 2015
 	*Tela principal criada.
 	*ModuraAbstrata pronta
-	*Tela cadastro de cliente						
+	*Tela cadastro de cliente
+	*Castro de cliente fucionando atrás da tela.						
