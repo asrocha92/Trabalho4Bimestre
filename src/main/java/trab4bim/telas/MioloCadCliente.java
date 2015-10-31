@@ -22,6 +22,7 @@ import trab4bim.Dao.DaoCliente;
 import trab4bim.classes.Cliente;
 import trab4bim.classes.Estado;
 import trab4bim.classes.Genero;
+import trab4bim.tabelas.TableCliente;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -66,6 +67,7 @@ public class MioloCadCliente extends JPanel {
 		gbc_txt_id.gridy = 1;
 		add(txt_id, gbc_txt_id);
 		txt_id.setColumns(10);
+		txt_id.enable(false);
 		
 		JLabel lblNome_1 = new JLabel("NOME: ");
 		GridBagConstraints gbc_lblNome_1 = new GridBagConstraints();
@@ -250,12 +252,28 @@ public class MioloCadCliente extends JPanel {
 		
 		//iniciar conexão
 		c.getCon();		
+		
+		listaDeCliente();
 	}
 	
+	//lista os dados das enum no cbxEstado e cbxGenero
 	public void listarEnumCBX(){
 		for(Estado e : Estado.values()) cbx_estado.addItem(e.name());
 		for(Genero g : Genero.values()) cbx_genero.addItem(g.name());
 	}
+	
+	//lista dados armazenados no banco na table
+	public void listaDeCliente(){
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				TableCliente tb = new TableCliente();
+				tb.listar();
+				table.setModel(tb);
+			}
+		}).start();
+	}
+	
 
 	protected void cadastrar() {
 		c.inserir(new Cliente(txt_nome.getText(), txt_telefone.getText(), txt_endereco.getText(),
@@ -267,7 +285,7 @@ public class MioloCadCliente extends JPanel {
 	}
 
 	protected void deletar() {
-		System.out.println(Estado.valueOf(String.valueOf(cbx_estado.getSelectedItem())).name());
+		
 	}
 	
 	protected void atualizar() {

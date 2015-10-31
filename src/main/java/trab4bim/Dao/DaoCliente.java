@@ -108,10 +108,10 @@ public class DaoCliente implements CrudDao<Cliente> {
 		lista = new ArrayList<Cliente>();
 		try {
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO "
+			rs = st.executeQuery("SELECT ID_C, NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO "
 					+ "FROM CLIENTE");
 			while (rs.next()) {
-				lista.add(c = new Cliente(rs.getString("NOME"), rs
+				lista.add(c = new Cliente(rs.getInt("ID_C"), rs.getString("NOME"), rs
 						.getString("TELEFONE"), rs.getString("ENDERECO"), rs
 						.getString("CIDADE"), Estado.valueOf(Estado.class,
 						rs.getString("ESTADO")), rs.getString("EMAIL"), Genero
