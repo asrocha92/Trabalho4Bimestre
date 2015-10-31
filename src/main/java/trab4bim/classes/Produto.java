@@ -11,17 +11,17 @@ import java.math.BigDecimal;
 public class Produto {
 	private int cod;
 	private int codBarra;
-	private Categoria categoria;
+	private String categoria;
 	private String descricao;
-	private int unidade;
+	private String unidade;
 	private BigDecimal custo;
 	private BigDecimal margenLucro;
 	
 	//Construtores da classe
 	public Produto(){}
 
-	public Produto(int cod, int codBarra, Categoria categoria,
-			String descricao, int unidade, BigDecimal custo,
+	public Produto(int cod, int codBarra, String categoria,
+			String descricao, String unidade, BigDecimal custo,
 			BigDecimal margenLucro) {
 		this.cod = cod;
 		this.codBarra = codBarra;
@@ -32,8 +32,8 @@ public class Produto {
 		this.margenLucro = margenLucro;
 	}
 
-	public Produto(int codBarra, Categoria categoria, String descricao,
-			int unidade, BigDecimal custo, BigDecimal margenLucro) {
+	public Produto(int codBarra, String categoria, String descricao,
+			String unidade, BigDecimal custo, BigDecimal margenLucro) {
 		this.codBarra = codBarra;
 		this.categoria = categoria;
 		this.descricao = descricao;
@@ -59,11 +59,11 @@ public class Produto {
 		this.codBarra = codigo;
 	}
 
-	public Categoria getCategoria() {
+	public String getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 
@@ -75,11 +75,11 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public int getUnidade() {
+	public String getUnidade() {
 		return unidade;
 	}
 
-	public void setUnidade(int unidade) {
+	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
 

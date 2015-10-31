@@ -54,5 +54,8 @@
 # 31 de outubro de 2015
 	*Tela principal criada.
 	*ModuraAbstrata pronta
+	*Configuração da tela Cliente
 	*Tela cadastro de cliente
-	*Castro de cliente fucionando atrás da tela.						
+	*Cadastro de cliente fucionando através da tela.
+	*Atualizar, deletar e listar em table da tela de cliente prnto.
+	*Configuração da tela de Produto						

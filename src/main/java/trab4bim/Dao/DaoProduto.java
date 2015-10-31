@@ -16,10 +16,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import trab4bim.classes.Categoria;
-import trab4bim.classes.Cliente;
-import trab4bim.classes.Estado;
-import trab4bim.classes.Genero;
 import trab4bim.classes.Produto;
 
 public class DaoProduto implements CrudDao<Produto>{
@@ -36,9 +32,9 @@ public class DaoProduto implements CrudDao<Produto>{
 			ps = con
 					.prepareStatement("INSERT INTO PRODUTO (COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO) VALUES (?, ?, ?, ?, ?, ?)");
 			ps.setInt(1, pd.getCodBarra());
-			ps.setString(2, pd.getCategoria().name());
+			ps.setString(2, pd.getCategoria());
 			ps.setString(3, pd.getDescricao());
-			ps.setInt(4, pd.getUnidade());
+			ps.setString(4, pd.getUnidade());
 			ps.setBigDecimal(5, pd.getCusto());
 			ps.setBigDecimal(6, pd.getMargenLucro());
 			ps.executeUpdate();
@@ -56,9 +52,9 @@ public class DaoProduto implements CrudDao<Produto>{
 					.prepareStatement("UPDATE PRODUTO SET COD_BARRA = ?, CATEGORIA = ?, DESCRICAO = ?,"
 							+ " UNIDADE = ?, CUSTO = ?, MARGE_LUCRO = ? WHERE COD_P = " + pd.getCod());
 			ps.setInt(1, pd.getCodBarra());
-			ps.setString(2, pd.getCategoria().name());
+			ps.setString(2, pd.getCategoria());
 			ps.setString(3, pd.getDescricao());
-			ps.setInt(4, pd.getUnidade());
+			ps.setString(4, pd.getUnidade());
 			ps.setBigDecimal(5, pd.getCusto());
 			ps.setBigDecimal(6, pd.getMargenLucro());
 			ps.executeUpdate();
@@ -92,8 +88,10 @@ public class DaoProduto implements CrudDao<Produto>{
 			rs.next();
 			if (rs.getString("NOME") != null) {
 				p = new Produto(id , rs.getInt("COD_BARRA"),
-						Categoria.valueOf(Categoria.class ,rs.getString("CATEGORIA")),
-						rs.getString("DESCRICAO"), rs.getInt("UNIDADE"), rs.getBigDecimal("CUSTO"),
+						rs.getString("CATEGORIA"),
+						rs.getString("DESCRICAO"), 
+						rs.getString("UNIDADE"), 
+						rs.getBigDecimal("CUSTO"),
 						rs.getBigDecimal("MARGE_LUCRO"));
 			}
 			rs.close();
@@ -112,9 +110,12 @@ public class DaoProduto implements CrudDao<Produto>{
 			rs = st.executeQuery("SELECT COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO "
 					+ "FROM PRODUTO");
 			while(rs.next()){
-				lista.add(p = new Produto(rs.getInt("COD_P") , rs.getInt("COD_BARRA"),
-						Categoria.valueOf(Categoria.class ,rs.getString("CATEGORIA")),
-						rs.getString("DESCRICAO"), rs.getInt("UNIDADE"), rs.getBigDecimal("CUSTO"),
+				lista.add(p = new Produto(rs.getInt("COD_P") , 
+						rs.getInt("COD_BARRA"),
+						rs.getString("CATEGORIA"),
+						rs.getString("DESCRICAO"),
+						rs.getString("UNIDADE"),
+						rs.getBigDecimal("CUSTO"),
 						rs.getBigDecimal("MARGE_LUCRO")));
 			}
 			rs.close();
