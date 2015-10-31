@@ -74,5 +74,9 @@ public class TableCliente extends AbstractTableModel{
 		this.fireTableStructureChanged();
 	}
 	
+	public void deletar(int indice){
+		lista.remove(indice);
+		this.fireTableStructureChanged();
+	}
 	
 }
