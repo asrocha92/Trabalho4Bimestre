@@ -217,7 +217,7 @@ public class MioloCadUsuário extends JPanel {
 		usuario.setSenha(txt_senha.getText());
 		u.inserir(usuario);
 		listaU = u.listar();
-		tableUsuario.adicionarLista(usuario);
+		tableUsuario.adicionarLista(listaU);
 		limpar();
 	}
 

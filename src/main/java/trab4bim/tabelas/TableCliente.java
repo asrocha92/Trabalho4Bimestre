@@ -63,8 +63,8 @@ public class TableCliente extends AbstractTableModel{
 		return lista = c.listar();
 	}
 
-	public void adicionarLista(Cliente c){
-		this.lista.add(c);
+	public void adicionarLista(List<Cliente> c){
+		this.lista = c;
 		this.fireTableStructureChanged();
 	}
 	

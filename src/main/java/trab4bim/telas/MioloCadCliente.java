@@ -313,7 +313,8 @@ public class MioloCadCliente extends JPanel {
 				txt_email.getText(),
 				Genero.valueOf(String.valueOf(cbx_genero.getSelectedItem())));
 		c.inserir(cliente);
-		tableCliente.adicionarLista(cliente);
+		listaC = c.listar();
+		tableCliente.adicionarLista(listaC);
 		limpar();
 	}
 

@@ -98,4 +98,15 @@ public class Produto {
 	public void setMargenLucro(BigDecimal margenLucro) {
 		this.margenLucro = margenLucro;
 	}
+	
+	
+	/**
+	 * @author Alex Santos Rocha, 01/11/2015 - 13:53:52
+	 * 
+	 * @return valor tortal do produto
+	 */
+	public Double CalcularMLP(){
+		return this.custo.doubleValue() + (this.custo.doubleValue() * (this.margenLucro.doubleValue() / 100));
+	}
+	
 }

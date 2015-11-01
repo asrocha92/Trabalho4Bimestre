@@ -57,8 +57,8 @@ public class TableProduto extends AbstractTableModel{
 		return lista = c.listar();
 	}
 
-	public void adicionarLista(Produto c){
-		this.lista.add(c);
+	public void adicionarLista(List<Produto> c){
+		this.lista = c;
 		this.fireTableStructureChanged();
 	}
 	

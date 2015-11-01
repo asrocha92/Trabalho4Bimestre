@@ -68,4 +68,5 @@
 	*Modelo da tabela Usuário criada.
 	*Tela cadastro de usuário implementada com a tela principal.
 	*Tela de venda pronta
-	*Modelo da tabela Venda Pronta						
+	*Modelo da tabela Venda Pronta	
+	*Configuração da tela venda realizando venda, atualizando sem modificar o historico da compra anterior, e deletando.					

@@ -55,8 +55,8 @@ public class TableUsuario extends AbstractTableModel{
 		return lista = u.listar();
 	}
 
-	public void adicionarLista(Usuario u){
-		this.lista.add(u);
+	public void adicionarLista(List<Usuario> u){
+		this.lista = u;
 		this.fireTableStructureChanged();
 	}
 	

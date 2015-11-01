@@ -64,8 +64,8 @@ public class TableVenda extends AbstractTableModel{
 		return lista = v.listar();
 	}
 
-	public void adicionarLista(Venda v){
-		this.lista.add(v);
+	public void adicionarLista(List<Venda> v){
+		this.lista = v;
 		this.fireTableStructureChanged();
 	}
 	

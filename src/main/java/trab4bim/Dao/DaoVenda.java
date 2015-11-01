@@ -39,42 +39,28 @@ public class DaoVenda implements CrudDao<Venda> {
 			ps.setBigDecimal(5, vd.getvTotal());
 			ps.setBigDecimal(6, vd.getvPago());
 			ps.setBigDecimal(7, vd.getTroco());
-			ps.setDate(8, vd.getData());
-			ps.setTime(9, vd.getHora());
+			ps.setString(8, vd.getData());
+			ps.setString(9, vd.getHora());
 			ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, "Venda Efetuada com sucesso.");
+			if (vd.getCod_v() == 0) {
+				JOptionPane.showMessageDialog(null, "Venda Efetuada com sucesso.");
+			}else{
+				JOptionPane.showMessageDialog(null, "Venda Atualiza com sucesso.");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void atualizar(Venda vd) {
-		try {
-			ps = con.prepareStatement("UPDATE VENDA SET ID_C = ?, CLIENTE = ?, COD_P = ?,"
-					+ " PRODUTO = ?, VTOTAL = ?, VPAGAMENTO = ?, TROCO = ?, DATA = ?,"
-					+ " HORA = ? WHERE COD_V =" + vd.getCod_v());
-			ps.setInt(1, vd.getId_c());
-			ps.setString(2, vd.getCliente());
-			ps.setInt(3, vd.getCod_p());
-			ps.setString(4, vd.getProduto());
-			ps.setBigDecimal(5, vd.getvTotal());
-			ps.setBigDecimal(6, vd.getvPago());
-			ps.setBigDecimal(7, vd.getTroco());
-			ps.setDate(8, vd.getData());
-			ps.setTime(9, vd.getHora());
-			ps.executeUpdate();
-			ps.close();
-			JOptionPane.showMessageDialog(null, "Venda Efetuada com sucesso.");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
 	}
 
 	public void deletar(int cod_v) {
 		try {
 			ps = con.prepareStatement("DELETE FROM VENDA WHERE COD_V =" + cod_v);
-			int res = ps.executeUpdate();
+			ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Requisição de venda excluida com sucesso");
 		} catch (SQLException e) {
@@ -90,12 +76,15 @@ public class DaoVenda implements CrudDao<Venda> {
 					+ "FROM venda WHERE COD_V = " + cod_v);
 			rs.next();
 			if (rs.getString("CLIENTE") != null) {
-				v = new Venda(rs.getInt("ID_C"), rs.getInt("COD_P"),
-						rs.getString("CLIENTE"), rs.getString("PRODUTO"),
+				v = new Venda(rs.getInt("ID_C"),
+						rs.getInt("COD_P"),
+						rs.getString("CLIENTE"),
+						rs.getString("PRODUTO"),
 						rs.getBigDecimal("VTOTAL"),
 						rs.getBigDecimal("VPAGAMENTO"),
-						rs.getBigDecimal("TROCO"), rs.getDate("DATA"),
-						rs.getTime("HORA"));
+						rs.getBigDecimal("TROCO"),
+						rs.getString("DATA"),
+						rs.getString("HORA"));
 			}
 			rs.close();
 			st.close();
@@ -110,15 +99,19 @@ public class DaoVenda implements CrudDao<Venda> {
 		lista = new ArrayList<Venda>();
 		try {
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT ID_C, CLIENTE, COD_P,"
+			rs = st.executeQuery("SELECT COD_V, ID_C, CLIENTE, COD_P,"
 					+ "PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA FROM VENDA");
 			while (rs.next()) {
-				lista.add(v = new Venda(rs.getInt("ID_C"), rs.getInt("COD_P"),
-						rs.getString("CLIENTE"), rs.getString("PRODUTO"), rs
-								.getBigDecimal("VTOTAL"), rs
-								.getBigDecimal("VPAGAMENTO"), rs
-								.getBigDecimal("TROCO"), rs.getDate("DATA"), rs
-								.getTime("HORA")));
+				lista.add(v = new Venda(rs.getInt("COD_V"),
+						rs.getInt("ID_C"),
+						rs.getInt("COD_P"),
+						rs.getString("CLIENTE"),
+						rs.getString("PRODUTO"),
+						rs.getBigDecimal("VTOTAL"),
+						rs.getBigDecimal("VPAGAMENTO"),
+						rs.getBigDecimal("TROCO"),
+						rs.getString("DATA"),
+						rs.getString("HORA")));
 			}
 			rs.close();
 			st.close();

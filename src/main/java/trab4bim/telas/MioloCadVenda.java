@@ -17,9 +17,6 @@ import java.awt.Insets;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -38,7 +35,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MioloCadVenda extends JPanel {
@@ -48,18 +48,18 @@ public class MioloCadVenda extends JPanel {
 	private JTextField txt_data;
 	private JTextField txt_horas;
 	private JTextField txt_codVenda;
-	private JComboBox cbx_cliente;
-	private JComboBox cbx_produto;
+	private JComboBox<String> cbx_cliente;
+	private JComboBox<String> cbx_produto;
 	private JTable table;
-	
+
 	private TableVenda tableVenda;
 	private DaoVenda v = new DaoVenda();
 	private List<Venda> listaV = new ArrayList<>();
-	private int indece = -1;
+	protected int indece = -1;
 
 	private List<Cliente> listaCliente = new ArrayList<Cliente>();
 	private List<Produto> listaProduto = new ArrayList<Produto>();
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -100,8 +100,8 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblNome_1.gridx = 0;
 		gbc_lblNome_1.gridy = 2;
 		add(lblNome_1, gbc_lblNome_1);
-		
-		cbx_cliente = new JComboBox();
+
+		cbx_cliente = new JComboBox<String>();
 		GridBagConstraints gbc_cbx_cliente = new GridBagConstraints();
 		gbc_cbx_cliente.gridwidth = 3;
 		gbc_cbx_cliente.insets = new Insets(0, 0, 5, 0);
@@ -117,8 +117,18 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblTelefone.gridx = 0;
 		gbc_lblTelefone.gridy = 3;
 		add(lblTelefone, gbc_lblTelefone);
-		
-		cbx_produto = new JComboBox();
+
+		cbx_produto = new JComboBox<String>();
+		// após um click no cbx_Produto ira preencher alguns campos na tela
+		// automatico
+		cbx_produto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount() == 2) {
+					fazerOsParanaesDasVenda();
+				}
+			}
+		});
 		GridBagConstraints gbc_cbx_produto = new GridBagConstraints();
 		gbc_cbx_produto.gridwidth = 3;
 		gbc_cbx_produto.insets = new Insets(0, 0, 5, 0);
@@ -134,7 +144,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblEndereo.gridx = 0;
 		gbc_lblEndereo.gridy = 4;
 		add(lblEndereo, gbc_lblEndereo);
-		
+
 		txt_vTotal = new JTextField();
 		GridBagConstraints gbc_txt_vTotal = new GridBagConstraints();
 		gbc_txt_vTotal.gridwidth = 3;
@@ -152,7 +162,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblCidade.gridx = 0;
 		gbc_lblCidade.gridy = 5;
 		add(lblCidade, gbc_lblCidade);
-		
+
 		txt_vPago = new JTextField();
 		GridBagConstraints gbc_txt_vPago = new GridBagConstraints();
 		gbc_txt_vPago.gridwidth = 3;
@@ -170,7 +180,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblEstado.gridx = 0;
 		gbc_lblEstado.gridy = 6;
 		add(lblEstado, gbc_lblEstado);
-		
+
 		txt_vTroco = new JTextField();
 		GridBagConstraints gbc_txt_vTroco = new GridBagConstraints();
 		gbc_txt_vTroco.gridwidth = 3;
@@ -188,7 +198,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblEmail.gridx = 0;
 		gbc_lblEmail.gridy = 7;
 		add(lblEmail, gbc_lblEmail);
-		
+
 		txt_data = new JTextField();
 		GridBagConstraints gbc_txt_data = new GridBagConstraints();
 		gbc_txt_data.anchor = GridBagConstraints.WEST;
@@ -210,10 +220,10 @@ public class MioloCadVenda extends JPanel {
 		JButton btnNewButton = new JButton("CADASTRAR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				cadastrar();
+				cadastrar();
 			}
 		});
-		
+
 		txt_horas = new JTextField();
 		GridBagConstraints gbc_txt_horas = new GridBagConstraints();
 		gbc_txt_horas.anchor = GridBagConstraints.WEST;
@@ -233,7 +243,7 @@ public class MioloCadVenda extends JPanel {
 		JButton btnNewButton_1 = new JButton("ATUALIZAR");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				atualizar();
+				 atualizar();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
@@ -262,13 +272,13 @@ public class MioloCadVenda extends JPanel {
 		gbc_scrollPane.gridy = 10;
 		add(scrollPane, gbc_scrollPane);
 
-		table = new JTable() {};
+		table = new JTable();
 		// click duplo para alterar o cliente
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount() == 2) {
-					Venda vd = (Venda) listaV.get(table.getSelectedRow());
+					Venda vd = listaV.get(table.getSelectedRow());
 					returnVenda(vd);
 					indece = table.getSelectedRow();
 				}
@@ -278,77 +288,152 @@ public class MioloCadVenda extends JPanel {
 
 		// iniciar conexão
 		v.getCon();
-		//listar todos os clientes na table
+		// listar todos os clientes na table
 		listaDeVenda();
-		
+		// listar cliente e produtos nos comboBox
 		listaClienteProduto();
+		// preencher os campos data e Hora automatico
+		rDataTime();
 	}
 
 	// lista dados armazenados no banco na table
 	public void listaDeVenda() {
-		new Thread(new Runnable() {			
+		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				tableVenda = new TableVenda();
 				listaV = tableVenda.listar();
-				table.setModel(tableVenda);		
+				table.setModel(tableVenda);
 			}
 		}).start();
 	}
-//
-//	protected void cadastrar() {
-//		Venda venda = new Venda(cod_v, id_c, cod_p, cliente, produto, vTotal, vPago, troco, data, hora);
-//		v.inserir(venda);
-//		tableVenda.adicionarLista(venda);
-//		limpar();
-//	}
-//
-//	protected void atualizar() {
-//		if (indece > -1) {
-//			Venda venda = new Venda(cod_v, id_c, cod_p, cliente, produto, vTotal, vPago, troco, data, hora);
-//			v.atualizar(venda);
-//			tableVenda.atualizarLista(indece, venda);
-//			limpar();
-//			indece = -1;
-//		}else{
-//			JOptionPane.showMessageDialog(null, "Selecio um venda para excluir!");
-//		}
-//	}
 
-	protected void deletar() {
+	protected void cadastrar() {
+		Venda venda = new Venda(listaCliente.get(cbx_cliente.getSelectedIndex() -1).getId(),
+				listaProduto.get(cbx_produto.getSelectedIndex() -1).getCod(),
+				String.valueOf(cbx_cliente.getSelectedItem()),
+				String.valueOf(cbx_produto.getSelectedItem()),
+				BigDecimal.valueOf(Double.valueOf(txt_vTotal.getText())),
+				BigDecimal.valueOf(Double.valueOf(txt_vPago.getText())),
+				BigDecimal.valueOf(Double.valueOf(txt_vTroco.getText())),
+				txt_data.getText(),
+				txt_horas.getText());
+		v.inserir(venda);
+		listaV = v.listar();
+		tableVenda.adicionarLista(listaV);
+		limpar();
+	}
+
+	protected void atualizar() {
+		if (indece > -1) {
+			Venda venda = new Venda(Integer.parseInt(txt_codVenda.getText()),
+					listaCliente.get(cbx_cliente.getSelectedIndex() -1).getId(),
+					listaProduto.get(cbx_produto.getSelectedIndex() -1).getCod(),
+					String.valueOf(cbx_cliente.getSelectedItem()),
+					String.valueOf(cbx_produto.getSelectedItem()),
+					BigDecimal.valueOf(Double.valueOf(txt_vTotal.getText())),
+					BigDecimal.valueOf(Double.valueOf(txt_vPago.getText())),
+					BigDecimal.valueOf(Double.valueOf(txt_vTroco.getText())),
+					txt_data.getText(), txt_horas.getText());
+			v.inserir(venda);
+			listaV = v.listar();
+			tableVenda.adicionarLista(listaV);
+			limpar();
+			indece = -1;
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"Selecio um venda para excluir!");
+		}
+	}
+
+	private void deletar() {
 		v.deletar(table.getSelectedRow());
 		tableVenda.deletar(table.getSelectedRow());
 	}
 
-	public void returnVenda(Venda v) {
+	private void returnVenda(Venda v) {
 		txt_codVenda.setText(String.valueOf(v.getCod_v()));
 		cbx_cliente.setSelectedItem(v.getCliente());
 		cbx_produto.setSelectedItem(v.getProduto());
 		txt_vTotal.setText(String.valueOf(v.getvTotal()));
 		txt_vPago.setText(String.valueOf(v.getvPago()));
-		txt_vTroco.setText(String.valueOf(v.getData()));
-		txt_data.setText(String.valueOf(v.getHora()));
-		txt_horas.setText("");
+		txt_vTroco.setText(String.valueOf(v.getTroco()));
+		txt_data.setText(v.getData());
+		txt_horas.setText(v.getHora());
 	}
 
-	public void limpar() {
+	private void limpar() {
 		txt_codVenda.setText("");
 		cbx_cliente.setSelectedIndex(0);
 		cbx_produto.setSelectedIndex(0);
 		txt_vTotal.setText("");
 		txt_vPago.setText("");
 		txt_vTroco.setText("");
-		txt_data.setText("");
-		txt_horas.setText("");
+		rDataTime();
 	}
-	
-	private void listaClienteProduto(){
+
+	private void listaClienteProduto() {
 		DaoCliente dc = new DaoCliente();
 		listaCliente = dc.listar();
 		DaoProduto dp = new DaoProduto();
 		listaProduto = dp.listar();
-		
-		for(Cliente c : listaCliente) cbx_cliente.addItem(c.getNome());
-		for(Produto p : listaProduto) cbx_produto.addItem(p.getDescricao());
+		int contador = 0;
+		for (Cliente c : listaCliente) {
+			if (contador == 0) {
+				contador = 1;
+				cbx_cliente.addItem("");
+			}
+			cbx_cliente.addItem(c.getNome());
+		}
+		contador = 0;
+		for (Produto p : listaProduto) {
+			if (contador == 0) {
+				contador = 1;
+				cbx_produto.addItem("");
+			}
+			cbx_produto.addItem(p.getDescricao());
+		}
 	}
+
+	/**
+	 * @author Alex Santos Rocha, 01/11/2015 - 14:44:01
+	 * 
+	 * @return valor pago e troco para o cliente.
+	 */
+	protected void fazerOsParanaesDasVenda() {
+		//cbx_produto.getSelectedIndex() - 1. os dados armazenados na lista começa em zero
+		double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1).CalcularMLP();
+		txt_vTotal.setText(String.valueOf(vt));
+		try {
+			double vp = Double.valueOf(JOptionPane
+					.showInputDialog("Digite o valor do pagamento ?"));
+			if (vp >= vt) {
+				double troco = vp - vt;
+				txt_vPago.setText(String.valueOf(vp));
+				// formatar número
+				BigDecimal bd = new BigDecimal(troco).setScale(2,
+						RoundingMode.HALF_EVEN);
+				txt_vTroco.setText(bd.toString());
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Valor recebido, e menos que o custo do produto");
+			}
+
+		} catch (Exception e) {
+			JOptionPane
+					.showMessageDialog(null,
+							"O valor digitado deve ser número ou com ponto\nEX: 50 ou 21.25");
+		}
+
+	}
+
+	// Preencher os campos data e hora
+	private void rDataTime() {
+		SimpleDateFormat frm = new SimpleDateFormat("dd/MM/yyyy");
+		txt_data.setText(frm.format(new java.util.Date()));
+
+		Calendar hora = Calendar.getInstance();
+		txt_horas.setText(String.format("%1$tH:%tM:%1$tS", hora));
+	}
+
 }

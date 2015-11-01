@@ -280,7 +280,8 @@ public class MioloDoProduto extends JPanel {
 				BigDecimal.valueOf(Double.parseDouble(txt_mLucro.getText()))
 				);
 		p.inserir(produto);
-		tableProduto.adicionarLista(produto);
+		listaP = p.listar();
+		tableProduto.adicionarLista(listaP);
 		limpar();
 	}
 

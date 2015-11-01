@@ -7,8 +7,6 @@ package trab4bim.classes;
  */
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Time;
 
 public class Venda {
 	private int cod_v;
@@ -19,15 +17,15 @@ public class Venda {
 	private BigDecimal vTotal;
 	private BigDecimal vPago;
 	private BigDecimal troco;
-	private Date data;
-	private Time hora;
+	private String data;
+	private String hora;
 
 	public Venda() {
 	}
 
 	public Venda(int cod_v, int id_c, int cod_p, String cliente,String produto,
-			BigDecimal vTotal, BigDecimal vPago, BigDecimal troco, Date data,
-			Time hora) {
+			BigDecimal vTotal, BigDecimal vPago, BigDecimal troco, String data,
+			String hora) {
 		this.cod_v = cod_v;
 		this.id_c = id_c;
 		this.cliente = cliente;
@@ -40,9 +38,10 @@ public class Venda {
 	}
 	
 	public Venda(int id_c, int cod_p, String cliente,String produto,
-			BigDecimal vTotal, BigDecimal vPago, BigDecimal troco, Date data,
-			Time hora) {
+			BigDecimal vTotal, BigDecimal vPago, BigDecimal troco, String data,
+			String hora) {
 		this.id_c = id_c;
+		this.cod_p = cod_p;
 		this.cliente = cliente;
 		this.produto = produto;
 		this.vTotal = vTotal;
@@ -78,10 +77,11 @@ public class Venda {
 	public BigDecimal getTroco() {
 		return troco;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public Time getHora() {
+	public String getHora() {
 		return hora;
 	}
+	
 }
