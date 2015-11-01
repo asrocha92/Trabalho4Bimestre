@@ -62,4 +62,8 @@
 	*Configuração da tela de Produto
 	*Tela Cadastro Produto.
 	*Tabela Modelo de Produto.
-	*Cadastrar, Atualizar e Deletar pela tela Cadastro de produto.						
+	*Cadastrar, Atualizar e Deletar pela tela Cadastro de produto.	
+# 1 de novembro de 2015
+	*Configuração completa da tela de cadastro de usuário cadastrando, atualizando e deletando.
+	*Modelo da tabela Usuário criada.
+							

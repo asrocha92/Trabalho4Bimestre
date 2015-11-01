@@ -23,8 +23,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public void inserir(Usuario u) {
 		try {
-			ps = con
-					.prepareStatement("INSERT INTO USUARIO (ID_C, CLIENTE, SENHA) VALUES (?, ?, ?)");
+			ps = con.prepareStatement("INSERT INTO USUARIO (ID_C, CLIENTE, SENHA) VALUES (?, ?, ?)");
 			ps.setInt(1, u.getIdCliente());
 			ps.setString(2, u.getCliente());
 			ps.setString(3, u.getSenha());
@@ -39,9 +38,8 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public void atualizar(Usuario u) {
 		try {
-			ps = con
-					.prepareStatement("UPDATE USUARIO SET ID_C = ?, CLIENTE = ?, SENHA =? WHERE ID_U"
-							+ u.getId());
+			ps = con.prepareStatement("UPDATE USUARIO SET ID_C = ?, CLIENTE = ?, SENHA =? WHERE ID_U"
+					+ u.getId());
 			ps.setInt(1, u.getIdCliente());
 			ps.setString(2, u.getCliente());
 			ps.setString(3, u.getSenha());
@@ -56,9 +54,8 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public void deletar(int id_u) {
 		try {
-			ps = con
-					.prepareStatement("DELETE FROM USUARIO WHERE ID_U = "
-							+ id_u);
+			ps = con.prepareStatement("DELETE FROM USUARIO WHERE ID_U = "
+					+ id_u);
 			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, res
@@ -74,12 +71,16 @@ public class DaoUsuario implements CrudDao<Usuario> {
 			rs = st.executeQuery("SELECT ID_C, CLIENTE, SENHA FROM USUARIO WHERE ID_U = "
 					+ id_u);
 			rs.next();
-			if (rs.getString("CLIENTE") != null)
-				u = new Usuario(id_u, rs.getInt("ID_C"),
-						rs.getString("CLIENTE"));
-			rs.close();
-			st.close();
-			return u;
+			if (rs.getString("CLIENTE") != null) {
+				u = new Usuario();
+				u.setId(id_u);
+				u.setIdCliente(rs.getInt("ID_C"));
+				u.setCliente(rs.getString("CLIENTE"));
+				u.setSenha(rs.getString("SENHA"));
+				rs.close();
+				st.close();
+				return u;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -91,9 +92,13 @@ public class DaoUsuario implements CrudDao<Usuario> {
 		try {
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT ID_U, ID_C, CLIENTE, SENHA FROM USUARIO");
-			while (rs.next()) {
-				lista.add(new Usuario(rs.getInt("ID_U"), rs.getInt("ID_C"), rs
-						.getString("CLIENTE")));
+			while (rs.next()) {				
+				u = new Usuario();
+				u.setId(rs.getInt("ID_U"));
+				u.setIdCliente(rs.getInt("ID_C"));
+				u.setCliente(rs.getString("CLIENTE"));
+				u.setSenha(rs.getString("SENHA"));
+				lista.add(u);
 			}
 			rs.close();
 			st.close();
@@ -104,5 +109,11 @@ public class DaoUsuario implements CrudDao<Usuario> {
 		}
 		return null;
 	}
+
+	public Connection getCon() {
+		return con;
+	}
+	
+	
 
 }
