@@ -39,7 +39,7 @@ public class DaoProduto implements CrudDao<Produto>{
 			ps.setBigDecimal(6, pd.getMargenLucro());
 			ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, "Produto: " + p.getDescricao()
+			JOptionPane.showMessageDialog(null, "Produto: " + pd.getDescricao()
 					+ "\n Cadastrado com sucesso.");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,8 +59,8 @@ public class DaoProduto implements CrudDao<Produto>{
 			ps.setBigDecimal(6, pd.getMargenLucro());
 			ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, "Produto: " + p.getDescricao()
-					+ "\n Cadastrado com sucesso.");
+			JOptionPane.showMessageDialog(null, "Produto: " + pd.getDescricao()
+					+ "\n Atualizado com sucesso.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,12 +69,11 @@ public class DaoProduto implements CrudDao<Produto>{
 
 	public void deletar(int id) {
 		try {
-			ps =con
-					.prepareStatement("DELETE FROM PRODUTO WHERE COD_P =" + id);
+			ps =con.prepareStatement("DELETE FROM PRODUTO WHERE COD_P =" + id);
 			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, res
-					+ ", Usuário excluido com sucesso.");
+					+ ", Produto excluido com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +106,7 @@ public class DaoProduto implements CrudDao<Produto>{
 		lista = new ArrayList<Produto>();
 		try {
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO "
+			rs = st.executeQuery("SELECT COD_P, COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO "
 					+ "FROM PRODUTO");
 			while(rs.next()){
 				lista.add(p = new Produto(rs.getInt("COD_P") , 
@@ -126,6 +125,10 @@ public class DaoProduto implements CrudDao<Produto>{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public Connection getCon() {
+		return con;
 	}
 
 }

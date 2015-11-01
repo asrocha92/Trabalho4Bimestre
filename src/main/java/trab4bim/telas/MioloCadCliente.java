@@ -3,7 +3,7 @@ package trab4bim.telas;
 /**
  * @author Alex Santos Rocha, 31/10/2015 - 9:00:37
  * 
- * Comentario: miolo do cadatro do cliente 
+ * Comentario: configuração da tela de cadastro do cliente 
  */
 
 import javax.swing.JPanel;
@@ -48,8 +48,8 @@ public class MioloCadCliente extends JPanel {
 	private JTextField txt_id;
 	private JComboBox<String> cbx_estado;
 	private JComboBox<String> cbx_genero;
-	private TableCliente tb;
-
+	
+	private TableCliente tableCliente;
 	private DaoCliente c = new DaoCliente();
 	private List<Cliente> listaC = new ArrayList<>();
 	private int indece = -1;
@@ -281,6 +281,7 @@ public class MioloCadCliente extends JPanel {
 		listarEnumCBX();
 		// iniciar conexão
 		c.getCon();
+		//listar todos os clientes na table
 		listaDeCliente();
 	}
 
@@ -297,9 +298,9 @@ public class MioloCadCliente extends JPanel {
 		new Thread(new Runnable() {			
 			@Override
 			public void run() {
-				tb = new TableCliente();
-				listaC = tb.listar();
-				table.setModel(tb);		
+				tableCliente = new TableCliente();
+				listaC = tableCliente.listar();
+				table.setModel(tableCliente);		
 			}
 		}).start();
 	}
@@ -313,7 +314,7 @@ public class MioloCadCliente extends JPanel {
 				txt_email.getText(),
 				Genero.valueOf(String.valueOf(cbx_genero.getSelectedItem())));
 		c.inserir(cliente);
-		tb.adicionarLista(cliente);
+		tableCliente.adicionarLista(cliente);
 		limpar();
 	}
 
@@ -329,7 +330,7 @@ public class MioloCadCliente extends JPanel {
 					txt_email.getText(),
 					Genero.valueOf(String.valueOf(cbx_genero.getSelectedItem())));
 			c.atualizar(cliente);
-			tb.atualizarLista(indece, cliente);
+			tableCliente.atualizarLista(indece, cliente);
 			limpar();
 			indece = -1;
 		}else{
@@ -339,7 +340,7 @@ public class MioloCadCliente extends JPanel {
 
 	protected void deletar() {
 		c.deletar(table.getSelectedRow());
-		tb.deletar(table.getSelectedRow());
+		tableCliente.deletar(table.getSelectedRow());
 	}
 
 	public void returnCliente(Cliente c) {

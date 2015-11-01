@@ -57,5 +57,9 @@
 	*Configuração da tela Cliente
 	*Tela cadastro de cliente
 	*Cadastro de cliente fucionando através da tela.
-	*Atualizar, deletar e listar em table da tela de cliente prnto.
-	*Configuração da tela de Produto						
+	*Atualizar, deletar e listar em table da tela de cliente pronta.
+	*Tabela modelo da tela cliente.
+	*Configuração da tela de Produto
+	*Tela Cadastro Produto.
+	*Tabela Modelo de Produto.
+	*Cadastrar, Atualizar e Deletar pela tela Cadastro de produto.						

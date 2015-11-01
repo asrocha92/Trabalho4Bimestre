@@ -28,7 +28,7 @@ CREATE TABLE `tb4bim`.`produto`(
   `cod_barra` INT NOT NULL,
   `categoria` VARCHAR(30) NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
-  `unidade` INT NOT NULL,
+  `unidade` VARCHAR(30) NOT NULL,
   `custo` DECIMAL(13,2) NOT NULL,
   `marge_lucro` DECIMAL(13,2) NOT NULL,
   PRIMARY KEY (`cod_p`)
