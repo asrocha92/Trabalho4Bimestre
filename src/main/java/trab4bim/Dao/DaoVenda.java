@@ -128,5 +128,10 @@ public class DaoVenda implements CrudDao<Venda> {
 		}
 		return null;
 	}
+	
+	//get que retorna o valor da conexão
+	public Connection getCon() {
+		return con;
+	}
 
 }

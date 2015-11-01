@@ -66,4 +66,6 @@
 # 1 de novembro de 2015
 	*Configuração completa da tela de cadastro de usuário cadastrando, atualizando e deletando.
 	*Modelo da tabela Usuário criada.
-	*Tela cadastro de usuário implementada com a tela principal.						
+	*Tela cadastro de usuário implementada com a tela principal.
+	*Tela de venda pronta
+	*Modelo da tabela Venda Pronta						
