@@ -76,8 +76,7 @@ public class DaoVenda implements CrudDao<Venda> {
 			ps = con.prepareStatement("DELETE FROM VENDA WHERE COD_V =" + cod_v);
 			int res = ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, res
-					+ ", Requisição de venda excluida com sucesso");
+			JOptionPane.showMessageDialog(null, "Requisição de venda excluida com sucesso");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -60,13 +60,12 @@ public class TableCliente extends AbstractTableModel{
 	
 	public List<Cliente> listar(){
 		DaoCliente c = new DaoCliente();
-		this.fireTableStructureChanged();
 		return lista = c.listar();
 	}
 
 	public void adicionarLista(Cliente c){
 		this.lista.add(c);
-		listar();
+		this.fireTableStructureChanged();
 	}
 	
 	public void atualizarLista(int indice, Cliente c){

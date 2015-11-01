@@ -52,13 +52,12 @@ public class TableUsuario extends AbstractTableModel{
 	
 	public List<Usuario> listar(){
 		DaoUsuario u = new DaoUsuario();
-		this.fireTableStructureChanged();
 		return lista = u.listar();
 	}
 
 	public void adicionarLista(Usuario u){
 		this.lista.add(u);
-		listar();
+		this.fireTableStructureChanged();
 	}
 	
 	public void atualizarLista(int indice, Usuario u){

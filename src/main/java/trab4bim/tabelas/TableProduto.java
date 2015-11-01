@@ -54,13 +54,12 @@ public class TableProduto extends AbstractTableModel{
 	
 	public List<Produto> listar(){
 		DaoProduto c = new DaoProduto();
-		this.fireTableStructureChanged();
 		return lista = c.listar();
 	}
 
 	public void adicionarLista(Produto c){
 		this.lista.add(c);
-		listar();
+		this.fireTableStructureChanged();
 	}
 	
 	public void atualizarLista(int indice, Produto c){

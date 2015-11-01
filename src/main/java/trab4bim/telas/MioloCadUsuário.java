@@ -29,6 +29,8 @@ import trab4bim.Dao.DaoUsuario;
 import trab4bim.classes.Cliente;
 import trab4bim.classes.Usuario;
 import trab4bim.tabelas.TableUsuario;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MioloCadUsuário extends JPanel {
 
@@ -76,6 +78,7 @@ public class MioloCadUsuário extends JPanel {
 		gbc_txt_idUser.gridy = 1;
 		add(txt_idUser, gbc_txt_idUser);
 		txt_idUser.setColumns(10);
+		txt_idUser.enable(false);
 
 		JLabel lblIdCliente = new JLabel("ID do CLIENTE: ");
 		GridBagConstraints gbc_lblIdCliente = new GridBagConstraints();
@@ -131,6 +134,11 @@ public class MioloCadUsuário extends JPanel {
 		add(txt_senha, gbc_txt_senha);
 
 		btnCadastrar = new JButton("CADASTRAR");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cadastrar();
+			}
+		});
 		GridBagConstraints gbc_btnCadastrar = new GridBagConstraints();
 		gbc_btnCadastrar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCadastrar.gridx = 2;
@@ -138,6 +146,11 @@ public class MioloCadUsuário extends JPanel {
 		add(btnCadastrar, gbc_btnCadastrar);
 
 		btnAtualizar = new JButton("ATUALIZAR");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				atualizar();
+			}
+		});
 		GridBagConstraints gbc_btnAtualizar = new GridBagConstraints();
 		gbc_btnAtualizar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAtualizar.gridx = 3;
@@ -145,6 +158,11 @@ public class MioloCadUsuário extends JPanel {
 		add(btnAtualizar, gbc_btnAtualizar);
 
 		btnDeletar = new JButton("DELETAR");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				deletar();
+			}
+		});
 		GridBagConstraints gbc_btnDeletar = new GridBagConstraints();
 		gbc_btnDeletar.insets = new Insets(0, 0, 5, 0);
 		gbc_btnDeletar.gridx = 4;
@@ -196,8 +214,9 @@ public class MioloCadUsuário extends JPanel {
 		Usuario usuario = new Usuario();
 		usuario.setIdCliente(Integer.parseInt(txt_idCliente.getText()));
 		usuario.setCliente(txt_cliente.getText());
-		usuario.setSenha(txt_senha.getSelectedText());
+		usuario.setSenha(txt_senha.getText());
 		u.inserir(usuario);
+		listaU = u.listar();
 		tableUsuario.adicionarLista(usuario);
 		limpar();
 	}
@@ -235,7 +254,7 @@ public class MioloCadUsuário extends JPanel {
 		txt_idUser.setText("");
 		txt_idCliente.setText("");
 		txt_cliente.setText("");
-		txt_senha.setText("");
+		txt_senha.setText("");;
 	}
 
 }

@@ -19,7 +19,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 	private ResultSet rs = null;
 	private Usuario u = null;
 	private List<Usuario> lista = null;
-	private Connection con;
+	private Connection con = Conexao.getInstace().conOpen();
 
 	public void inserir(Usuario u) {
 		try {
@@ -58,8 +58,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 					+ id_u);
 			int res = ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, res
-					+ ", usuário excluido com sucesso.");
+			JOptionPane.showMessageDialog(null,"Usuário excluido com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

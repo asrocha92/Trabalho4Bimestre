@@ -1,4 +1,9 @@
 package trab4bim.telas;
+/**
+ * @author Alex Santos Rocha, 31/10/2015 - 10:21:34
+ * 
+ * Comentario: tela principal para chamar telas interna do sistema no frame
+ */
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -68,6 +73,11 @@ public class TelaPrincipal extends JFrame {
 		mnCadastro.add(mntmProduto);
 		
 		JMenuItem mntmUsurio = new JMenuItem("Usu\u00E1rio");
+		mntmUsurio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirTelaUsuario();
+			}
+		});
 		mnCadastro.add(mntmUsurio);
 		
 		JMenu mnVenda = new JMenu("Venda");
@@ -120,6 +130,17 @@ public class TelaPrincipal extends JFrame {
 		};
 		p.setCloseAction(a);
 		tabbedPane.addTab("Cadastro de Produto ", p);
+	}
+	
+	protected void abrirTelaUsuario() {
+		TelaCadUsuario u = new TelaCadUsuario();
+		ActionListener a = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(u);
+			}			
+		};
+		u.setCloseAction(a);
+		tabbedPane.addTab("Cadastro de Usuário ", u);
 	}
 	
 }

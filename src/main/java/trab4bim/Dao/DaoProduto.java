@@ -72,8 +72,7 @@ public class DaoProduto implements CrudDao<Produto>{
 			ps =con.prepareStatement("DELETE FROM PRODUTO WHERE COD_P =" + id);
 			int res = ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, res
-					+ ", Produto excluido com sucesso.");
+			JOptionPane.showMessageDialog(null, "Produto excluido com sucesso.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
