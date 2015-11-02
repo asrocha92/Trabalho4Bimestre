@@ -95,6 +95,11 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnRelattio);
 		
 		JMenuItem mntmCliente_1 = new JMenuItem("Cliente");
+		mntmCliente_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirRelatorioCliente();
+			}
+		});
 		mnRelattio.add(mntmCliente_1);
 		
 		JMenuItem mntmProduto_1 = new JMenuItem("Produto");
@@ -112,6 +117,17 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.setBorder(null);
 		tabbedPane.setBackground(new Color(0, 255, 127));
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abrirRelatorioCliente() {
+		TelaRelCliente rc = new TelaRelCliente();
+		ActionListener a = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(rc);
+			}			
+		};
+		rc.setCloseAction(a);
+		tabbedPane.addTab("Relatório do Cliente ", rc);		
 	}
 
 	private void abrirCadCliente() {		
