@@ -70,3 +70,8 @@
 	*Tela de venda pronta
 	*Modelo da tabela Venda Pronta	
 	*Configuração da tela venda realizando venda, atualizando sem modificar o historico da compra anterior, e deletando.					
+	*Criada uma classe RelatorioDao com filtro dos relatórios necessários
+	*Criada TableModelRelCliente 
+	*Criada classe RelatórioCliente, que fuciona como um confiração do Jpanel, também chamada de miolo.
+	*Primeiro relatório do cliente funcionando sobre a interface.
+	*RelatórioCliente.jasper na pasta do proj. src/main/resources 
