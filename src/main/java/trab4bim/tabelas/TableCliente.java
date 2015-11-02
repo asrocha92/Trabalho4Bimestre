@@ -11,7 +11,9 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import trab4bim.Dao.DaoCliente;
+import trab4bim.Dao.RelatoriosDao;
 import trab4bim.classes.Cliente;
+import trab4bim.classes.Produto;
 
 public class TableCliente extends AbstractTableModel{
 	
@@ -69,13 +71,20 @@ public class TableCliente extends AbstractTableModel{
 	}
 	
 	public void atualizarLista(int indice, Cliente c){
-		lista.set(indice, c);
+		this.lista.set(indice, c);
 		this.fireTableStructureChanged();
 	}
 	
 	public void deletar(int indice){
-		lista.remove(indice);
+		this.lista.remove(indice);
 		this.fireTableStructureChanged();
+	}
+	
+	public List<Cliente> listarRelatorio(String sql){
+		RelatoriosDao d = new RelatoriosDao();
+		this.lista = d.listarClienteRel(sql);
+		this.fireTableDataChanged();		
+		return lista;
 	}
 	
 }

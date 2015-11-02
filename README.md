@@ -75,3 +75,8 @@
 	*Criada classe RelatórioCliente, que fuciona como um confiração do Jpanel, também chamada de miolo.
 	*Primeiro relatório do cliente funcionando sobre a interface.
 	*RelatórioCliente.jasper na pasta do proj. src/main/resources 
+# 2 de novemro de 2015
+	*Modificação no relatório de cliente, foi corrigidos os filtros
+	*Relatório do produto com fintros de estado e cidade.
+	*Gerando pdf apartir do fintro que está mostrando na tela sobre relatório do produto.
+		

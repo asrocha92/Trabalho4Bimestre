@@ -48,4 +48,13 @@ public enum Estado {
 	private Estado(String nome){
 		this.nome = nome;
 	}
+	
+	public static String transforma(String estado){
+		for(Estado e: Estado.values()){
+			if(e.getNome().equals(estado)){
+				return e.name();
+			}
+		}
+		return "";
+	}
 }
