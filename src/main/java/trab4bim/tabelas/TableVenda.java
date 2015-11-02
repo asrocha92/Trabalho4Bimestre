@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import trab4bim.Dao.DaoVenda;
+import trab4bim.Dao.RelatoriosDao;
 import trab4bim.classes.Venda;
 
 
@@ -70,13 +71,20 @@ public class TableVenda extends AbstractTableModel{
 	}
 	
 	public void atualizarLista(int indice, Venda v){
-		lista.set(indice, v);
+		this.lista.set(indice, v);
 		this.fireTableStructureChanged();
 	}
 	
 	public void deletar(int indice){
-		lista.remove(indice);
+		this.lista.remove(indice);
 		this.fireTableStructureChanged();
+	}
+
+	public List<Venda> listarRelatorio(StringBuilder sql) {
+		RelatoriosDao d = new RelatoriosDao();
+		this.lista = d.listarRelVenda(sql);
+		this.fireTableDataChanged();		
+		return lista;
 	}
 	
 }

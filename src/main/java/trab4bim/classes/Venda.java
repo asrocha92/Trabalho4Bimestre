@@ -52,6 +52,19 @@ public class Venda {
 
 	}
 
+	public Venda(int cod_v, String cliente, String produto,
+			BigDecimal vTotal, BigDecimal vPago,
+			BigDecimal troco, String data, String hora) {
+		this.cod_v = cod_v;
+		this.cliente = cliente;
+		this.produto = produto;
+		this.vTotal = vTotal;
+		this.vPago = vPago;
+		this.troco = troco;
+		this.data = data;
+		this.hora = hora;
+	}
+
 	// Métodos geters e seters
 	public int getCod_v() {
 		return cod_v;

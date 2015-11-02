@@ -79,4 +79,7 @@
 	*Modificação no relatório de cliente, foi corrigidos os filtros
 	*Relatório do produto com fintros de estado e cidade.
 	*Gerando pdf apartir do fintro que está mostrando na tela sobre relatório do produto.
+	*Relatório da Venda completo com fintro
+	*
+	
 		

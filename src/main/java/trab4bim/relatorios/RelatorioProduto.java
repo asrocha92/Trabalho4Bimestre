@@ -177,8 +177,7 @@ public class RelatorioProduto extends JPanel {
 			int indice = 0;
 			if (i == 0){
 				cbx_categoria.addItem("");
-			}
-			
+			}			
 			for (int j = 0; j < cbx_categoria.getItemCount(); j++) {
 				if (listaP.get(i).getCategoria().equals(cbx_categoria.getItemAt(j).toString())) 
 					indice++;

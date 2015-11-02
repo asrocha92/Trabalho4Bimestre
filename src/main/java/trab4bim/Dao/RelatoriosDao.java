@@ -73,16 +73,14 @@ public class RelatoriosDao {
 		return null;
 	}
 	
-	public List<Venda> listarRelVenda(String sql) {
+	public List<Venda> listarRelVenda(StringBuilder sql) {
+		System.out.println(sql.toString() + " UNION " + sql.toString());
 		List<Venda> lista = new ArrayList<Venda>();
 		try {
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT COD_V, ID_C, CLIENTE, COD_P,"
-					+ "PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA FROM VENDA");
+			rs = st.executeQuery(sql.toString() + " UNION " + sql.toString());
 			while (rs.next()) {
 				lista.add(new Venda(rs.getInt("COD_V"),
-						rs.getInt("ID_C"),
-						rs.getInt("COD_P"),
 						rs.getString("CLIENTE"),
 						rs.getString("PRODUTO"),
 						rs.getBigDecimal("VTOTAL"),
@@ -90,6 +88,24 @@ public class RelatoriosDao {
 						rs.getBigDecimal("TROCO"),
 						rs.getString("DATA"),
 						rs.getString("HORA")));
+			}
+			rs.close();
+			st.close();
+			return lista;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//método para retornar categoria
+	public List<String> listarCatProd() {
+		List<String> lista = new ArrayList<>();
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT CATEGORIA FROM PRODUTO");
+			while(rs.next()){
+				lista.add(rs.getString("CATEGORIA"));
 			}
 			rs.close();
 			st.close();

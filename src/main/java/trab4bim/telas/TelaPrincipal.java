@@ -111,6 +111,11 @@ public class TelaPrincipal extends JFrame {
 		mnRelattio.add(mntmProduto_1);
 		
 		JMenuItem mntmVenda = new JMenuItem("Venda");
+		mntmVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirRelvenda();
+			}
+		});
 		mnRelattio.add(mntmVenda);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -122,6 +127,17 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.setBorder(null);
 		tabbedPane.setBackground(new Color(0, 255, 127));
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abrirRelvenda() {
+		TelaRelVenda rv = new TelaRelVenda();
+		ActionListener a = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(rv);
+			}			
+		};
+		rv.setCloseAction(a);
+		tabbedPane.addTab("Relatório do Produto ", rv);
 	}
 
 	protected void abrirRelProduto() {
