@@ -262,7 +262,7 @@ public class MioloCadCliente extends JPanel {
 		gbc_scrollPane.gridy = 10;
 		add(scrollPane, gbc_scrollPane);
 
-		table = new JTable() {};
+		table = new JTable();
 		// click duplo para alterar o cliente
 		table.addMouseListener(new MouseAdapter() {
 			@Override

@@ -83,7 +83,7 @@ public class RelatorioCliente extends JPanel{
 		
 
 		TableModelRelCliente tbModel = new TableModelRelCliente();
-		tbModel.listar();
+//		tbModel.listar();
 		table = new JTable(tbModel);
 		scrollPane.setViewportView(table);
 		

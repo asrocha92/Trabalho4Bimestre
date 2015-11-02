@@ -50,7 +50,7 @@ public class TableModelRelCliente extends AbstractTableModel{
 		}
 	}
 
-	public void listar(){
-		this.lista = r.listarClienteRel();
-	}
+//	public void listar(){
+//		this.lista = r.listarClienteRel();
+//	}
 }

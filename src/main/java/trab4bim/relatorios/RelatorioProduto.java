@@ -3,15 +3,19 @@ package trab4bim.relatorios;
 /**
  * @author Alex Santos Rocha, 01/11/2015 - 21:38:02
  * 
- * Comentario: Configuração do relatório do cliente e gera relatório PDF
+ * Comentario: Configuração do relatório produto, e contruira relatório PDF
  */
 
 import java.awt.Desktop;
 import java.io.File;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.text.StringCharacterIterator;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -19,6 +23,7 @@ import javax.swing.JPanel;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 import java.awt.GridBagLayout;
 
@@ -29,7 +34,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTable;
 
 import trab4bim.Dao.Conexao;
-import trab4bim.tabelas.TableModelRelCliente;
+import trab4bim.classes.Produto;
+import trab4bim.tabelas.TableProduto;
 
 import javax.swing.JButton;
 
@@ -37,42 +43,42 @@ import java.awt.Insets;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import java.awt.Dimension;
-import java.awt.Component;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-/**
- * 
- * @author Alex Santos Rocha, 01/11/2015 - 19:23:29
- * 
- *         Comentario: classe gera relatório em PDF do cliente.
- *
- */
+public class RelatorioProduto extends JPanel {
 
-public class RelatorioProduto extends JPanel{
-	private static String OUF_PDF;
-	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\RelatorioCliente.jasper";
-	private JTable table;
-	private Connection con = Conexao.getInstace().conOpen();
 	private JTextField txt_mLucro;
+	private JComboBox<String> cbx_categoria;
+	private JTable table;
+
+	private static String OUF_PDF;
+	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\RelProduto.jasper";
+	private List<Produto> listaP;
+	private TableProduto tbModel;
 
 	public RelatorioProduto() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{113, 99, 46, 106, 47, 0, 0};
-		gridBagLayout.rowHeights = new int[]{10, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 113, 99, 46, 106, 47, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 10, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0,
+				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
+
 		JButton btnNewButton = new JButton("EXPORTAR PRA PDF");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				exportarPdf();
 			}
 		});
-		
+
 		JLabel lblMargeDeLucro = new JLabel("MARGE DE LUCRO: ");
 		GridBagConstraints gbc_lblMargeDeLucro = new GridBagConstraints();
 		gbc_lblMargeDeLucro.anchor = GridBagConstraints.EAST;
@@ -80,7 +86,7 @@ public class RelatorioProduto extends JPanel{
 		gbc_lblMargeDeLucro.gridx = 0;
 		gbc_lblMargeDeLucro.gridy = 1;
 		add(lblMargeDeLucro, gbc_lblMargeDeLucro);
-		
+
 		txt_mLucro = new JTextField();
 		GridBagConstraints gbc_txt_mLucro = new GridBagConstraints();
 		gbc_txt_mLucro.fill = GridBagConstraints.HORIZONTAL;
@@ -89,7 +95,7 @@ public class RelatorioProduto extends JPanel{
 		gbc_txt_mLucro.gridy = 1;
 		add(txt_mLucro, gbc_txt_mLucro);
 		txt_mLucro.setColumns(10);
-		
+
 		JLabel lblCategoria = new JLabel(" CATEGORIA: ");
 		GridBagConstraints gbc_lblCategoria = new GridBagConstraints();
 		gbc_lblCategoria.anchor = GridBagConstraints.EAST;
@@ -97,52 +103,131 @@ public class RelatorioProduto extends JPanel{
 		gbc_lblCategoria.gridx = 2;
 		gbc_lblCategoria.gridy = 1;
 		add(lblCategoria, gbc_lblCategoria);
-		
-		JComboBox cbx_categoria = new JComboBox();
+
+		cbx_categoria = new JComboBox<String>();
 		GridBagConstraints gbc_cbx_categoria = new GridBagConstraints();
 		gbc_cbx_categoria.insets = new Insets(0, 0, 5, 5);
 		gbc_cbx_categoria.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbx_categoria.gridx = 3;
 		gbc_cbx_categoria.gridy = 1;
 		add(cbx_categoria, gbc_cbx_categoria);
+
+		JButton btnFiltrar = new JButton("FILTRAR");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gerarsql();
+			}
+		});
+		GridBagConstraints gbc_btnFiltrar = new GridBagConstraints();
+		gbc_btnFiltrar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnFiltrar.gridx = 4;
+		gbc_btnFiltrar.gridy = 1;
+		add(btnFiltrar, gbc_btnFiltrar);
+		
+		JButton btnNewButton_1 = new JButton("ATUALIZAR");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				modeloTable();
+			}
+		});
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 5;
+		gbc_btnNewButton_1.gridy = 1;
+		add(btnNewButton_1, gbc_btnNewButton_1);
 		btnNewButton.setBackground(Color.WHITE);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 5;
+		gbc_btnNewButton.gridx = 6;
 		gbc_btnNewButton.gridy = 1;
 		add(btnNewButton, gbc_btnNewButton);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.gridwidth = 6;
+		gbc_scrollPane.gridwidth = 7;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
 		add(scrollPane, gbc_scrollPane);
-		
 
-		TableModelRelCliente tbModel = new TableModelRelCliente();
-		tbModel.listar();
-		table = new JTable(tbModel);
+		table = new JTable();
 		scrollPane.setViewportView(table);
-		
+
+		modeloTable();
+
+		carregarCBX();
 	}
-	
-	private void exportarPdf(){
+
+	//Método que carrega a table modelo em uma thread
+	private void modeloTable() {
+		tbModel = new TableProduto();
+		listaP = tbModel.listar();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				table.setModel(tbModel);
+			}
+		}).start();
+	}
+
+	//método pra carregar filtro de categoria no comboBox
+	private void carregarCBX() {
+		for (int i = 0; i < listaP.size(); i++) {
+			int indice = 0;
+			if (i == 0){
+				cbx_categoria.addItem("");
+			}
+			
+			for (int j = 0; j < cbx_categoria.getItemCount(); j++) {
+				if (listaP.get(i).getCategoria().equals(cbx_categoria.getItemAt(j).toString())) 
+					indice++;
+				if (indice > 1) break; 
+			}			
+			if (indice < 1) cbx_categoria.addItem(listaP.get(i).getCategoria());			
+		}
+	 }
+
+	// gerar sql
+	protected void gerarsql() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT COD_P, COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO FROM PRODUTO ");
+		try {
+			if (Double.valueOf(txt_mLucro.getText()) > 0) {
+				txt_mLucro.setBackground(Color.WHITE);
+				sql.append("WHERE MARGE_LUCRO >= '" + txt_mLucro.getText()+"' ");
+				if (cbx_categoria.getSelectedItem() != null)
+					sql.append("AND CATEGORIA = '"+ cbx_categoria.getSelectedItem()+"'");
+			}else if (cbx_categoria.getSelectedItem() != null) {
+				sql.append("WHERRE CATEGORIA = '" + cbx_categoria.getSelectedItem()+"'");
+			}
+			listaP = tbModel.listarRelatorio(sql.toString());
+			table.setModel(tbModel);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Digite somente números");
+			txt_mLucro.setBackground(Color.yellow);
+			txt_mLucro.setFocusable(true);
+		}
+	}
+
+	//Método para exportar para pdf a table produto
+	public void exportarPdf() {
+
+		TableModel tableModel = getTableModelProduto();
+
 		JasperPrint jp = null;
 		try {
-			Map<String, Object> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("endereco", "Av. Nilza de Oliveira, 401");
 			map.put("telefone", "(55) 44 3543-1090");
 			// passar onde está o relatório em forma binarinaria
 			// map passa valores do atributos endereco e telefone
 			// e 3 parametro passa a conexão
-			jp = JasperFillManager.fillReport(arq, map, con);
+			jp = JasperFillManager.fillReport(arq,
+					map,
+					new JRTableModelDataSource(tableModel));
 			// damos o nome ao arquivo pdf
 			OUF_PDF = nomeRelatorio();
-			System.out.println(OUF_PDF);
 			// criamos o relatório em pdf
 			JasperExportManager.exportReportToPdfFile(jp,
 					"C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\"
@@ -157,6 +242,24 @@ public class RelatorioProduto extends JPanel{
 		}
 	}
 
+	// gera uma table com os dados presentes na tela
+	private TableModel getTableModelProduto() {
+		String[] columnNames = { "cod_p", "cod_barra", "categoria", "descricao", "unidade", "custo", "marge_lucro" };
+
+		Object[][] data = new Object[listaP.size()][7];
+		for (int i = 0; i < listaP.size(); i++) {
+			int j = 0;
+			data[i][j++] = Long.valueOf(listaP.get(i).getCod());
+			data[i][j++] = listaP.get(i).getCodBarra();
+			data[i][j++] = listaP.get(i).getCategoria();
+			data[i][j++] = listaP.get(i).getDescricao();
+			data[i][j++] = listaP.get(i).getUnidade();
+			data[i][j++] = listaP.get(i).getCusto();
+			data[i][j++] = listaP.get(i).getMargenLucro();
+		}
+		return new DefaultTableModel(data, columnNames);
+	}
+
 	/**
 	 * @author Alex Santos Rocha, 01/11/2015 - 19:29:15
 	 * 
@@ -167,11 +270,11 @@ public class RelatorioProduto extends JPanel{
 	public String nomeRelatorio() {
 		StringBuilder nome = new StringBuilder();
 		SimpleDateFormat frm = new SimpleDateFormat("ddMMyyyy");
-		nome.append("Cliente-" + frm.format(new java.util.Date()) + "-");
+		nome.append("Produto-" + frm.format(new java.util.Date()) + "-");
 
 		Calendar hora = Calendar.getInstance();
 		return nome.append(String.format("%1$tH-%tM-%1$tS", hora) + ".fdf")
 				.toString();
 	}
-	
+
 }
