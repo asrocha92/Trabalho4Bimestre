@@ -305,7 +305,7 @@ public class MioloDoProduto extends JPanel {
 	}
 
 	protected void deletar() {
-		p.deletar(table.getSelectedRow());
+		p.deletar(listaP.get(table.getSelectedRow()).getCod());
 		tableProduto.deletar(table.getSelectedRow());
 	}
 

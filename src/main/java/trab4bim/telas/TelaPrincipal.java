@@ -99,7 +99,7 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		});
 		mnVenda.add(mntmEfetuarVenda);
 		
-		JMenu mnRelattio = new JMenu("Relat\u00F3tio");
+		JMenu mnRelattio = new JMenu("Relat\u00F3rio");
 		menuBar.add(mnRelattio);
 		
 		JMenuItem mntmCliente_1 = new JMenuItem("Cliente");

@@ -239,7 +239,7 @@ public class MioloCadUsuário extends JPanel {
 	}
 
 	protected void deletar() {
-		u.deletar(table.getSelectedRow());
+		u.deletar(listaU.get(table.getSelectedRow()).getId());
 		tableUsuario.deletar(table.getSelectedRow());
 	}
 

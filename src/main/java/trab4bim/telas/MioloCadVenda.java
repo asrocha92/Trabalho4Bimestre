@@ -347,7 +347,7 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	private void deletar() {
-		v.deletar(table.getSelectedRow());
+		v.deletar(listaV.get(table.getSelectedRow()).getCod_p());
 		tableVenda.deletar(table.getSelectedRow());
 	}
 

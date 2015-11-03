@@ -339,7 +339,7 @@ public class MioloCadCliente extends JPanel {
 	}
 
 	protected void deletar() {
-		c.deletar(table.getSelectedRow());
+		c.deletar(listaC.get(table.getSelectedRow()).getId());
 		tableCliente.deletar(table.getSelectedRow());
 	}
 
