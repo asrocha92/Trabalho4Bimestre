@@ -114,5 +114,17 @@ public class DaoUsuario implements CrudDao<Usuario> {
 	}
 	
 	
+	public boolean Verifica(String user, String pass) {
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT CLIENTE, SENHA FROM USUARIO WHERE CLIENTE = '"+user+"' AND SENHA = '"+pass+"'");
+			boolean v = rs.next();
+			return v;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 
 }

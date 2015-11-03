@@ -80,6 +80,8 @@
 	*Relatório do produto com fintros de estado e cidade.
 	*Gerando pdf apartir do fintro que está mostrando na tela sobre relatório do produto.
 	*Relatório da Venda completo com fintro
-	*
+# 3 de novembro de 2015	
+	*Tela de login pronta.
+	*Utilizando Padrão de Projeto Proxy
 	
 		

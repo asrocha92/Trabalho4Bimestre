@@ -15,19 +15,27 @@ import javax.swing.JMenuBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import trab4bim.telaLogin.Sistema;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TelaPrincipal extends JFrame {
+public class TelaPrincipal extends JFrame implements Sistema {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 
 	/**
-	 * Launch the application.
+	 * @author Alex Santos Rocha, 02/11/2015 - 23:17:20
+	 * 
+	 * Comentario: depois de ferificar abre a tela principal
+	 * 
 	 */
-	public static void main(String[] args) {
+	
+	@Override
+	public void abrir(String user, String pass) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

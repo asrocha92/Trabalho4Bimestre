@@ -11,23 +11,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JPasswordField;
+
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_user;
-	private JTextField txt_pass;
+	private JPasswordField txt_pass;
+	private FundoDaTelaLogin frame1;
 
 	/**
 	 * Launch the application.
@@ -35,10 +39,10 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {					
 					Login frame = new Login();
 					frame.setUndecorated(true);
-					frame.setBackground(new Color(0, 0, 0, .5f));
+					frame.setBackground(new Color(0, 0, 0, .8f));
 					((JPanel) frame.getContentPane()).setOpaque(false);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
@@ -53,64 +57,36 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 442, 180);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 482, 208);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{60, 317, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{25, 20, 20, 23, 23, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[]{317, 0};
+		gbl_contentPane.rowHeights = new int[]{25, 20, 0, 20, 23, 23, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblSistemaGestoDe = new JLabel("Sistema Gest\u00E3o de Pe\u00E7as");
-		lblSistemaGestoDe.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 21));
-		GridBagConstraints gbc_lblSistemaGestoDe = new GridBagConstraints();
-		gbc_lblSistemaGestoDe.anchor = GridBagConstraints.NORTH;
-		gbc_lblSistemaGestoDe.insets = new Insets(0, 0, 5, 5);
-		gbc_lblSistemaGestoDe.gridx = 1;
-		gbc_lblSistemaGestoDe.gridy = 0;
-		contentPane.add(lblSistemaGestoDe, gbc_lblSistemaGestoDe);
-		
 		JLabel lblLogin = new JLabel("Usu\u00E1rio: ");
-		lblLogin.setFont(new Font("Times New Roman", Font.ITALIC, 15));
+		lblLogin.setForeground(Color.GREEN);
+		lblLogin.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
 		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
-		gbc_lblLogin.anchor = GridBagConstraints.EAST;
-		gbc_lblLogin.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLogin.fill = GridBagConstraints.VERTICAL;
+		gbc_lblLogin.insets = new Insets(0, 0, 5, 0);
 		gbc_lblLogin.gridx = 0;
-		gbc_lblLogin.gridy = 1;
+		gbc_lblLogin.gridy = 0;
 		contentPane.add(lblLogin, gbc_lblLogin);
 		
 		txt_user = new JTextField();
 		GridBagConstraints gbc_txt_user = new GridBagConstraints();
-		gbc_txt_user.anchor = GridBagConstraints.NORTH;
-		gbc_txt_user.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txt_user.insets = new Insets(0, 0, 5, 5);
-		gbc_txt_user.gridx = 1;
+		gbc_txt_user.fill = GridBagConstraints.BOTH;
+		gbc_txt_user.insets = new Insets(0, 0, 5, 0);
+		gbc_txt_user.gridx = 0;
 		gbc_txt_user.gridy = 1;
 		contentPane.add(txt_user, gbc_txt_user);
 		txt_user.setColumns(10);
-		
-		JLabel lblPassord = new JLabel("Senha: ");
-		lblPassord.setFont(new Font("Times New Roman", Font.ITALIC, 15));
-		GridBagConstraints gbc_lblPassord = new GridBagConstraints();
-		gbc_lblPassord.anchor = GridBagConstraints.EAST;
-		gbc_lblPassord.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassord.gridx = 0;
-		gbc_lblPassord.gridy = 2;
-		contentPane.add(lblPassord, gbc_lblPassord);
-		
-		txt_pass = new JTextField();
-		GridBagConstraints gbc_txt_pass = new GridBagConstraints();
-		gbc_txt_pass.anchor = GridBagConstraints.NORTH;
-		gbc_txt_pass.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txt_pass.insets = new Insets(0, 0, 5, 5);
-		gbc_txt_pass.gridx = 1;
-		gbc_txt_pass.gridy = 2;
-		contentPane.add(txt_pass, gbc_txt_pass);
-		txt_pass.setColumns(10);
 		
 		JButton btnLogar = new JButton("Logar");
 		btnLogar.addActionListener(new ActionListener() {
@@ -118,12 +94,30 @@ public class Login extends JFrame {
 				verifica();
 			}
 		});
+		
+		JLabel lblPassord = new JLabel("Senha: ");
+		lblPassord.setForeground(Color.GREEN);
+		lblPassord.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
+		GridBagConstraints gbc_lblPassord = new GridBagConstraints();
+		gbc_lblPassord.fill = GridBagConstraints.VERTICAL;
+		gbc_lblPassord.insets = new Insets(0, 0, 5, 0);
+		gbc_lblPassord.gridx = 0;
+		gbc_lblPassord.gridy = 2;
+		contentPane.add(lblPassord, gbc_lblPassord);
+		
+		txt_pass = new JPasswordField();
+		GridBagConstraints gbc_txt_pass = new GridBagConstraints();
+		gbc_txt_pass.fill = GridBagConstraints.BOTH;
+		gbc_txt_pass.insets = new Insets(0, 0, 5, 0);
+		gbc_txt_pass.gridx = 0;
+		gbc_txt_pass.gridy = 3;
+		
+		contentPane.add(txt_pass, gbc_txt_pass);
 		GridBagConstraints gbc_btnLogar = new GridBagConstraints();
-		gbc_btnLogar.anchor = GridBagConstraints.NORTH;
-		gbc_btnLogar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnLogar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnLogar.gridx = 1;
-		gbc_btnLogar.gridy = 3;
+		gbc_btnLogar.fill = GridBagConstraints.BOTH;
+		gbc_btnLogar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnLogar.gridx = 0;
+		gbc_btnLogar.gridy = 4;
 		contentPane.add(btnLogar, gbc_btnLogar);
 		
 		JButton btnFechar = new JButton("Fechar");
@@ -133,16 +127,30 @@ public class Login extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnFechar = new GridBagConstraints();
-		gbc_btnFechar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnFechar.anchor = GridBagConstraints.NORTH;
-		gbc_btnFechar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnFechar.gridx = 1;
-		gbc_btnFechar.gridy = 4;
+		gbc_btnFechar.fill = GridBagConstraints.BOTH;
+		gbc_btnFechar.gridx = 0;
+		gbc_btnFechar.gridy = 5;
 		contentPane.add(btnFechar, gbc_btnFechar);
+		
+		frame1 = new FundoDaTelaLogin();
+		frame1.setUndecorated(true);
+		frame1.setBackground(new Color(0, 0, 0, .9f));
+		((JPanel) frame1.getContentPane()).setOpaque(false);
+		frame1.setLocationRelativeTo(null);
+		frame1.setExtendedState(MAXIMIZED_BOTH);
+		frame1.setVisible(true);
 	}
 
 	protected void verifica() {
-		limpar();
+		try {
+			new SistemaProxy(txt_user.getText(), new String(txt_pass.getPassword()));
+			this.dispose();
+			frame1.dispose();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Usuário ou senha\nINCORRETOS");
+			limpar();
+			txt_user.setFocusable(true);
+		}
 	}
 	
 	private void limpar(){

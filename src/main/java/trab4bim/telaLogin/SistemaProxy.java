@@ -1,5 +1,8 @@
 package trab4bim.telaLogin;
 
+import trab4bim.Dao.DaoUsuario;
+import trab4bim.telas.TelaPrincipal;
+
 public class SistemaProxy implements Sistema{
 
 	public SistemaProxy(String usu, String pass) {
@@ -8,8 +11,18 @@ public class SistemaProxy implements Sistema{
 
 	@Override
 	public void abrir(String user, String pass) {
-		// TODO Auto-generated method stub
+		if (VerificaUserPass(user, pass)) {
+			new TelaPrincipal().abrir(user, pass);
+		} else {
+			throw new RuntimeException("Senha invalida");
+		}
 		
+	}
+	
+	private boolean VerificaUserPass(String user, String pass){
+		DaoUsuario d = new DaoUsuario();
+		boolean v = d.Verifica(user, pass);
+		return v;
 	}
 	
 }
