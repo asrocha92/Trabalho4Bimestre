@@ -1,7 +1,7 @@
 CREATE DATABASE tb4bim;
 
 CREATE TABLE `tb4bim`.`cliente`(  
-  `id_c` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_c` INT(10) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(60),
   `telefone` VARCHAR(18),
   `endereco` VARCHAR(60),
@@ -13,8 +13,8 @@ CREATE TABLE `tb4bim`.`cliente`(
 );
 
 CREATE TABLE `tb4bim`.`usuario`(  
-  `id_u` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_c` INT(11) NOT NULL,
+  `id_u` INT(10) NOT NULL AUTO_INCREMENT,
+  `id_c` INT(10) NOT NULL,
   `cliente` VARCHAR(20) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_u`),
@@ -25,7 +25,7 @@ CREATE TABLE `tb4bim`.`usuario`(
 
 CREATE TABLE `tb4bim`.`produto`(  
   `cod_p` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `cod_barra` INT(11) NOT NULL,
+  `cod_barra` INT(10) NOT NULL,
   `categoria` VARCHAR(30) NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
   `unidade` VARCHAR(30) NOT NULL,
@@ -35,16 +35,15 @@ CREATE TABLE `tb4bim`.`produto`(
 );
 
 CREATE TABLE `tb4bim`.`venda`(  
-  `cod_v` INT(11) NOT NULL AUTO_INCREMENT,
-  `id_c` INT(11) NOT NULL,
+  `cod_v` INT(10) NOT NULL AUTO_INCREMENT,
+  `id_c` INT(10) NOT NULL,
   `cliente` VARCHAR(60) NOT NULL,
-  `cod_p` INT(11) NOT NULL,
+  `cod_p` INT(10) NOT NULL,
   `produto` VARCHAR(255) NOT NULL,
   `vtotal` DECIMAL(13,2) NOT NULL,
   `vpagamento` DECIMAL(13,2) NOT NULL,
   `troco` DECIMAL(13,2) NOT NULL,
   `data` VARCHAR(10) NOT NULL,
   `hora` VARCHAR(8) NOT NULL,
-  	ADD PRIMARY KEY (`cod_v`);
+   PRIMARY KEY (`cod_v`)
 );
-
