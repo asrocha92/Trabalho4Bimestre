@@ -45,6 +45,7 @@ public class Login extends JFrame {
 					frame.setBackground(new Color(0, 0, 0, .8f));
 					((JPanel) frame.getContentPane()).setOpaque(false);
 					frame.setLocationRelativeTo(null);
+//					frame.setEnabled(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -123,6 +124,7 @@ public class Login extends JFrame {
 		JButton btnFechar = new JButton("Fechar");
 		btnFechar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame1.dispose();
 				dispose();
 			}
 		});
@@ -138,6 +140,7 @@ public class Login extends JFrame {
 		((JPanel) frame1.getContentPane()).setOpaque(false);
 		frame1.setLocationRelativeTo(null);
 		frame1.setExtendedState(MAXIMIZED_BOTH);
+		frame1.setEnabled(false);
 		frame1.setVisible(true);
 	}
 
