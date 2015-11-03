@@ -1,17 +1,16 @@
 package trab4bim.telaLogin;
 
-import java.awt.BorderLayout;
+/**
+ * @author Alex Santos Rocha, 02/11/2015 - 22:54:49
+ * 
+ * Comentario tela de login
+ */
 import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -114,6 +113,11 @@ public class Login extends JFrame {
 		txt_pass.setColumns(10);
 		
 		JButton btnLogar = new JButton("Logar");
+		btnLogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verifica();
+			}
+		});
 		GridBagConstraints gbc_btnLogar = new GridBagConstraints();
 		gbc_btnLogar.anchor = GridBagConstraints.NORTH;
 		gbc_btnLogar.fill = GridBagConstraints.HORIZONTAL;
@@ -135,6 +139,15 @@ public class Login extends JFrame {
 		gbc_btnFechar.gridx = 1;
 		gbc_btnFechar.gridy = 4;
 		contentPane.add(btnFechar, gbc_btnFechar);
+	}
+
+	protected void verifica() {
+		limpar();
+	}
+	
+	private void limpar(){
+		txt_user.setText("");
+		txt_pass.setText("");
 	}
 
 }
