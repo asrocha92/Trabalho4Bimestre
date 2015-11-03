@@ -18,9 +18,10 @@ CREATE TABLE `tb4bim`.`usuario`(
   `cliente` VARCHAR(20) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_u`),
-  UNIQUE INDEX `usuario` (`id_c`),
-  CONSTRAINT `usuario` FOREIGN KEY (`id_c`) REFERENCES `tb4bim`.`cliente`(`id_c`)
+  UNIQUE INDEX `usuario` (`id_c`)
 );
+
+INSERT INTO `tb4bim`.`usuario` (`id_u`,`id_c`,`cliente`,`senha`) VALUES ( '1', '1','admin','admin');
 
 
 CREATE TABLE `tb4bim`.`produto`(  
