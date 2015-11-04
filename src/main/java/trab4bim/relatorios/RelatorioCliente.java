@@ -60,10 +60,8 @@ public class RelatorioCliente extends JPanel {
 	private JComboBox<String> cbx_cidade;
 	private JTable table;
 
-	private static String OUF_PDF;
-	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\RelCliente.jasper";
 	private List<Cliente> listaC;
-	private TableCliente tbModel;
+	private TableCliente tbModelCliente;
 	private String sql = "SELECT ID_C, NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO FROM CLIENTE";
 
 	public RelatorioCliente() {
@@ -178,12 +176,12 @@ public class RelatorioCliente extends JPanel {
 
 	// Método que carrega a table modelo em uma thread
 	private void modeloTable() {
-		tbModel = new TableCliente();
-		listaC = tbModel.listar();
+		tbModelCliente = new TableCliente();
+		listaC = tbModelCliente.listar();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				table.setModel(tbModel);
+				table.setModel(tbModelCliente);
 			}
 		}).start();
 	}
@@ -226,8 +224,8 @@ public class RelatorioCliente extends JPanel {
 					+ "' AND CIDADE ='"
 					+ cbx_cidade.getSelectedItem().toString() +
 					"'");
-			listaC = tbModel.listarRelatorio(filtrosql.toString());
-			table.setModel(tbModel);
+			listaC = tbModelCliente.listarRelatorio(filtrosql.toString());
+			table.setModel(tbModelCliente);
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"Selecione cidade e estado para filtrar.");
@@ -240,8 +238,8 @@ public class RelatorioCliente extends JPanel {
 			StringBuilder filtrosql = new StringBuilder();
 			filtrosql.append(sql + " WHERE CIDADE = '"
 					+ cbx_cidade.getSelectedItem() + "'");
-			listaC = tbModel.listarRelatorio(filtrosql.toString());
-			table.setModel(tbModel);
+			listaC = tbModelCliente.listarRelatorio(filtrosql.toString());
+			table.setModel(tbModelCliente);
 		}
 	}
 
@@ -250,38 +248,13 @@ public class RelatorioCliente extends JPanel {
 			StringBuilder filtrosql = new StringBuilder();
 			filtrosql.append(sql+ " WHERE ESTADO = '"
 						+ Estado.transforma(cbx_estado.getSelectedItem().toString()) + "'");
-			listaC = tbModel.listarRelatorio(filtrosql.toString());
-			table.setModel(tbModel);
+			listaC = tbModelCliente.listarRelatorio(filtrosql.toString());
+			table.setModel(tbModelCliente);
 		}
 	}
 
 	public void exportarPdf() {
-		TableModel tableModel = getTableModelProduto();
-
-		JasperPrint jp = null;
-		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("enderecop", "Av. Nilza de Oliveira, 401");
-			map.put("telefonep", "(55) 44 3543-1090");
-			// passar onde está o relatório em forma binarinaria
-			// map passa valores do atributos endereco e telefone
-			// e 3 parametro passa a conexão
-			jp = JasperFillManager.fillReport(arq, map,
-					new JRTableModelDataSource(tableModel));
-			// damos o nome ao arquivo pdf
-			OUF_PDF = nomeRelatorio();
-			// criamos o relatório em pdf
-			JasperExportManager.exportReportToPdfFile(jp,
-					"C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\"
-							+ OUF_PDF);
-
-			Desktop.getDesktop().open(
-					new File(
-							"C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\"
-									+ OUF_PDF));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new GerarPDF("Cliente", getTableModelProduto());
 	}
 
 	// gera uma table com os dados presentes na tela
@@ -302,23 +275,6 @@ public class RelatorioCliente extends JPanel {
 			data[i][j++] = listaC.get(i).getGenero().getNome();
 		}
 		return new DefaultTableModel(data, columnNames);
-	}
-
-	/**
-	 * @author Alex Santos Rocha, 01/11/2015 - 19:29:15
-	 * 
-	 * @return Nome do relatório
-	 * 
-	 *         Exemplo: Cliente-dataAtula-horas
-	 */
-	public String nomeRelatorio() {
-		StringBuilder nome = new StringBuilder();
-		SimpleDateFormat frm = new SimpleDateFormat("ddMMyyyy");
-		nome.append("Cliente-" + frm.format(new java.util.Date()) + "-");
-
-		Calendar hora = Calendar.getInstance();
-		return nome.append(String.format("%1$tH-%tM-%1$tS", hora) + ".fdf")
-				.toString();
 	}
 
 }

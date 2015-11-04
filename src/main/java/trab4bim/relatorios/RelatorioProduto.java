@@ -57,10 +57,8 @@ public class RelatorioProduto extends JPanel {
 	private JComboBox<String> cbx_categoria;
 	private JTable table;
 
-	private static String OUF_PDF;
-	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\RelProduto.jasper";
 	private List<Produto> listaP;
-	private TableProduto tbModel;
+	private TableProduto tbModelProduto;
 
 	public RelatorioProduto() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -161,12 +159,12 @@ public class RelatorioProduto extends JPanel {
 
 	//Método que carrega a table modelo em uma thread
 	private void modeloTable() {
-		tbModel = new TableProduto();
-		listaP = tbModel.listar();
+		tbModelProduto = new TableProduto();
+		listaP = tbModelProduto.listar();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				table.setModel(tbModel);
+				table.setModel(tbModelProduto);
 			}
 		}).start();
 	}
@@ -200,8 +198,8 @@ public class RelatorioProduto extends JPanel {
 			}else if (cbx_categoria.getSelectedItem() != null) {
 				sql.append("WHERRE CATEGORIA = '" + cbx_categoria.getSelectedItem()+"'");
 			}
-			listaP = tbModel.listarRelatorio(sql.toString());
-			table.setModel(tbModel);
+			listaP = tbModelProduto.listarRelatorio(sql.toString());
+			table.setModel(tbModelProduto);
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Digite somente números");
 			txt_mLucro.setBackground(Color.yellow);
@@ -211,34 +209,7 @@ public class RelatorioProduto extends JPanel {
 
 	//Método para exportar para pdf a table produto
 	public void exportarPdf() {
-
-		TableModel tableModel = getTableModelProduto();
-
-		JasperPrint jp = null;
-		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("endereco", "Av. Nilza de Oliveira, 401");
-			map.put("telefone", "(55) 44 3543-1090");
-			// passar onde está o relatório em forma binarinaria
-			// map passa valores do atributos endereco e telefone
-			// e 3 parametro passa a conexão
-			jp = JasperFillManager.fillReport(arq,
-					map,
-					new JRTableModelDataSource(tableModel));
-			// damos o nome ao arquivo pdf
-			OUF_PDF = nomeRelatorio();
-			// criamos o relatório em pdf
-			JasperExportManager.exportReportToPdfFile(jp,
-					"C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\"
-							+ OUF_PDF);
-
-			Desktop.getDesktop().open(
-					new File(
-							"C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\"
-									+ OUF_PDF));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new GerarPDF("Produto", getTableModelProduto());
 	}
 
 	// gera uma table com os dados presentes na tela
@@ -257,23 +228,6 @@ public class RelatorioProduto extends JPanel {
 			data[i][j++] = listaP.get(i).getMargenLucro();
 		}
 		return new DefaultTableModel(data, columnNames);
-	}
-
-	/**
-	 * @author Alex Santos Rocha, 01/11/2015 - 19:29:15
-	 * 
-	 * @return Nome do relatório
-	 * 
-	 *         Exemplo: Cliente-dataAtula-horas
-	 */
-	public String nomeRelatorio() {
-		StringBuilder nome = new StringBuilder();
-		SimpleDateFormat frm = new SimpleDateFormat("ddMMyyyy");
-		nome.append("Produto-" + frm.format(new java.util.Date()) + "-");
-
-		Calendar hora = Calendar.getInstance();
-		return nome.append(String.format("%1$tH-%tM-%1$tS", hora) + ".fdf")
-				.toString();
 	}
 
 }

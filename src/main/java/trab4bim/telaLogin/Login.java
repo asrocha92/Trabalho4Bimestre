@@ -60,6 +60,7 @@ public class Login extends JFrame {
 		setBounds(100, 100, 482, 208);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.BLACK);
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{317, 0};
@@ -69,7 +70,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblLogin = new JLabel("Usu\u00E1rio: ");
-		lblLogin.setForeground(Color.BLACK);
+		lblLogin.setForeground(Color.GREEN);
 		lblLogin.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
 		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
 		gbc_lblLogin.fill = GridBagConstraints.VERTICAL;
@@ -95,7 +96,7 @@ public class Login extends JFrame {
 		});
 		
 		JLabel lblPassord = new JLabel("Senha: ");
-		lblPassord.setForeground(Color.BLACK);
+		lblPassord.setForeground(Color.GREEN);
 		lblPassord.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
 		GridBagConstraints gbc_lblPassord = new GridBagConstraints();
 		gbc_lblPassord.fill = GridBagConstraints.VERTICAL;

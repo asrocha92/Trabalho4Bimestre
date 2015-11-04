@@ -51,8 +51,6 @@ public class RelatorioVenda extends JPanel {
 	private JComboBox<Object> cbx_mes;
 	private JComboBox<Object> cbx_categ;
 	
-	private static String OUF_PDF;
-	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\RelVenda.jasper";
 	private List<Venda> listaV;
 	private TableVenda tbModel;
 
@@ -259,34 +257,7 @@ public class RelatorioVenda extends JPanel {
 
 	//Método para exportar para pdf a table produto
 	public void exportarPdf() {
-
-		TableModel tableModel = getTableModelProduto();
-
-		JasperPrint jp = null;
-		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("endereco", "Av. Nilza de Oliveira, 401");
-			map.put("telefone", "(55) 44 3543-1090");
-			// passar onde está o relatório em forma binarinaria
-			// map passa valores do atributos endereco e telefone
-			// e 3 parametro passa a conexão
-			jp = JasperFillManager.fillReport(arq,
-					map,
-					new JRTableModelDataSource(tableModel));
-			// damos o nome ao arquivo pdf
-			OUF_PDF = nomeRelatorio();
-			// criamos o relatório em pdf
-			JasperExportManager.exportReportToPdfFile(jp,
-					"C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\"
-							+ OUF_PDF);
-
-			Desktop.getDesktop().open(
-					new File(
-							"C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\"
-									+ OUF_PDF));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new GerarPDF("Venda", getTableModelProduto());
 	}
 
 	// gera uma table com os dados presentes na tela
@@ -306,23 +277,6 @@ public class RelatorioVenda extends JPanel {
 			data[i][j++] = listaV.get(i).getHora();
 		}
 		return new DefaultTableModel(data, columnNames);
-	}
-
-	/**
-	 * @author Alex Santos Rocha, 01/11/2015 - 19:29:15
-	 * 
-	 * @return Nome do relatório
-	 * 
-	 *         Exemplo: Cliente-dataAtula-horas
-	 */
-	public String nomeRelatorio() {
-		StringBuilder nome = new StringBuilder();
-		SimpleDateFormat frm = new SimpleDateFormat("ddMMyyyy");
-		nome.append("Venda-" + frm.format(new java.util.Date()) + "-");
-
-		Calendar hora = Calendar.getInstance();
-		return nome.append(String.format("%1$tH-%tM-%1$tS", hora) + ".fdf")
-				.toString();
 	}
 
 }
