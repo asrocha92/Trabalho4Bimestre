@@ -42,10 +42,8 @@ public class Login extends JFrame {
 				try {					
 					Login frame = new Login();
 					frame.setUndecorated(true);
-					frame.setBackground(new Color(0, 0, 0, .8f));
-					((JPanel) frame.getContentPane()).setOpaque(false);
+					frame.setOpacity(0.8f);
 					frame.setLocationRelativeTo(null);
-//					frame.setEnabled(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +69,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblLogin = new JLabel("Usu\u00E1rio: ");
-		lblLogin.setForeground(Color.GREEN);
+		lblLogin.setForeground(Color.BLACK);
 		lblLogin.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
 		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
 		gbc_lblLogin.fill = GridBagConstraints.VERTICAL;
@@ -97,7 +95,7 @@ public class Login extends JFrame {
 		});
 		
 		JLabel lblPassord = new JLabel("Senha: ");
-		lblPassord.setForeground(Color.GREEN);
+		lblPassord.setForeground(Color.BLACK);
 		lblPassord.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
 		GridBagConstraints gbc_lblPassord = new GridBagConstraints();
 		gbc_lblPassord.fill = GridBagConstraints.VERTICAL;
@@ -136,8 +134,7 @@ public class Login extends JFrame {
 		
 		frame1 = new FundoDaTelaLogin();
 		frame1.setUndecorated(true);
-		frame1.setBackground(new Color(0, 0, 0, .9f));
-		((JPanel) frame1.getContentPane()).setOpaque(false);
+		frame1.setOpacity(0.8f);
 		frame1.setLocationRelativeTo(null);
 		frame1.setExtendedState(MAXIMIZED_BOTH);
 		frame1.setEnabled(false);
@@ -150,7 +147,7 @@ public class Login extends JFrame {
 			this.dispose();
 			frame1.dispose();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Usuário ou senha\nINCORRETOS");
+			JOptionPane.showMessageDialog(null, "Usuário ou senha\nINCORETA");
 			limpar();
 			txt_user.setFocusable(true);
 		}
