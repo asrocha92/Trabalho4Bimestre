@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JPasswordField;
 
+import trab4bim.Dao.DaoUsuario;
+
 public class Login extends JFrame {
 
 	private JPanel contentPane;
@@ -39,7 +41,7 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {					
+				try {						
 					Login frame = new Login();
 					frame.setUndecorated(true);
 					frame.setOpacity(0.8f);
@@ -140,6 +142,8 @@ public class Login extends JFrame {
 		frame1.setExtendedState(MAXIMIZED_BOTH);
 		frame1.setEnabled(false);
 		frame1.setVisible(true);
+		
+		new DaoUsuario().getCon();
 	}
 
 	protected void verifica() {

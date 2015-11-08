@@ -185,15 +185,12 @@ public class MioloCadUsuário extends JPanel {
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount() == 2) {
 					Usuario u = (Usuario) listaU.get(table.getSelectedRow());
-					returnCliente(u);
+					returnUsuario(u);
 					indece = table.getSelectedRow();
 				}
 			}
 		});
 		scrollPane.setViewportView(table);
-
-		//retrona conexão com o banco 
-		u.getCon();
 		//listar todos os clientes na table
 		listaDeUsuario();
 	}
@@ -243,11 +240,11 @@ public class MioloCadUsuário extends JPanel {
 		tableUsuario.deletar(table.getSelectedRow());
 	}
 
-	public void returnCliente(Usuario c) {
-		txt_idUser.setText(String.valueOf(c.getId()));
-		txt_idCliente.setText(String.valueOf(c.getIdCliente()));
-		txt_cliente.setText(c.getCliente());
-		txt_senha.setText(c.getSenha());
+	public void returnUsuario(Usuario u) {
+		txt_idUser.setText(String.valueOf(u.getId()));
+		txt_idCliente.setText(String.valueOf(u.getIdCliente()));
+		txt_cliente.setText(u.getCliente());
+		txt_senha.setText(u.getSenha());
 	}
 
 	public void limpar() {

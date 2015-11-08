@@ -217,7 +217,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblGenro.gridy = 8;
 		add(lblGenro, gbc_lblGenro);
 
-		JButton btnNewButton = new JButton("CADASTRAR");
+		JButton btnNewButton = new JButton("EFETUAR VENDA");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cadastrar();
@@ -286,8 +286,6 @@ public class MioloCadVenda extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 
-		// iniciar conexão
-		v.getCon();
 		// listar todos os clientes na table
 		listaDeVenda();
 		// listar cliente e produtos nos comboBox
@@ -401,10 +399,10 @@ public class MioloCadVenda extends JPanel {
 	 * @return valor pago e troco para o cliente.
 	 */
 	protected void fazerOsParanaesDasVenda() {
-		//cbx_produto.getSelectedIndex() - 1. os dados armazenados na lista começa em zero
-		double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1).CalcularMLP();
-		txt_vTotal.setText(String.valueOf(vt));
 		try {
+			//cbx_produto.getSelectedIndex() - 1. os dados armazenados na lista começa em zero
+			double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1).CalcularMLP();
+			txt_vTotal.setText(String.valueOf(vt));
 			double vp = Double.valueOf(JOptionPane
 					.showInputDialog("Digite o valor do pagamento ?"));
 			if (vp >= vt) {

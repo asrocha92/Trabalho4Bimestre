@@ -245,22 +245,20 @@ public class MioloDoProduto extends JPanel {
 					public void mouseClicked(MouseEvent evt) {
 						if (evt.getClickCount() == 2) {
 							Produto p = (Produto) listaP.get(table.getSelectedRow());
-							returnCliente(p);
+							returnProduto(p);
 							indece = table.getSelectedRow();
 						}
 					}
 				});
 		scrollPane.setViewportView(table);
 		
-		// iniciar conexão 
-		p.getCon();
 		//listar todos os clientes na table
-		listaDeCliente();
+		listaDeProduto();
 		
 	}
 
 	// lista dados armazenados no banco na table
-	public void listaDeCliente() {
+	public void listaDeProduto() {
 		new Thread(new Runnable() {			
 			@Override
 			public void run() {
@@ -309,7 +307,7 @@ public class MioloDoProduto extends JPanel {
 		tableProduto.deletar(table.getSelectedRow());
 	}
 
-	public void returnCliente(Produto p) {
+	public void returnProduto(Produto p) {
 		txt_cod.setText(String.valueOf(p.getCod()));
 		txt_codBarra.setText(String.valueOf(p.getCodBarra()));
 		txt_categoria.setText(p.getCategoria());
