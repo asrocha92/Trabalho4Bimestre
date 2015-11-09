@@ -74,7 +74,6 @@ public class RelatoriosDao {
 	}
 	
 	public List<Venda> listarRelVenda(StringBuilder sql) {
-		System.out.println(sql.toString() + " UNION " + sql.toString());
 		List<Venda> lista = new ArrayList<Venda>();
 		try {
 			st = con.createStatement();

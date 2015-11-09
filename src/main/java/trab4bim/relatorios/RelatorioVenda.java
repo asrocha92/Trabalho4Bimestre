@@ -243,7 +243,7 @@ public class RelatorioVenda extends JPanel {
 				}			
 				if (indice < 1) cbx_categ.addItem(lct.get(i).toString());			
 			}
-		 }
+	}
 
 	// gerar sql
 	protected void gerarsql() {

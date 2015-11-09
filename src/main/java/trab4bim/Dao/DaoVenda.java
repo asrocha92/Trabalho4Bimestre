@@ -44,7 +44,7 @@ public class DaoVenda implements CrudDao<Venda> {
 			ps.executeUpdate();
 			ps.close();
 			if (vd.getCod_v() == 0) {
-				JOptionPane.showMessageDialog(null, "Venda Efetuada com sucesso.");
+				JOptionPane.showMessageDialog(null, "Venda não efetuada.");
 			}else{
 				JOptionPane.showMessageDialog(null, "Venda Atualiza com sucesso.");
 			}
@@ -54,7 +54,7 @@ public class DaoVenda implements CrudDao<Venda> {
 	}
 
 	public void atualizar(Venda vd) {
-	
+		//uma venda pode se atualizar os dados do registro maa não pode modificar o historico do banco por isso vazio esse método
 	}
 
 	public void deletar(int cod_v) {
