@@ -84,4 +84,7 @@
 	*Tela de login pronta.
 	*Utilizando Padrão de Projeto Proxy
 	
+# 10 de novebro de 2015
+	# Feito algumas correções
+	#Criada a classe TratarException	
 		
