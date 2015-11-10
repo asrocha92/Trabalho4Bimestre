@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import trab4bim.Dao.DaoCliente;
 import trab4bim.Dao.DaoProduto;
 import trab4bim.Dao.DaoVenda;
+import trab4bim.TrararException.TratarException;
 import trab4bim.classes.Cliente;
 import trab4bim.classes.Produto;
 import trab4bim.classes.Venda;
@@ -36,6 +37,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,7 +67,7 @@ public class MioloCadVenda extends JPanel {
 	 */
 	public MioloCadVenda() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 77, 0, 0, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 77, 0, 96, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 10, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0,
@@ -240,13 +242,14 @@ public class MioloCadVenda extends JPanel {
 		gbc_btnNewButton.gridy = 9;
 		add(btnNewButton, gbc_btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("ATUALIZAR");
+		JButton btnNewButton_1 = new JButton("ALTERAR");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 atualizar();
+				atualizar();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_1.gridx = 2;
 		gbc_btnNewButton_1.gridy = 9;
@@ -307,40 +310,64 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	protected void cadastrar() {
-		Venda venda = new Venda(listaCliente.get(cbx_cliente.getSelectedIndex() -1).getId(),
-				listaProduto.get(cbx_produto.getSelectedIndex() -1).getCod(),
-				String.valueOf(cbx_cliente.getSelectedItem()),
-				String.valueOf(cbx_produto.getSelectedItem()),
-				BigDecimal.valueOf(Double.valueOf(txt_vTotal.getText())),
-				BigDecimal.valueOf(Double.valueOf(txt_vPago.getText())),
-				BigDecimal.valueOf(Double.valueOf(txt_vTroco.getText())),
-				txt_data.getText(),
-				txt_horas.getText());
-		v.inserir(venda);
-		listaV = v.listar();
-		tableVenda.adicionarLista(listaV);
-		limpar();
-	}
-
-	protected void atualizar() {
-		if (indece > -1) {
-			Venda venda = new Venda(Integer.parseInt(txt_codVenda.getText()),
-					listaCliente.get(cbx_cliente.getSelectedIndex() -1).getId(),
-					listaProduto.get(cbx_produto.getSelectedIndex() -1).getCod(),
+		Venda venda;
+		try {
+			venda = new Venda(
+					listaCliente.get(cbx_cliente.getSelectedIndex() - 1)
+							.getId(),
+					listaProduto.get(cbx_produto.getSelectedIndex() - 1)
+							.getCod(),
 					String.valueOf(cbx_cliente.getSelectedItem()),
 					String.valueOf(cbx_produto.getSelectedItem()),
-					BigDecimal.valueOf(Double.valueOf(txt_vTotal.getText())),
-					BigDecimal.valueOf(Double.valueOf(txt_vPago.getText())),
-					BigDecimal.valueOf(Double.valueOf(txt_vTroco.getText())),
+					new TratarException().tratarBigDecimal(txt_vTotal.getText()),
+					new TratarException().tratarBigDecimal(txt_vPago.getText()),
+					new TratarException().tratarBigDecimal(txt_vTroco.getText()),
 					txt_data.getText(), txt_horas.getText());
 			v.inserir(venda);
 			listaV = v.listar();
 			tableVenda.adicionarLista(listaV);
 			limpar();
-			indece = -1;
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(null, "Erro com valor digitado!");
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Digite somete números e não letras");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void atualizar() {
+		if (indece > -1) {
+			try {
+				Venda venda = new Venda(
+						Integer.parseInt(txt_codVenda.getText()),
+						listaCliente.get(cbx_cliente.getSelectedIndex() - 1)
+								.getId(),
+						listaProduto.get(cbx_produto.getSelectedIndex() - 1)
+								.getCod(),
+						String.valueOf(cbx_cliente.getSelectedItem()),
+						String.valueOf(cbx_produto.getSelectedItem()),
+						new TratarException().tratarBigDecimal(txt_vTotal.getText()),
+						new TratarException().tratarBigDecimal(txt_vPago.getText()),
+						new TratarException().tratarBigDecimal(txt_vTroco.getText()),
+						txt_data.getText(), txt_horas.getText());
+				v.inserir(venda);
+				listaV = v.listar();
+				tableVenda.adicionarLista(listaV);
+				limpar();
+				indece = -1;
+			} catch (ParseException e) {
+				JOptionPane.showMessageDialog(null, "Erro com valor digitado!");
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null,
+						"Digite somete números e não letras");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Selecio um venda para excluir!");
+					"De um duplo click na tabela venda para poder atualizar!");
 		}
 	}
 
@@ -400,8 +427,10 @@ public class MioloCadVenda extends JPanel {
 	 */
 	protected void fazerOsParanaesDasVenda() {
 		try {
-			//cbx_produto.getSelectedIndex() - 1. os dados armazenados na lista começa em zero
-			double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1).CalcularMLP();
+			// cbx_produto.getSelectedIndex() - 1. os dados armazenados na lista
+			// começa em zero
+			double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1)
+					.CalcularMLP();
 			txt_vTotal.setText(String.valueOf(vt));
 			double vp = Double.valueOf(JOptionPane
 					.showInputDialog("Digite o valor do pagamento ?"));

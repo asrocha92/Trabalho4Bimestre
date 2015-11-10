@@ -53,7 +53,7 @@ public class MioloCadUsuário extends JPanel {
 	 */
 	public MioloCadUsuário() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 96, 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 96, 0, 0, 95, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 10, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
@@ -145,13 +145,14 @@ public class MioloCadUsuário extends JPanel {
 		gbc_btnCadastrar.gridy = 5;
 		add(btnCadastrar, gbc_btnCadastrar);
 
-		btnAtualizar = new JButton("ATUALIZAR");
+		btnAtualizar = new JButton("ALTERAR");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				atualizar();
 			}
 		});
 		GridBagConstraints gbc_btnAtualizar = new GridBagConstraints();
+		gbc_btnAtualizar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnAtualizar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAtualizar.gridx = 3;
 		gbc_btnAtualizar.gridy = 5;
