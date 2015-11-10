@@ -34,6 +34,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -338,7 +339,7 @@ public class MioloDoProduto extends JPanel {
 		txt_categoria.setText(p.getCategoria());
 		txt_desc.setText(p.getDescricao());
 		txt_und.setText(p.getUnidade());
-		txt_custo.setText(String.valueOf(p.getCusto()));
+		txt_custo.setText(new BigDecimal(p.getCusto().toString()).setScale(2, RoundingMode.HALF_EVEN).toString());
 		txt_mLucro.setText(String.valueOf(p.getMargenLucro()));
 	}
 

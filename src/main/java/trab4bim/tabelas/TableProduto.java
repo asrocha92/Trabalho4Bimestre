@@ -1,5 +1,7 @@
 package trab4bim.tabelas;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class TableProduto extends AbstractTableModel{
 		case 2: return p.getCategoria();
 		case 3: return p.getDescricao();
 		case 4: return p.getUnidade();
-		case 5: return p.getCusto();
+		case 5: return new BigDecimal(p.getCusto().toString()).setScale(2, RoundingMode.HALF_EVEN);
 		case 6: return p.getMargenLucro();
 		default: return "";
 		}

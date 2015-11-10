@@ -87,4 +87,5 @@
 # 10 de novebro de 2015
 	# Feito algumas correções
 	#Criada a classe TratarException	
+	#Criação das classe teste 'JUnit', das classe do pacote 'trab4bim.Dao'
 		

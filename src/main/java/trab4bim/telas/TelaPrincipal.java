@@ -30,7 +30,7 @@ public class TelaPrincipal extends JFrame implements Sistema {
 	/**
 	 * @author Alex Santos Rocha, 02/11/2015 - 23:17:20
 	 * 
-	 * Comentario: depois de ferificar abre a tela principal
+	 * Comentario: depois de verificar abre a tela principal
 	 * 
 	 */
 	

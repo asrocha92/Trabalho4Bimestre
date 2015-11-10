@@ -429,17 +429,14 @@ public class MioloCadVenda extends JPanel {
 		try {
 			// cbx_produto.getSelectedIndex() - 1. os dados armazenados na lista
 			// começa em zero
-			double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1)
-					.CalcularMLP();
+			double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1) .CalcularMLP();
 			txt_vTotal.setText(String.valueOf(vt));
-			double vp = Double.valueOf(JOptionPane
-					.showInputDialog("Digite o valor do pagamento ?"));
+			double vp = Double.valueOf(JOptionPane.showInputDialog("Digite o valor do pagamento ?"));
 			if (vp >= vt) {
 				double troco = vp - vt;
 				txt_vPago.setText(String.valueOf(vp));
 				// formatar número
-				BigDecimal bd = new BigDecimal(troco).setScale(2,
-						RoundingMode.HALF_EVEN);
+				BigDecimal bd = new BigDecimal(troco).setScale(2, RoundingMode.HALF_EVEN);
 				txt_vTroco.setText(bd.toString());
 			} else {
 				JOptionPane.showMessageDialog(null,

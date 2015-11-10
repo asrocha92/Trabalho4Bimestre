@@ -143,7 +143,7 @@ public class Login extends JFrame {
 		frame1.setEnabled(false);
 		frame1.setVisible(true);
 		
-//		new DaoUsuario().getCon();
+		new DaoUsuario().getCon();
 	}
 
 	protected void verifica() {
@@ -152,7 +152,7 @@ public class Login extends JFrame {
 			this.dispose();
 			frame1.dispose();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Usuário ou senha\nINCORETA");
+			JOptionPane.showMessageDialog(null, "Usuário ou senha\nINCORRETA");
 			limpar();
 			txt_user.setFocusable(true);
 		}
