@@ -32,7 +32,7 @@ public class FundoDaTelaLogin extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lb_img = new JLabel("");
-		lb_img.setIcon(new ImageIcon("C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\imagem\\ENG.jpg"));
+		lb_img.setIcon(new ImageIcon("C:\\Users\\e006617\\git\\Trabalho4Bimestre\\src\\main\\resources\\imagem\\ENG.jpg"));
 		GridBagConstraints gbc_lb_img = new GridBagConstraints();
 		gbc_lb_img.gridx = 0;
 		gbc_lb_img.gridy = 0;

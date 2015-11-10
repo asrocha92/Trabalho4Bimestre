@@ -26,7 +26,7 @@ public class Conexao {
 		String driverName = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost/tb4bim";
 		String user = "root";
-		String pass = "'123'";
+		String pass = "1234";
 		try {
 			Class.forName(driverName);
 			return con = DriverManager.getConnection(url, user, pass);
