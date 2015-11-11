@@ -89,6 +89,7 @@
 	*Criada a classe TratarException	
 	*Criação das classe teste 'JUnit', das classe do pacote 'trab4bim.Dao'
 # 11 de novebro de 2015
-	*Teste da conexão com banco.
-	*
+	*Teste JUnit da conexão com banco funcionando.
+	*Teste JUnit da classe DaoCliente funcionando.
+	*Teste JUnit da classe DaoProduto funcionando.
 		
