@@ -28,7 +28,7 @@ public class DaoVenda implements CrudDao<Venda> {
 	private List<Venda> lista = null;
 	private Connection con = Conexao.getInstace().conOpen();
 
-	public void inserir(Venda vd) {
+	public int inserir(Venda vd) {
 		try {
 			ps = con.prepareStatement("INSERT INTO VENDA (ID_C, CLIENTE, COD_P,"
 					+ " PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -41,30 +41,35 @@ public class DaoVenda implements CrudDao<Venda> {
 			ps.setBigDecimal(7, vd.getTroco());
 			ps.setString(8, vd.getData());
 			ps.setString(9, vd.getHora());
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			if (vd.getCod_v() == 0) {
 				JOptionPane.showMessageDialog(null, "Venda não efetuada.");
 			}else{
 				JOptionPane.showMessageDialog(null, "Venda Atualiza com sucesso.");
 			}
+			return res;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
-	public void atualizar(Venda vd) {
+	public int atualizar(Venda vd) {
 		//uma venda pode se atualizar os dados do registro maa não pode modificar o historico do banco por isso vazio esse método
+		return 0;
 	}
 
-	public void deletar(int cod_v) {
+	public int deletar(int cod_v) {
 		try {
 			ps = con.prepareStatement("DELETE FROM VENDA WHERE COD_V =" + cod_v);
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Requisição de venda excluida com sucesso");
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 

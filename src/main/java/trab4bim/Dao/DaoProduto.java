@@ -27,7 +27,7 @@ public class DaoProduto implements CrudDao<Produto>{
 	private List<Produto> lista = null;
 	private Connection con = Conexao.getInstace().conOpen();
 	
-	public void inserir(Produto pd) {
+	public int inserir(Produto pd) {
 		try {
 			ps = con
 					.prepareStatement("INSERT INTO PRODUTO (COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO) VALUES (?, ?, ?, ?, ?, ?)");
@@ -37,16 +37,18 @@ public class DaoProduto implements CrudDao<Produto>{
 			ps.setString(4, pd.getUnidade());
 			ps.setBigDecimal(5, pd.getCusto());
 			ps.setBigDecimal(6, pd.getMargenLucro());
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Produto: " + pd.getDescricao()
 					+ "\n Cadastrado com sucesso.");
+			return res;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
-	public void atualizar(Produto pd) {
+	public int atualizar(Produto pd) {
 		try {
 			ps = con
 					.prepareStatement("UPDATE PRODUTO SET COD_BARRA = ?, CATEGORIA = ?, DESCRICAO = ?,"
@@ -57,24 +59,28 @@ public class DaoProduto implements CrudDao<Produto>{
 			ps.setString(4, pd.getUnidade());
 			ps.setBigDecimal(5, pd.getCusto());
 			ps.setBigDecimal(6, pd.getMargenLucro());
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Produto: " + pd.getDescricao()
 					+ "\n Atualizado com sucesso.");
+			return res;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return 0;
 		}
 		
 	}
 
-	public void deletar(int id) {
+	public int deletar(int id) {
 		try {
 			ps =con.prepareStatement("DELETE FROM PRODUTO WHERE COD_P =" + id);
 			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Produto excluido com sucesso.");
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 

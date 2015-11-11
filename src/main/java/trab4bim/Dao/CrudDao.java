@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface CrudDao <T>{
 
-	public void inserir(T tipo);
+	public int inserir(T tipo);
 	
-	public void atualizar(T tipo);
+	public int atualizar(T tipo);
 	
-	public void deletar(int tipo);
+	public int deletar(int tipo);
 	
 	public T buscarUm(int id);
 	

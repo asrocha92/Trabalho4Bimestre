@@ -30,9 +30,10 @@ public class DaoCliente implements CrudDao<Cliente> {
 	private List<Cliente> lista = null;
 	private Connection con = Conexao.getInstace().conOpen();
 
-	public void inserir(Cliente c) {
+	
+	public int inserir(Cliente c) {
 		try {
-			ps = con.prepareStatement("INSERT INTO CLIENTE (NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps = getCon().prepareStatement("INSERT INTO CLIENTE (NOME, TELEFONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getTelefone());
 			ps.setString(3, c.getEndreco());
@@ -40,18 +41,20 @@ public class DaoCliente implements CrudDao<Cliente> {
 			ps.setString(5, c.getEstado().name());
 			ps.setString(6, c.getEmail());
 			ps.setString(7, c.getGenero().name());
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Cliente: " + c.getNome()
 					+ "\n Cadastrado com sucesso.");
+			return res;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
-	public void atualizar(Cliente c) {
+	public int atualizar(Cliente c) {
 		try {
-			ps = con.prepareStatement("UPDATE CLIENTE SET NOME = ?,"
+			ps = getCon().prepareStatement("UPDATE CLIENTE SET NOME = ?,"
 					+ " TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?,"
 					+ " EMAIL = ?, GENERO = ? WHERE ID_C = " + c.getId());
 			ps.setString(1, c.getNome());
@@ -61,23 +64,27 @@ public class DaoCliente implements CrudDao<Cliente> {
 			ps.setString(5, c.getEstado().name());
 			ps.setString(6, c.getEmail());
 			ps.setString(7, c.getGenero().name());
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Cliente: " + c.getNome()
 					+ "\n Atualizado com sucesso.");
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
-	public void deletar(int id) {
+	public int deletar(int id) {
 		try {
-			ps = con.prepareStatement("DELETE FROM CLIENTE WHERE ID_C =" + id);
-			ps.executeUpdate();
+			ps = getCon().prepareStatement("DELETE FROM CLIENTE WHERE ID_C =" + id);
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null,"Cliente excluido com sucesso.");
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
@@ -96,7 +103,8 @@ public class DaoCliente implements CrudDao<Cliente> {
 			}
 			rs.close();
 			st.close();
-			return c;
+			if(c != null)
+				return c;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

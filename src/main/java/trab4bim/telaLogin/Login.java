@@ -1,4 +1,4 @@
-package trab4bim.telaLogin;
+	package trab4bim.telaLogin;
 
 /**
  * @author Alex Santos Rocha, 02/11/2015 - 22:54:49

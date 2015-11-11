@@ -36,11 +36,13 @@ public class Conexao {
 		return null;
 	}
 	
-	public void conClose(){
-		try {
+	public boolean conClose(){
+		try {			
 			con.close();
-		} catch (SQLException e) {
+			return true;
+		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 		

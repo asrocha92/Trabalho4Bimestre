@@ -23,8 +23,12 @@ import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 public class GerarPDF {
 	
 	private String tipo;
-	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
-	private String salvarLocal = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
+	//teste no pc p
+//	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
+//	private String salvarLocal = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
+	//teste no pc do s
+	private String arq = "C:\\Users\\e006617\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
+	private String salvarLocal = arq;
 	
 	public GerarPDF(String tipo, TableModel tbModel){
 		this.tipo = tipo;
@@ -43,7 +47,7 @@ public class GerarPDF {
 				map.put("endereco", "Av. Nilza de Oliveira, 401");
 				map.put("telefone", "(55) 44 3543-1090");
 			}
-			// passar onde está o relatório em forma binarinaria
+			// passar onde está o relatório em forma binaria
 			// map passa valores do atributos endereco e telefone
 			// e 3 parametro passa a conexão
 			jp = JasperFillManager.fillReport(arq, map,

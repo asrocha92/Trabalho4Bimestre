@@ -21,46 +21,52 @@ public class DaoUsuario implements CrudDao<Usuario> {
 	private List<Usuario> lista = null;
 	private Connection con = Conexao.getInstace().conOpen();
 
-	public void inserir(Usuario u) {
+	public int inserir(Usuario u) {
 		try {
 			ps = con.prepareStatement("INSERT INTO USUARIO (ID_C, CLIENTE, SENHA) VALUES (?, ?, ?)");
 			ps.setInt(1, u.getIdCliente());
 			ps.setString(2, u.getCliente());
 			ps.setString(3, u.getSenha());
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Usuário cadastrado com\n"
 					+ "Sucesso");
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
-	public void atualizar(Usuario u) {
+	public int atualizar(Usuario u) {
 		try {
 			ps = con.prepareStatement("UPDATE USUARIO SET ID_C = ?, CLIENTE = ?, SENHA =? WHERE ID_U"
 					+ u.getId());
 			ps.setInt(1, u.getIdCliente());
 			ps.setString(2, u.getCliente());
 			ps.setString(3, u.getSenha());
-			ps.executeUpdate();
+			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Usuário atualizado com\n"
 					+ "Sucesso");
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
-	public void deletar(int id_u) {
+	public int deletar(int id_u) {
 		try {
 			ps = con.prepareStatement("DELETE FROM USUARIO WHERE ID_U = "
 					+ id_u);
 			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null,"Usuário excluido com sucesso.");
+			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 
