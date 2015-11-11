@@ -38,6 +38,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class MioloCadCliente extends JPanel {
 	private JTextField txt_nome;
 	private JTextField txt_telefone;
@@ -57,6 +58,7 @@ public class MioloCadCliente extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings("deprecation")
 	public MioloCadCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 77, 0, 96, 0, 0 };

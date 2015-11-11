@@ -15,6 +15,7 @@ import trab4bim.Dao.RelatoriosDao;
 import trab4bim.classes.Venda;
 
 
+@SuppressWarnings("serial")
 public class TableVenda extends AbstractTableModel{
 	
 	List<Venda> lista = new ArrayList<>();

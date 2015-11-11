@@ -2,6 +2,7 @@ package trab4bim.telas;
 
 import java.awt.BorderLayout;
 
+@SuppressWarnings("serial")
 public class TelaCadCliente extends ModuraAbstrata {
 
 	/**

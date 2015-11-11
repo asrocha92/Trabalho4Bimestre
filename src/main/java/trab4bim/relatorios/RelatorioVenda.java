@@ -8,14 +8,11 @@ package trab4bim.relatorios;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
@@ -23,26 +20,15 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import trab4bim.Dao.DaoProduto;
 import trab4bim.Dao.RelatoriosDao;
-import trab4bim.classes.Produto;
 import trab4bim.classes.Venda;
-import trab4bim.tabelas.TableProduto;
 import trab4bim.tabelas.TableVenda;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@SuppressWarnings("serial")
 public class RelatorioVenda extends JPanel {
 
 	private JTextField txt_cliente;

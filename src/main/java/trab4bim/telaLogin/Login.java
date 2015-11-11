@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -28,6 +27,7 @@ import javax.swing.JPasswordField;
 
 import trab4bim.Dao.DaoUsuario;
 
+@SuppressWarnings("serial")
 public class Login extends JFrame {
 
 	private JPanel contentPane;

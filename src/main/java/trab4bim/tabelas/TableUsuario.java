@@ -13,6 +13,7 @@ import javax.swing.table.AbstractTableModel;
 import trab4bim.Dao.DaoUsuario;
 import trab4bim.classes.Usuario;
 
+@SuppressWarnings("serial")
 public class TableUsuario extends AbstractTableModel{
 	
 	List<Usuario> lista = new ArrayList<>();

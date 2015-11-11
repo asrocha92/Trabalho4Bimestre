@@ -29,7 +29,7 @@ public class DaoProduto implements CrudDao<Produto>{
 	
 	public int inserir(Produto pd) {
 		try {
-			ps = con
+			ps = getCon()
 					.prepareStatement("INSERT INTO PRODUTO (COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO) VALUES (?, ?, ?, ?, ?, ?)");
 			ps.setInt(1, pd.getCodBarra());
 			ps.setString(2, pd.getCategoria());
@@ -50,7 +50,7 @@ public class DaoProduto implements CrudDao<Produto>{
 
 	public int atualizar(Produto pd) {
 		try {
-			ps = con
+			ps = getCon()
 					.prepareStatement("UPDATE PRODUTO SET COD_BARRA = ?, CATEGORIA = ?, DESCRICAO = ?,"
 							+ " UNIDADE = ?, CUSTO = ?, MARGE_LUCRO = ? WHERE COD_P = " + pd.getCod());
 			ps.setInt(1, pd.getCodBarra());
@@ -73,7 +73,7 @@ public class DaoProduto implements CrudDao<Produto>{
 
 	public int deletar(int id) {
 		try {
-			ps =con.prepareStatement("DELETE FROM PRODUTO WHERE COD_P =" + id);
+			ps =getCon().prepareStatement("DELETE FROM PRODUTO WHERE COD_P =" + id);
 			int res = ps.executeUpdate();
 			ps.close();
 			JOptionPane.showMessageDialog(null, "Produto excluido com sucesso.");
@@ -86,11 +86,11 @@ public class DaoProduto implements CrudDao<Produto>{
 
 	public Produto buscarUm(int id) {
 		try {
-			st = con.createStatement();
+			st = getCon().createStatement();
 			rs = st.executeQuery("SELECT COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO "
 					+ "FROM PRODUTO WHERE COD_P = " + id);
 			rs.next();
-			if (rs.getString("NOME") != null) {
+			if (rs.getString("COD_BARRA") != null) {
 				p = new Produto(id , rs.getInt("COD_BARRA"),
 						rs.getString("CATEGORIA"),
 						rs.getString("DESCRICAO"), 
@@ -110,7 +110,7 @@ public class DaoProduto implements CrudDao<Produto>{
 	public List<Produto> listar() {
 		lista = new ArrayList<Produto>();
 		try {
-			st = con.createStatement();
+			st = getCon().createStatement();
 			rs = st.executeQuery("SELECT COD_P, COD_BARRA, CATEGORIA, DESCRICAO, UNIDADE, CUSTO, MARGE_LUCRO "
 					+ "FROM PRODUTO");
 			while(rs.next()){

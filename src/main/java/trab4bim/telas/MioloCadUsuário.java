@@ -26,12 +26,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import trab4bim.Dao.DaoUsuario;
-import trab4bim.classes.Cliente;
 import trab4bim.classes.Usuario;
 import trab4bim.tabelas.TableUsuario;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class MioloCadUsuário extends JPanel {
 
 	protected JTextField txt_idUser;
@@ -51,6 +52,7 @@ public class MioloCadUsuário extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings("deprecation")
 	public MioloCadUsuário() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 96, 0, 0, 95, 0, 0 };
@@ -208,6 +210,7 @@ public class MioloCadUsuário extends JPanel {
 		}).start();
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void cadastrar() {
 		Usuario usuario = new Usuario();
 		usuario.setIdCliente(Integer.parseInt(txt_idCliente.getText()));

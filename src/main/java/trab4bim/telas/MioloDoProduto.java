@@ -19,14 +19,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import trab4bim.Dao.DaoCliente;
 import trab4bim.Dao.DaoProduto;
 import trab4bim.TrararException.TratarException;
-import trab4bim.classes.Cliente;
-import trab4bim.classes.Estado;
-import trab4bim.classes.Genero;
 import trab4bim.classes.Produto;
-import trab4bim.tabelas.TableCliente;
 import trab4bim.tabelas.TableProduto;
 
 import java.awt.event.ActionListener;
@@ -39,6 +34,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class MioloDoProduto extends JPanel {
 	protected JTextField txt_cod;
 	protected JTextField txt_codBarra;
@@ -60,6 +56,7 @@ public class MioloDoProduto extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings("deprecation")
 	public MioloDoProduto() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 116, 0, 0, 94, 0, 0 };

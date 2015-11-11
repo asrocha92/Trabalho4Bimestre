@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class MioloCadVenda extends JPanel {
 	private JTextField txt_vTotal;
 	private JTextField txt_vPago;
@@ -65,6 +66,7 @@ public class MioloCadVenda extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings("deprecation")
 	public MioloCadVenda() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 77, 0, 96, 0, 0 };

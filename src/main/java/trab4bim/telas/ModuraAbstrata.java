@@ -20,6 +20,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("serial")
 public abstract class ModuraAbstrata extends JPanel {
 
 //	private JButton btn_fechar;

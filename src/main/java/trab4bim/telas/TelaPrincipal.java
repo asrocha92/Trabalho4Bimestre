@@ -22,6 +22,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class TelaPrincipal extends JFrame implements Sistema {
 
 	private JPanel contentPane;

@@ -1,15 +1,18 @@
 package trab4bim.telaLogin;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.ImageIcon;
 
+@SuppressWarnings("serial")
 public class FundoDaTelaLogin extends JFrame {
 
 	private JPanel contentPane;

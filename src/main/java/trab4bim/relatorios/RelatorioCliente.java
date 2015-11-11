@@ -1,20 +1,9 @@
 package trab4bim.relatorios;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.sql.Connection;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JPanel;
-
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 import java.awt.GridBagLayout;
 
@@ -24,11 +13,9 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JTable;
 
-import trab4bim.Dao.Conexao;
 import trab4bim.classes.Cliente;
 import trab4bim.classes.Estado;
 import trab4bim.tabelas.TableCliente;
-import trab4bim.tabelas.TableProduto;
 
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
@@ -54,6 +41,7 @@ import java.awt.event.MouseEvent;
  *
  */
 
+@SuppressWarnings("serial")
 public class RelatorioCliente extends JPanel {
 
 	private JComboBox<String> cbx_estado;

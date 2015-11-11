@@ -12,6 +12,7 @@ import trab4bim.Dao.RelatoriosDao;
 import trab4bim.classes.Produto;
 
 
+@SuppressWarnings("serial")
 public class TableProduto extends AbstractTableModel{
 
 	List<Produto> lista = new ArrayList<>();

@@ -7,8 +7,10 @@ package trab4bim.telas;
  */
 
 import java.awt.BorderLayout;
+
 import trab4bim.relatorios.RelatorioVenda;
 
+@SuppressWarnings("serial")
 public class TelaRelVenda extends ModuraAbstrata {
 
 	/**

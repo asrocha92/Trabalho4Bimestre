@@ -6,24 +6,9 @@ package trab4bim.relatorios;
  * Comentario: Configuração do relatório produto, e contruira relatório PDF
  */
 
-import java.awt.Desktop;
-import java.io.File;
-import java.math.BigDecimal;
-import java.sql.Connection;
-import java.text.SimpleDateFormat;
-import java.text.StringCharacterIterator;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JPanel;
-
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 import java.awt.GridBagLayout;
 
@@ -33,7 +18,6 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JTable;
 
-import trab4bim.Dao.Conexao;
 import trab4bim.classes.Produto;
 import trab4bim.tabelas.TableProduto;
 
@@ -51,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+@SuppressWarnings("serial")
 public class RelatorioProduto extends JPanel {
 
 	private JTextField txt_mLucro;

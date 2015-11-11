@@ -2,9 +2,9 @@ package trab4bim.telas;
 
 import java.awt.BorderLayout;
 
-import trab4bim.relatorios.RelatorioCliente;
 import trab4bim.relatorios.RelatorioProduto;
 
+@SuppressWarnings("serial")
 public class TelaRelProduto extends ModuraAbstrata {
 
 	/**

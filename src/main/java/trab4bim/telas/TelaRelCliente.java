@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import trab4bim.relatorios.RelatorioCliente;
 
+@SuppressWarnings("serial")
 public class TelaRelCliente extends ModuraAbstrata {
 
 	/**

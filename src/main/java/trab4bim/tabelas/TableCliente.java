@@ -13,8 +13,8 @@ import javax.swing.table.AbstractTableModel;
 import trab4bim.Dao.DaoCliente;
 import trab4bim.Dao.RelatoriosDao;
 import trab4bim.classes.Cliente;
-import trab4bim.classes.Produto;
 
+@SuppressWarnings("serial")
 public class TableCliente extends AbstractTableModel{
 	
 	List<Cliente> lista = new ArrayList<>();
