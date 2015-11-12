@@ -431,7 +431,7 @@ public class MioloCadVenda extends JPanel {
 		try {
 			// cbx_produto.getSelectedIndex() - 1. os dados armazenados na lista
 			// começa em zero
-			double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1) .CalcularMLP();
+			double vt = listaProduto.get(cbx_produto.getSelectedIndex() - 1) .CalcularMarLucrP();
 			txt_vTotal.setText(String.valueOf(vt));
 			double vp = Double.valueOf(JOptionPane.showInputDialog("Digite o valor do pagamento ?"));
 			if (vp >= vt) {

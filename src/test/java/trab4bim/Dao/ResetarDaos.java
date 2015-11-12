@@ -1,5 +1,11 @@
 package trab4bim.Dao;
 
+/**
+ * @author Alex Santos Rocha, 12/11/2015 - 12:32:36
+ * 
+ * Reset all tables a the type specific.
+ */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

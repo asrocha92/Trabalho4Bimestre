@@ -7,12 +7,7 @@ package trab4bim.Dao;
  */
 
 import static org.junit.Assert.*;
-
-import java.math.BigDecimal;
-
 import org.junit.Test;
-
-import trab4bim.classes.Produto;
 import trab4bim.classes.Usuario;
 
 public class JunitTesteDaoUsuario {

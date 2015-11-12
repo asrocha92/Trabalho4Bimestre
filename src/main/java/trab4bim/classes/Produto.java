@@ -7,6 +7,7 @@ package trab4bim.classes;
  */
 
 import java.math.BigDecimal;
+import java.util.Locale;
 
 public class Produto {
 	private int cod;
@@ -104,9 +105,12 @@ public class Produto {
 	 * @author Alex Santos Rocha, 01/11/2015 - 13:53:52
 	 * 
 	 * @return valor total do produto
+	 * 
+	 * calcular marge de lucro do produto
 	 */
-	public Double CalcularMLP(){
-		return this.custo.doubleValue() + (this.custo.doubleValue() * (this.margenLucro.doubleValue() / 100));
+	public Double CalcularMarLucrP(){
+		double valor = this.custo.doubleValue() + (this.custo.doubleValue() * (this.margenLucro.doubleValue() / 100));
+		return Double.valueOf(String.format(Locale.US, "%.3f", valor));
 	}
 	
 }

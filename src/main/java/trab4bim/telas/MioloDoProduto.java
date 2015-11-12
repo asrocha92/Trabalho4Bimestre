@@ -49,7 +49,7 @@ public class MioloDoProduto extends JPanel {
 	private JTable table;
 
 	private TableProduto tableProduto;
-	private DaoProduto p = new DaoProduto();
+	private DaoProduto dp = new DaoProduto();
 	private List<Produto> listaP = new ArrayList<>();
 	private int indece = -1;
 
@@ -282,8 +282,8 @@ public class MioloDoProduto extends JPanel {
 					txt_und.getText(),
 					new TratarException().tratarBigDecimal(txt_custo.getText()),
 					new TratarException().tratarBigDecimal(txt_mLucro.getText()));
-			p.inserir(produto);
-			listaP = p.listar();
+			dp.inserir(produto);
+			listaP = dp.listar();
 			tableProduto.adicionarLista(listaP);
 			limpar();
 		} catch (ParseException e) {
@@ -299,34 +299,31 @@ public class MioloDoProduto extends JPanel {
 	protected void atualizar() {
 		if (indece > -1) {
 			try {
-				Produto produto = new Produto(Integer.parseInt(txt_cod
-						.getText()), Integer.parseInt(txt_codBarra.getText()),
-						txt_categoria.getText(), txt_desc.getText(),
-						txt_und.getText(),
-						new TratarException().tratarBigDecimal(txt_custo
-								.getText()),
-						new TratarException().tratarBigDecimal(txt_mLucro
-								.getText()));
-				p.atualizar(produto);
+				Produto produto = new Produto(Integer.parseInt(txt_cod.getText()),
+											  Integer.parseInt(txt_codBarra.getText()),
+											  txt_categoria.getText(),
+											  txt_desc.getText(),
+											  txt_und.getText(),
+											  new TratarException().tratarBigDecimal(txt_custo.getText()),
+											  new TratarException().tratarBigDecimal(txt_mLucro.getText()));
+				dp.atualizar(produto);
 				tableProduto.atualizarLista(indece, produto);
 				limpar();
 				indece = -1;
 			} catch (ParseException e) {
-				JOptionPane.showMessageDialog(null, "Erro com valor digitado!");
+				JOptionPane.showMessageDialog(null,"Erro com valor digitado!");
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null,
-						"Digite somete números e não letras");
+				JOptionPane.showMessageDialog(null,"Digite somete números e não letras");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"De um duplo click no produto que deseja alterar!");
+			JOptionPane.showMessageDialog(null,"De um duplo click no produto que deseja alterar!");
 		}
 	}
 
 	protected void deletar() {
-		p.deletar(listaP.get(table.getSelectedRow()).getCod());
+		dp.deletar(listaP.get(table.getSelectedRow()).getCod());
 		tableProduto.deletar(table.getSelectedRow());
 	}
 

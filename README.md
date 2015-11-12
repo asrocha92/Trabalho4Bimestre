@@ -96,4 +96,4 @@
 	*Teste JUnit da classe DaoUsuário funcionando.
 	*Teste JUnit da classe DaoVenda funcionando.
 	*Criado uma classe ResetarDaos(para testes)
-		
+	*Teste JUnit da classse Produto o método calcularMarLucrP()	

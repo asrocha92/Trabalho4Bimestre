@@ -23,7 +23,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public int inserir(Usuario u) {
 		try {
-			ps = con.prepareStatement("INSERT INTO USUARIO (ID_C, CLIENTE, SENHA) VALUES (?, ?, ?)");
+			ps = con.prepareStatement("INSERT INTO USUARIO (ID_C, CLIENTE, SENHA) VALUES (?, ?, MD5(?))");
 			ps.setInt(1, u.getIdCliente());
 			ps.setString(2, u.getCliente());
 			ps.setString(3, u.getSenha());
@@ -123,7 +123,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 	public boolean Verifica(String user, String pass) {
 		try {
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT CLIENTE, SENHA FROM USUARIO WHERE CLIENTE = '"+user+"' AND SENHA = '"+pass+"'");
+			rs = st.executeQuery("SELECT CLIENTE, SENHA FROM USUARIO WHERE CLIENTE = '"+user+"' AND SENHA = MD5('"+pass+"')");
 			boolean v = rs.next();
 			return v;
 		} catch (SQLException e) {

@@ -21,7 +21,7 @@ CREATE TABLE `tb4bim`.`usuario`(
   UNIQUE INDEX `usuario` (`id_c`)
 );
 
-INSERT INTO `tb4bim`.`usuario` (`id_u`,`id_c`,`cliente`,`senha`) VALUES ( '1', '1','admin','admin');
+INSERT INTO `tb4bim`.`usuario` (`id_u`,`id_c`,`cliente`,`senha`) VALUES ( '1', '1','admin',MD5('admin'));
 
 
 CREATE TABLE `tb4bim`.`produto`(  
@@ -30,7 +30,7 @@ CREATE TABLE `tb4bim`.`produto`(
   `categoria` VARCHAR(30) NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
   `unidade` VARCHAR(30) NOT NULL,
-  `custo` DECIMAL(13,2) NOT NULL,
+  `custo` DECIMAL(13,3) NOT NULL,
   `marge_lucro` DECIMAL(13,2) NOT NULL,
   PRIMARY KEY (`cod_p`)
 );
@@ -41,9 +41,9 @@ CREATE TABLE `tb4bim`.`venda`(
   `cliente` VARCHAR(60) NOT NULL,
   `cod_p` INT(10) NOT NULL,
   `produto` VARCHAR(255) NOT NULL,
-  `vtotal` DECIMAL(13,2) NOT NULL,
-  `vpagamento` DECIMAL(13,2) NOT NULL,
-  `troco` DECIMAL(13,2) NOT NULL,
+  `vtotal` DECIMAL(13,3) NOT NULL,
+  `vpagamento` DECIMAL(13,3) NOT NULL,
+  `troco` DECIMAL(13,3) NOT NULL,
   `data` VARCHAR(10) NOT NULL,
   `hora` VARCHAR(8) NOT NULL,
    PRIMARY KEY (`cod_v`)
