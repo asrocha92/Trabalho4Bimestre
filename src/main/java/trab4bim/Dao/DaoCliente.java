@@ -80,9 +80,8 @@ public class DaoCliente implements CrudDao<Cliente> {
 			ps = getCon().prepareStatement("DELETE FROM CLIENTE WHERE ID_C =" + id);
 			int res = ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null,"Cliente excluido com sucesso.");
 			return res;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}

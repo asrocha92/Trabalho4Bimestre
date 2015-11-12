@@ -1,12 +1,17 @@
 package trab4bim.Dao;
 
+/**
+ * 
+ * @author Alex Santos Rocha, 12/11/2015 - 09:06:34
+ * 
+ * Testando os métodos da classe Conexão através do JUnit
+ */
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 
 public class JunitTesteConexao {
-	
-	
 	
 	@Test
 	public void testConOpen() {

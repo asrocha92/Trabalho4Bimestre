@@ -1,39 +1,54 @@
 package trab4bim.Dao;
 
-import static org.junit.Assert.*;
+/**
+ * @author Alex Santos Rocha, 12/11/2015 - 09:07:19
+ * 
+ * Testando os métodos da classe DaoVenda através do JUnit
+ */
 
-import org.junit.Test;
+import static org.junit.Assert.*;
+import java.math.BigDecimal;
+import org.junit.*;
+import trab4bim.classes.Venda;
 
 public class JUnitTesteDaoVenda {
-
+	
 	@Test
 	public void testInserir() {
-		fail("Not yet implemented");
+		assertEquals("Erro ao inserir dados no banco", 1,
+						new DaoVenda()
+							.inserir(new Venda(1, 1, "teste", "teste", BigDecimal.valueOf(16.99), BigDecimal.valueOf(17.00), BigDecimal.valueOf(0.01), "12/11/2015", "09:31:41")));
+		new ResetarDaos().resetar("VENDA");
 	}
 
-	@Test
+	@Ignore
 	public void testAtualizar() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDeletar() {
-		fail("Not yet implemented");
+		//toda venda pode ser modificada mas não pode mudar o histórico da mesma por isso ao atualizar venda ele insere no historico a mesma só que modificada 
 	}
 
 	@Test
 	public void testBuscarUm() {
-		fail("Not yet implemented");
+		new DaoVenda().inserir(new Venda(1, 1, "teste", "teste", BigDecimal.valueOf(16.99), BigDecimal.valueOf(17.00), BigDecimal.valueOf(0.01), "12/11/2015", "09:31:41"));
+		assertNotNull("Erro ao buscar Venda", new DaoVenda().buscarUm(1));
+		new ResetarDaos().resetar("VENDA");
 	}
 
 	@Test
 	public void testListar() {
-		fail("Not yet implemented");
+		new DaoVenda().inserir(new Venda(1, 1, "teste", "teste", BigDecimal.valueOf(16.99), BigDecimal.valueOf(17.00), BigDecimal.valueOf(0.01), "12/11/2015", "09:31:41"));
+		assertNotNull("Erro ao Listar Venda", new DaoVenda().listar());
+		new ResetarDaos().resetar("VENDA");
+	}
+
+	@Test
+	public void testDeletar() {
+		new DaoVenda().inserir(new Venda(1, 1, "teste", "teste", BigDecimal.valueOf(16.99), BigDecimal.valueOf(17.00), BigDecimal.valueOf(0.01), "12/11/2015", "09:31:41"));
+		assertEquals("Erro ao deletar histórico da venda", 1, new DaoVenda().deletar(1));
+		new ResetarDaos().resetar("VENDA");
 	}
 
 	@Test
 	public void testGetCon() {
-		fail("Not yet implemented");
+		assertNotNull("Erro ao retornar conexão", new DaoCliente().getCon());
 	}
-
 }

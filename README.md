@@ -92,4 +92,8 @@
 	*Teste JUnit da conexão com banco funcionando.
 	*Teste JUnit da classe DaoCliente funcionando.
 	*Teste JUnit da classe DaoProduto funcionando.
+# 12 de novembro de 2015
+	*Teste JUnit da classe DaoUsuário funcionando.
+	*Teste JUnit da classe DaoVenda funcionando.
+	*Criado uma classe ResetarDaos(para testes)
 		

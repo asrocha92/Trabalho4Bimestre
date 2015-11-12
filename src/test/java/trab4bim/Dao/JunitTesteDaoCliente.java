@@ -1,49 +1,31 @@
 package trab4bim.Dao;
 
+/**
+ * @author Alex Santos Rocha, 12/11/2015 - 09:01:40
+ * 
+ * Testando os métodos da classe DaoCliente através do JUnit
+ */
+
 import static org.junit.Assert.*;
-
 import org.junit.*;
-
-import trab4bim.classes.Cliente;
-import trab4bim.classes.Estado;
-import trab4bim.classes.Genero;
+import trab4bim.classes.*;
 
 public class JunitTesteDaoCliente {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void testInserir() {
-		int res = new DaoCliente().inserir(new Cliente("Alex", "04590902121","Rua paraná", "Cascavel", Estado.PR, "teste@teste.com",Genero.M));
-		if (res == 1)
-			assertTrue(true);
-		else 
-			assertTrue("Erro ao inserir dados no banco", false);
+		assertEquals("Erro ao inserir dados no banco", 1, 
+							new DaoCliente()
+								.inserir(new Cliente("Alex", "04590902121","Rua paraná", "Cascavel", Estado.PR, "teste@teste.com",Genero.M)));
 		new ResetarDaos().resetar("CLIENTE");
 	}
 
 	@Test
 	public void testAtualizar() {
 		new DaoCliente().inserir(new Cliente("test", "04590902121","Rua paraná", "Cascavel", Estado.PR, "teste@teste.com",Genero.M));
-		int res = new DaoCliente().atualizar(new Cliente(1, "Alex", "4655521","Rua São Paulo", "Cascavel", Estado.PR, "teste@teste.com",Genero.M));
-		if (res == 1)
-			assertTrue(true);
-		else
-			assertTrue("Erro ao inserir dados no banco", false);
+		assertEquals("Erro ao atualizar dados no banco", 1, 
+						new DaoCliente()
+							.atualizar(new Cliente(1, "Alex", "4655521","Rua São Paulo", "Cascavel", Estado.PR, "teste@teste.com",Genero.M)));
 		new ResetarDaos().resetar("CLIENTE");
 
 	}
@@ -65,11 +47,7 @@ public class JunitTesteDaoCliente {
 	@Test
 	public void testDeletar() {
 		new DaoCliente().inserir(new Cliente("Alex", "04590902121","Rua paraná", "Cascavel", Estado.PR, "teste@teste.com",Genero.M));
-		int res = new DaoCliente().deletar(1);
-		if (res == 1) 
-			assertTrue(true);
-		else 
-			assertTrue("Erro ao deletar Cliente", false);
+		assertEquals("Erro ao deletar cliente",1 , new DaoCliente().deletar(1));
 		new ResetarDaos().resetar("CLIENTE");
 	}
 

@@ -40,7 +40,7 @@ public class DaoUsuario implements CrudDao<Usuario> {
 
 	public int atualizar(Usuario u) {
 		try {
-			ps = con.prepareStatement("UPDATE USUARIO SET ID_C = ?, CLIENTE = ?, SENHA =? WHERE ID_U"
+			ps = con.prepareStatement("UPDATE USUARIO SET ID_C = ?, CLIENTE = ?, SENHA =? WHERE ID_U="
 					+ u.getId());
 			ps.setInt(1, u.getIdCliente());
 			ps.setString(2, u.getCliente());

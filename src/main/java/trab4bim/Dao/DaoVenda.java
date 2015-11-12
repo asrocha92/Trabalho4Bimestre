@@ -21,7 +21,7 @@ import trab4bim.classes.Venda;
  *
  */
 public class DaoVenda implements CrudDao<Venda> {
-	private PreparedStatement ps = null;
+	private PreparedStatement ps;
 	private Statement st = null;
 	private ResultSet rs = null;
 	private Venda v = null;
@@ -30,8 +30,7 @@ public class DaoVenda implements CrudDao<Venda> {
 
 	public int inserir(Venda vd) {
 		try {
-			ps = con.prepareStatement("INSERT INTO VENDA (ID_C, CLIENTE, COD_P,"
-					+ " PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			ps = con.prepareStatement("INSERT INTO VENDA (ID_C, CLIENTE, COD_P, PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setInt(1, vd.getId_c());
 			ps.setString(2, vd.getCliente());
 			ps.setInt(3, vd.getCod_p());
@@ -43,11 +42,10 @@ public class DaoVenda implements CrudDao<Venda> {
 			ps.setString(9, vd.getHora());
 			int res = ps.executeUpdate();
 			ps.close();
-			if (vd.getCod_v() == 0) {
-				JOptionPane.showMessageDialog(null, "Venda não efetuada.");
-			}else{
-				JOptionPane.showMessageDialog(null, "Venda Atualiza com sucesso.");
-			}
+			if(res == 1)
+				JOptionPane.showMessageDialog(null, "Venda efetuada com sucesso.");
+			else
+				JOptionPane.showMessageDialog(null, "Venda não efetuada!");
 			return res;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,7 +63,10 @@ public class DaoVenda implements CrudDao<Venda> {
 			ps = con.prepareStatement("DELETE FROM VENDA WHERE COD_V =" + cod_v);
 			int res = ps.executeUpdate();
 			ps.close();
-			JOptionPane.showMessageDialog(null, "Requisição de venda excluida com sucesso");
+			if(res == 1)
+				JOptionPane.showMessageDialog(null, "Historico selecionado foi\nexcluido com sucesso");
+			else
+				JOptionPane.showMessageDialog(null, "Histórico selecionado não foi excluido!");
 			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,11 +77,9 @@ public class DaoVenda implements CrudDao<Venda> {
 	public Venda buscarUm(int cod_v) {
 		try {
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT ID_C, CLIENTE, COD_P,"
-					+ "PRODUTO, VTOTAL, VPAGAMENTO, TROCO, DATA, HORA"
-					+ "FROM venda WHERE COD_V = " + cod_v);
+			rs = st.executeQuery("SELECT * FROM VENDA WHERE COD_V ="+ cod_v);
 			rs.next();
-			if (rs.getString("CLIENTE") != null) {
+			if (rs.getString("ID_C") != null) {
 				v = new Venda(rs.getInt("ID_C"),
 						rs.getInt("COD_P"),
 						rs.getString("CLIENTE"),
@@ -96,8 +95,8 @@ public class DaoVenda implements CrudDao<Venda> {
 			return v;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	public List<Venda> listar() {
