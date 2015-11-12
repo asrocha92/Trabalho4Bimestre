@@ -24,11 +24,11 @@ public class GerarPDF {
 	
 	private String tipo;
 	//teste no pc p
-//	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
-//	private String salvarLocal = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
+	private String arq = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
+	private String salvarLocal = "C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
 	//teste no pc do s
-	private String arq = "C:\\Users\\e006617\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
-	private String salvarLocal = arq;
+//	private String arq = "C:\\Users\\e006617\\git\\Trabalho4Bimestre\\src\\main\\resources\\";
+//	private String salvarLocal = arq;
 	
 	public GerarPDF(String tipo, TableModel tbModel){
 		this.tipo = tipo;

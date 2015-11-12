@@ -140,79 +140,135 @@ public class TelaPrincipal extends JFrame implements Sistema {
 
 	protected void abrirRelvenda() {
 		TelaRelVenda rv = new TelaRelVenda();
+
+		if(verfTelaAberta("Relatório das Vendas")) return;
+		
 		ActionListener a = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(rv);
 			}			
 		};
 		rv.setCloseAction(a);
-		tabbedPane.addTab("Relatório do Produto ", rv);
+		tabbedPane.addTab("Relatório das Vendas", rv);
+		
+		SelecioneTelaAbrirIndex();
 	}
 
 	protected void abrirRelProduto() {
 		TelaRelProduto rp = new TelaRelProduto();
+		
+		if(verfTelaAberta("Relatório do Produto")) return;
+		
 		ActionListener a = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(rp);
 			}			
 		};
 		rp.setCloseAction(a);
-		tabbedPane.addTab("Relatório do Produto ", rp);
+		tabbedPane.addTab("Relatório do Produto", rp);
+
+		SelecioneTelaAbrirIndex();
 	}
 
 	protected void abrirRelatorioCliente() {
 		TelaRelCliente rc = new TelaRelCliente();
+		
+		if(verfTelaAberta("Relatório do Cliente")) return;
+		
 		ActionListener a = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(rc);
 			}			
 		};
 		rc.setCloseAction(a);
-		tabbedPane.addTab("Relatório do Cliente ", rc);		
+		tabbedPane.addTab("Relatório do Cliente", rc);		
+
+		SelecioneTelaAbrirIndex();
 	}
 
 	private void abrirCadCliente() {		
 		TelaCadCliente tl = new TelaCadCliente();
+		
+		if(verfTelaAberta("Cadastrar Cliente")) return;
+		
 		ActionListener a = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(tl);
 			}			
 		};
 		tl.setCloseAction(a);
-		tabbedPane.addTab("Cadastro de Cliente ", tl);
+		tabbedPane.addTab("Cadastrar Cliente", tl);
+
+		SelecioneTelaAbrirIndex();
 	}
 	
 	protected void abrirTelaDoProd() {
 		TelaCadProduto p = new TelaCadProduto();
+		
+		if(verfTelaAberta("Cadastrar Produto")) return;
+		
 		ActionListener a = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(p);
 			}			
 		};
 		p.setCloseAction(a);
-		tabbedPane.addTab("Cadastro de Produto ", p);
+		tabbedPane.addTab("Cadastrar Produto", p);
+
+		SelecioneTelaAbrirIndex();
 	}
 	
 	protected void abrirTelaUsuario() {
 		TelaCadUsuario u = new TelaCadUsuario();
+		
+		if(verfTelaAberta("Cadastrar Usuário")) return;
+		
 		ActionListener a = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(u);
 			}			
 		};
 		u.setCloseAction(a);
-		tabbedPane.addTab("Cadastro de Usuário ", u);
+		tabbedPane.addTab("Cadastrar Usuário", u);
+
+		SelecioneTelaAbrirIndex();
 	}	
 	
 	protected void abrirVenda() {
 		TelaCadVenda v = new TelaCadVenda();
+		
+		if(verfTelaAberta("Efetuar Venda")) return;
+		
 		ActionListener a = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(v);
 			}			
 		};
 		v.setCloseAction(a);
-		tabbedPane.addTab("Vendas ", v);
+
+		tabbedPane.addTab("Efetuar Venda", v);
+
+		SelecioneTelaAbrirIndex();
 	}
 	
+	//método que deixa ser instânciado somente uma aba especifica de um tipo na tela
+	public boolean verfTelaAberta(String nTabPane){
+		for(int i = 0; i < tabbedPane.getTabCount(); i++){
+			if(tabbedPane.getTitleAt(i).equals(nTabPane)){
+				tabbedPane.setSelectedIndex(i);
+				SelecioneTelaAbrirComp(i);
+				return true;
+			}			
+		}
+		return false;
+	}
+	
+	//seleciona a tela se estiver aberta
+	public void SelecioneTelaAbrirIndex(){
+		tabbedPane.setSelectedIndex(tabbedPane.getTabCount() -1);
+	}
+	
+	public void SelecioneTelaAbrirComp(int index){
+		tabbedPane.setSelectedComponent(tabbedPane.getComponent(index));
+	}
 }
