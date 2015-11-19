@@ -124,6 +124,7 @@ public class MioloCadVenda extends JPanel {
 		add(lblTelefone, gbc_lblTelefone);
 
 		cbx_produto = new JComboBox<String>();
+		cbx_produto.setToolTipText("De um duplo click, e insira valor");
 		// após um click no cbx_Produto ira preencher alguns campos na tela
 		// automatico
 		cbx_produto.addMouseListener(new MouseAdapter() {
@@ -298,6 +299,10 @@ public class MioloCadVenda extends JPanel {
 		listaClienteProduto();
 		// preencher os campos data e Hora automatico
 		rDataTime();
+		
+		txt_vTotal.setEnabled(false);
+		txt_vPago.setEnabled(false);
+		txt_vTroco.setEnabled(false);
 	}
 
 	// lista dados armazenados no banco na table
@@ -313,9 +318,8 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	protected void cadastrar() {
-		Venda venda;
 		try {
-			venda = new Venda(
+			Venda venda = new Venda(
 					listaCliente.get(cbx_cliente.getSelectedIndex() - 1).getId(),
 					listaProduto.get(cbx_produto.getSelectedIndex() - 1).getCod(),
 					String.valueOf(cbx_cliente.getSelectedItem()),
@@ -328,6 +332,7 @@ public class MioloCadVenda extends JPanel {
 			listaV = v.listar();
 			tableVenda.adicionarLista(listaV);
 			limpar();
+			JOptionPane.showMessageDialog(null, "Efetuada Venda com sucesso");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
@@ -349,6 +354,7 @@ public class MioloCadVenda extends JPanel {
 				v.inserir(venda);
 				listaV = v.listar();
 				tableVenda.adicionarLista(listaV);
+				JOptionPane.showMessageDialog(null, "Venda atualizada venda com sucesso");
 				limpar();
 				indece = -1;
 			} catch (Exception e) {
@@ -373,7 +379,13 @@ public class MioloCadVenda extends JPanel {
 		txt_vTroco.setText(String.valueOf(v.getTroco()));
 		txt_data.setText(v.getData());
 		txt_horas.setText(v.getHora());
+		txt_codVenda.setEnabled(true);
 		txt_codVenda.setEditable(false);
+		txt_data.setEnabled(true);
+		txt_horas.setEnabled(true);
+		txt_data.setEditable(true);
+		txt_horas.setEditable(true);
+		deixarVisBt();
 	}
 
 	private void limpar() {
@@ -428,14 +440,12 @@ public class MioloCadVenda extends JPanel {
 				BigDecimal bd = new BigDecimal(troco).setScale(2, RoundingMode.HALF_EVEN);
 				txt_vTroco.setText(bd.toString());
 			} else {
-				JOptionPane.showMessageDialog(null,
-						"Valor recebido, e menos que o custo do produto");
+				JOptionPane.showMessageDialog(null,	"Valor recebido, e menos que o custo do produto");
 			}
 
+			deixarVisBt();
 		} catch (Exception e) {
-			JOptionPane
-					.showMessageDialog(null,
-							"O valor digitado deve ser número ou com ponto\nEX: 50 ou 21.25");
+			JOptionPane.showMessageDialog(null,	"O valor digitado deve ser número ou com ponto\nEX: 50 ou 21.25");
 		}
 
 	}
@@ -450,6 +460,16 @@ public class MioloCadVenda extends JPanel {
 		
 		txt_data.setEditable(false);
 		txt_horas.setEditable(false);
+	}
+	
+	
+	private void deixarVisBt(){
+		txt_vTotal.setEnabled(true);
+		txt_vPago.setEnabled(true);
+		txt_vTroco.setEnabled(true);
+		txt_vTotal.setEditable(false);
+		txt_vPago.setEditable(false);
+		txt_vTroco.setEditable(false);
 	}
 
 }

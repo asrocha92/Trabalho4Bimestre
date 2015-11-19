@@ -78,6 +78,7 @@ public class RelatorioCliente extends JPanel {
 		add(lblNewLabel, gbc_lblNewLabel);
 
 		cbx_estado = new JComboBox<>();
+		cbx_estado.setToolTipText("De duplo click ira filtar");
 		cbx_estado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
@@ -101,6 +102,7 @@ public class RelatorioCliente extends JPanel {
 		add(lblFiltroPorCidade, gbc_lblFiltroPorCidade);
 
 		cbx_cidade = new JComboBox<>();
+		cbx_cidade.setToolTipText("De duplo click ira filtar");
 		cbx_cidade.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {

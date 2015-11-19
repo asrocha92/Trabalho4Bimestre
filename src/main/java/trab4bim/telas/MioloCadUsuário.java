@@ -211,27 +211,35 @@ public class MioloCadUsuário extends JPanel {
 	}
 
 	protected void cadastrar() {
-		Usuario usuario = new Usuario();
-		usuario.setIdCliente(Integer.parseInt(txt_idCliente.getText()));
-		usuario.setCliente(txt_cliente.getText());
-		usuario.setSenha(String.valueOf(txt_senha.getPassword()));
-		u.inserir(usuario);
-		listaU = u.listar();
-		tableUsuario.adicionarLista(listaU);
-		limpar();
+		try{
+			Usuario usuario = new Usuario();
+			usuario.setIdCliente(Integer.parseInt(txt_idCliente.getText()));
+			usuario.setCliente(txt_cliente.getText());
+			usuario.setSenha(String.valueOf(txt_senha.getPassword()));
+			u.inserir(usuario);
+			listaU = u.listar();
+			tableUsuario.adicionarLista(listaU);
+			limpar();
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 	}
 
 	protected void atualizar() {
 		if (indece > -1) {
-			Usuario usuario = new Usuario();
-			usuario.setId(Integer.parseInt(txt_idUser.getText()));
-			usuario.setIdCliente(Integer.parseInt(txt_idCliente.getText()));
-			usuario.setCliente(txt_cliente.getText());
-			usuario.setSenha(txt_senha.getSelectedText());
-			u.atualizar(usuario);
-			tableUsuario.atualizarLista(indece, usuario);
-			limpar();
-			indece = -1;
+			try{
+				Usuario usuario = new Usuario();
+				usuario.setId(Integer.parseInt(txt_idUser.getText()));
+				usuario.setIdCliente(Integer.parseInt(txt_idCliente.getText()));
+				usuario.setCliente(txt_cliente.getText());
+				usuario.setSenha(txt_senha.getSelectedText());
+				u.atualizar(usuario);
+				tableUsuario.atualizarLista(indece, usuario);
+				limpar();
+				indece = -1;
+			} catch (Exception e){
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"Selecio um Usuário para editar!");

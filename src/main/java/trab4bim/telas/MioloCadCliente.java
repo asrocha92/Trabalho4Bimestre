@@ -332,6 +332,7 @@ public class MioloCadCliente extends JPanel {
 
 	protected void atualizar() {
 		if (indece > -1) {
+			try{
 			Cliente cliente = new Cliente(
 					Integer.parseInt(txt_id.getText()),
 					tratar.tratarString(txt_nome.getText(), "NOME"),
@@ -345,6 +346,9 @@ public class MioloCadCliente extends JPanel {
 			tableCliente.atualizarLista(indece, cliente);
 			limpar();
 			indece = -1;
+			} catch (Exception e){
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
 		}else{
 			JOptionPane.showMessageDialog(null, "Selecio um cliente para editar!");
 		}

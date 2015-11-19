@@ -43,9 +43,7 @@ public class DaoVenda implements CrudDao<Venda> {
 			int res = ps.executeUpdate();
 			ps.close();
 			if(res == 1)
-				JOptionPane.showMessageDialog(null, "Venda efetuada com sucesso.");
-			else
-				JOptionPane.showMessageDialog(null, "Venda não efetuada!");
+				return res;
 			return res;
 		} catch (Exception e) {
 			e.printStackTrace();

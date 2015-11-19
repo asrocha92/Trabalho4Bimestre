@@ -29,7 +29,7 @@ public class TratarException {
 				cont++;
 		}
 		if(cont == 0)
-			return nome;
+			return valor;
 		else
 			throw new RuntimeException("Escreva somente letras em: "+nome);
 	}
@@ -42,7 +42,7 @@ public class TratarException {
 				cont++;
 		}
 		if(cont == 0)
-			return nome;
+			return valor;
 		else
 			throw new RuntimeException("Escreva somente números em: "+nome);
 	}
