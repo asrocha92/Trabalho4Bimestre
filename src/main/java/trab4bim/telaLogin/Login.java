@@ -146,13 +146,13 @@ public class Login extends JFrame {
 		new DaoUsuario().getCon();
 	}
 
-	protected void verifica() {
+	private void verifica() {
 		try {
-			new SistemaProxy(txt_user.getText(), new String(txt_pass.getPassword()));
+			new SistemaProxy(txt_user.getText(), String.valueOf((txt_pass.getPassword())));
 			this.dispose();
 			frame1.dispose();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Usuário ou senha\nINCORRETA");
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			limpar();
 			txt_user.setFocusable(true);
 		}

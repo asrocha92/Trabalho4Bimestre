@@ -14,7 +14,7 @@ public class SistemaProxy implements Sistema{
 		if (VerificaUserPass(user, pass)) {
 			new TelaPrincipal().abrir(user, pass);
 		} else {
-			throw new RuntimeException("Senha invalida");
+			throw new RuntimeException("Usuário ou senha\nINCORRETOS\n");
 		}
 		
 	}

@@ -210,12 +210,11 @@ public class MioloCadUsuário extends JPanel {
 		}).start();
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void cadastrar() {
 		Usuario usuario = new Usuario();
 		usuario.setIdCliente(Integer.parseInt(txt_idCliente.getText()));
 		usuario.setCliente(txt_cliente.getText());
-		usuario.setSenha(txt_senha.getText());
+		usuario.setSenha(String.valueOf(txt_senha.getPassword()));
 		u.inserir(usuario);
 		listaU = u.listar();
 		tableUsuario.adicionarLista(listaU);
@@ -249,6 +248,7 @@ public class MioloCadUsuário extends JPanel {
 		txt_idCliente.setText(String.valueOf(u.getIdCliente()));
 		txt_cliente.setText(u.getCliente());
 		txt_senha.setText(u.getSenha());
+		txt_idUser.setEditable(false);
 	}
 
 	public void limpar() {

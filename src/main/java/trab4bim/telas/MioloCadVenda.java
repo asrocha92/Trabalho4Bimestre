@@ -37,7 +37,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -59,6 +58,8 @@ public class MioloCadVenda extends JPanel {
 	private DaoVenda v = new DaoVenda();
 	private List<Venda> listaV = new ArrayList<>();
 	protected int indece = -1;
+	
+	private TratarException tratar = new TratarException();
 
 	private List<Cliente> listaCliente = new ArrayList<Cliente>();
 	private List<Produto> listaProduto = new ArrayList<Produto>();
@@ -315,27 +316,20 @@ public class MioloCadVenda extends JPanel {
 		Venda venda;
 		try {
 			venda = new Venda(
-					listaCliente.get(cbx_cliente.getSelectedIndex() - 1)
-							.getId(),
-					listaProduto.get(cbx_produto.getSelectedIndex() - 1)
-							.getCod(),
+					listaCliente.get(cbx_cliente.getSelectedIndex() - 1).getId(),
+					listaProduto.get(cbx_produto.getSelectedIndex() - 1).getCod(),
 					String.valueOf(cbx_cliente.getSelectedItem()),
 					String.valueOf(cbx_produto.getSelectedItem()),
-					new TratarException().tratarBigDecimal(txt_vTotal.getText()),
-					new TratarException().tratarBigDecimal(txt_vPago.getText()),
-					new TratarException().tratarBigDecimal(txt_vTroco.getText()),
+					tratar.tratarBigDecimal(txt_vTotal.getText()),
+					tratar.tratarBigDecimal(txt_vPago.getText()),
+					tratar.tratarBigDecimal(txt_vTroco.getText()),
 					txt_data.getText(), txt_horas.getText());
 			v.inserir(venda);
 			listaV = v.listar();
 			tableVenda.adicionarLista(listaV);
 			limpar();
-		} catch (ParseException e) {
-			JOptionPane.showMessageDialog(null, "Erro com valor digitado!");
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null,
-					"Digite somete números e não letras");
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
 
@@ -344,32 +338,24 @@ public class MioloCadVenda extends JPanel {
 			try {
 				Venda venda = new Venda(
 						Integer.parseInt(txt_codVenda.getText()),
-						listaCliente.get(cbx_cliente.getSelectedIndex() - 1)
-								.getId(),
-						listaProduto.get(cbx_produto.getSelectedIndex() - 1)
-								.getCod(),
+						listaCliente.get(cbx_cliente.getSelectedIndex() - 1).getId(),
+						listaProduto.get(cbx_produto.getSelectedIndex() - 1).getCod(),
 						String.valueOf(cbx_cliente.getSelectedItem()),
 						String.valueOf(cbx_produto.getSelectedItem()),
-						new TratarException().tratarBigDecimal(txt_vTotal.getText()),
-						new TratarException().tratarBigDecimal(txt_vPago.getText()),
-						new TratarException().tratarBigDecimal(txt_vTroco.getText()),
+						tratar.tratarBigDecimal(txt_vTotal.getText()),
+						tratar.tratarBigDecimal(txt_vPago.getText()),
+						tratar.tratarBigDecimal(txt_vTroco.getText()),
 						txt_data.getText(), txt_horas.getText());
 				v.inserir(venda);
 				listaV = v.listar();
 				tableVenda.adicionarLista(listaV);
 				limpar();
 				indece = -1;
-			} catch (ParseException e) {
-				JOptionPane.showMessageDialog(null, "Erro com valor digitado!");
-			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null,
-						"Digite somete números e não letras");
 			} catch (Exception e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"De um duplo click na tabela venda para poder atualizar!");
+			JOptionPane.showMessageDialog(null,"De um duplo click na tabela venda para poder atualizar!");
 		}
 	}
 
@@ -387,6 +373,7 @@ public class MioloCadVenda extends JPanel {
 		txt_vTroco.setText(String.valueOf(v.getTroco()));
 		txt_data.setText(v.getData());
 		txt_horas.setText(v.getHora());
+		txt_codVenda.setEditable(false);
 	}
 
 	private void limpar() {
@@ -460,6 +447,9 @@ public class MioloCadVenda extends JPanel {
 
 		Calendar hora = Calendar.getInstance();
 		txt_horas.setText(String.format("%1$tH:%tM:%1$tS", hora));
+		
+		txt_data.setEditable(false);
+		txt_horas.setEditable(false);
 	}
 
 }

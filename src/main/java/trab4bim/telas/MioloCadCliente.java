@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import trab4bim.Dao.DaoCliente;
+import trab4bim.TrararException.TratarException;
 import trab4bim.classes.Cliente;
 import trab4bim.classes.Estado;
 import trab4bim.classes.Genero;
@@ -40,6 +41,7 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class MioloCadCliente extends JPanel {
+
 	private JTextField txt_nome;
 	private JTextField txt_telefone;
 	private JTextField txt_endereco;
@@ -54,6 +56,8 @@ public class MioloCadCliente extends JPanel {
 	private DaoCliente c = new DaoCliente();
 	private List<Cliente> listaC = new ArrayList<>();
 	private int indece = -1;
+	
+	private TratarException tratar = new TratarException();
 
 	/**
 	 * Create the panel.
@@ -308,27 +312,32 @@ public class MioloCadCliente extends JPanel {
 	}
 
 	protected void cadastrar() {
-		Cliente cliente = new Cliente(txt_nome.getText(),
-				txt_telefone.getText(), 
-				txt_endereco.getText(),
-				txt_cidade.getText(),
-				Estado.valueOf(String.valueOf(cbx_estado.getSelectedItem())),
-				txt_email.getText(),
-				Genero.valueOf(String.valueOf(cbx_genero.getSelectedItem())));
-		c.inserir(cliente);
-		listaC = c.listar();
-		tableCliente.adicionarLista(listaC);
-		limpar();
+		try {
+			
+			Cliente cliente = new Cliente(tratar.tratarString(txt_nome.getText(), "NOME"),
+					tratar.tratarNumero(txt_telefone.getText(), "TELEFONE"), 
+					txt_endereco.getText(),
+					tratar.tratarString(txt_cidade.getText(), "CIDADE"),
+					Estado.valueOf(String.valueOf(cbx_estado.getSelectedItem())),
+					txt_email.getText(),
+					Genero.valueOf(String.valueOf(cbx_genero.getSelectedItem())));
+			c.inserir(cliente);
+			listaC = c.listar();
+			tableCliente.adicionarLista(listaC);
+			limpar();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 	}
 
 	protected void atualizar() {
 		if (indece > -1) {
 			Cliente cliente = new Cliente(
 					Integer.parseInt(txt_id.getText()),
-					txt_nome.getText(),
-					txt_telefone.getText(),
+					tratar.tratarString(txt_nome.getText(), "NOME"),
+					tratar.tratarNumero(txt_telefone.getText(), "TELEFONE"),
 					txt_endereco.getText(),
-					txt_cidade.getText(),
+					tratar.tratarString(txt_cidade.getText(), "CIDADE"),
 					Estado.valueOf(String.valueOf(cbx_estado.getSelectedItem())),
 					txt_email.getText(),
 					Genero.valueOf(String.valueOf(cbx_genero.getSelectedItem())));
@@ -355,6 +364,7 @@ public class MioloCadCliente extends JPanel {
 		cbx_estado.setSelectedItem(c.getEstado().name());
 		txt_email.setText(c.getEmail());
 		cbx_genero.setSelectedItem(c.getGenero().name());
+		txt_id.setEditable(false);
 	}
 
 	public void limpar() {
