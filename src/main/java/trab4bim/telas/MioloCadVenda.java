@@ -124,17 +124,6 @@ public class MioloCadVenda extends JPanel {
 		add(lblTelefone, gbc_lblTelefone);
 
 		cbx_produto = new JComboBox<String>();
-		cbx_produto.setToolTipText("De um duplo click, e insira valor");
-		// após um click no cbx_Produto ira preencher alguns campos na tela
-		// automatico
-		cbx_produto.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount() == 2) {
-					fazerOsParanaesDasVenda();
-				}
-			}
-		});
 		GridBagConstraints gbc_cbx_produto = new GridBagConstraints();
 		gbc_cbx_produto.gridwidth = 3;
 		gbc_cbx_produto.insets = new Insets(0, 0, 5, 0);
@@ -153,13 +142,25 @@ public class MioloCadVenda extends JPanel {
 
 		txt_vTotal = new JTextField();
 		GridBagConstraints gbc_txt_vTotal = new GridBagConstraints();
-		gbc_txt_vTotal.gridwidth = 3;
-		gbc_txt_vTotal.insets = new Insets(0, 0, 5, 0);
+		gbc_txt_vTotal.gridwidth = 2;
+		gbc_txt_vTotal.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_vTotal.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txt_vTotal.gridx = 1;
 		gbc_txt_vTotal.gridy = 4;
 		add(txt_vTotal, gbc_txt_vTotal);
 		txt_vTotal.setColumns(10);
+		
+		JButton btnNewButton_3 = new JButton("Inf. Pagamento");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				fazerOsParanaesDasVenda();
+			}
+		});
+		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
+		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton_3.gridx = 3;
+		gbc_btnNewButton_3.gridy = 4;
+		add(btnNewButton_3, gbc_btnNewButton_3);
 
 		JLabel lblCidade = new JLabel("VALOR PAGO: ");
 		GridBagConstraints gbc_lblCidade = new GridBagConstraints();

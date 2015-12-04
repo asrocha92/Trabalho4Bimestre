@@ -22,6 +22,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JPasswordField;
 
@@ -34,6 +36,9 @@ public class Login extends JFrame {
 	private JTextField txt_user;
 	private JPasswordField txt_pass;
 	private FundoDaTelaLogin frame1;
+	private JTextField TextTranferir;
+	private JButton btnLogar;
+	private JButton btnFechar;
 
 	/**
 	 * Launch the application.
@@ -82,6 +87,8 @@ public class Login extends JFrame {
 		contentPane.add(lblLogin, gbc_lblLogin);
 		
 		txt_user = new JTextField();
+		
+		
 		GridBagConstraints gbc_txt_user = new GridBagConstraints();
 		gbc_txt_user.fill = GridBagConstraints.BOTH;
 		gbc_txt_user.insets = new Insets(0, 0, 5, 0);
@@ -90,7 +97,7 @@ public class Login extends JFrame {
 		contentPane.add(txt_user, gbc_txt_user);
 		txt_user.setColumns(10);
 		
-		JButton btnLogar = new JButton("Logar");
+		btnLogar = new JButton("Logar");		
 		btnLogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				verifica();
@@ -108,6 +115,7 @@ public class Login extends JFrame {
 		contentPane.add(lblPassord, gbc_lblPassord);
 		
 		txt_pass = new JPasswordField();
+		
 		GridBagConstraints gbc_txt_pass = new GridBagConstraints();
 		gbc_txt_pass.fill = GridBagConstraints.BOTH;
 		gbc_txt_pass.insets = new Insets(0, 0, 5, 0);
@@ -122,7 +130,7 @@ public class Login extends JFrame {
 		gbc_btnLogar.gridy = 4;
 		contentPane.add(btnLogar, gbc_btnLogar);
 		
-		JButton btnFechar = new JButton("Fechar");
+		btnFechar = new JButton("Fechar");
 		btnFechar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame1.dispose();
@@ -135,6 +143,7 @@ public class Login extends JFrame {
 		gbc_btnFechar.gridy = 5;
 		contentPane.add(btnFechar, gbc_btnFechar);
 		
+
 		frame1 = new FundoDaTelaLogin();
 		frame1.setUndecorated(true);
 		frame1.setOpacity(0.8f);
@@ -144,7 +153,62 @@ public class Login extends JFrame {
 		frame1.setVisible(true);
 		
 		new DaoUsuario().getCon();
+		
+		
+		cofiguraPressListers();
+
 	}
+
+	
+	private  void cofiguraPressListers(){
+		txt_user.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					verifica();
+				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+					System.exit(0);
+				}
+			}
+		});
+		
+		txt_pass.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					verifica();
+				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+					System.exit(0);
+				}
+			}
+		});
+		
+		btnLogar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					verifica();
+				if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+					System.exit(0);
+			}
+		});
+		
+		
+		btnFechar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+					System.exit(0);
+				if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+					System.exit(0);
+			}
+		});
+		
+		
+	}
+	
+	
+	
 
 	private void verifica() {
 		try {
