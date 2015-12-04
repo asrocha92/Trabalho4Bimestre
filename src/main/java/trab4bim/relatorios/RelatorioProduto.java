@@ -34,6 +34,9 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.ImageIcon;
+import java.awt.event.KeyEvent;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class RelatorioProduto extends JPanel {
@@ -56,6 +59,7 @@ public class RelatorioProduto extends JPanel {
 		setLayout(gridBagLayout);
 
 		JButton btnNewButton = new JButton("EXPORTAR PRA PDF");
+		btnNewButton.setIcon(new ImageIcon(RelatorioProduto.class.getResource("/trab4bim/telas/ico/pdf.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				exportarPdf();
@@ -96,6 +100,7 @@ public class RelatorioProduto extends JPanel {
 		add(cbx_categoria, gbc_cbx_categoria);
 
 		JButton btnFiltrar = new JButton("FILTRAR");
+		btnFiltrar.setIcon(new ImageIcon(RelatorioProduto.class.getResource("/trab4bim/telas/ico/seacher.png")));
 		btnFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				gerarsql();
@@ -108,6 +113,8 @@ public class RelatorioProduto extends JPanel {
 		add(btnFiltrar, gbc_btnFiltrar);
 		
 		JButton btnNewButton_1 = new JButton("ATUALIZAR");
+		btnNewButton_1.setMnemonic(KeyEvent.VK_ENTER);
+		btnNewButton_1.setIcon(new ImageIcon(RelatorioProduto.class.getResource("/trab4bim/telas/ico/update.png")));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				modeloTable();
@@ -118,7 +125,7 @@ public class RelatorioProduto extends JPanel {
 		gbc_btnNewButton_1.gridx = 5;
 		gbc_btnNewButton_1.gridy = 1;
 		add(btnNewButton_1, gbc_btnNewButton_1);
-		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBackground(UIManager.getColor("Button.light"));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);

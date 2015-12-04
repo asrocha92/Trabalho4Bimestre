@@ -31,6 +31,7 @@ import trab4bim.tabelas.TableUsuario;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class MioloCadUsuário extends JPanel {
@@ -136,6 +137,7 @@ public class MioloCadUsuário extends JPanel {
 		add(txt_senha, gbc_txt_senha);
 
 		btnCadastrar = new JButton("CADASTRAR");
+		btnCadastrar.setIcon(new ImageIcon(MioloCadUsuário.class.getResource("/trab4bim/telas/ico/insert.png")));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cadastrar();
@@ -148,6 +150,7 @@ public class MioloCadUsuário extends JPanel {
 		add(btnCadastrar, gbc_btnCadastrar);
 
 		btnAtualizar = new JButton("ALTERAR");
+		btnAtualizar.setIcon(new ImageIcon(MioloCadUsuário.class.getResource("/trab4bim/telas/ico/change.png")));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				atualizar();
@@ -161,6 +164,7 @@ public class MioloCadUsuário extends JPanel {
 		add(btnAtualizar, gbc_btnAtualizar);
 
 		btnDeletar = new JButton("DELETAR");
+		btnDeletar.setIcon(new ImageIcon(MioloCadUsuário.class.getResource("/trab4bim/telas/ico/delete.png")));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deletar();

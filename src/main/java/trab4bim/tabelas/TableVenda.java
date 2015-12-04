@@ -5,6 +5,8 @@ package trab4bim.tabelas;
  * Comentario: carrega o modelo da tabela de clientes armazenados no banco
  */
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +39,9 @@ public class TableVenda extends AbstractTableModel{
 		case 0: return o.getCod_v();
 		case 1: return o.getCliente();
 		case 2: return o.getProduto();
-		case 3: return o.getvTotal();
-		case 4: return o.getvPago();
-		case 5: return o.getTroco();
+		case 3: return new BigDecimal(o.getvTotal().toString()).setScale(2, RoundingMode.HALF_EVEN);
+		case 4: return new BigDecimal(o.getvPago().toString()).setScale(2, RoundingMode.HALF_EVEN);
+		case 5: return new BigDecimal(o.getTroco().toString()).setScale(2, RoundingMode.HALF_EVEN);
 		case 6: return o.getData(); 
 		case 7: return o.getHora();
 		default: return "";

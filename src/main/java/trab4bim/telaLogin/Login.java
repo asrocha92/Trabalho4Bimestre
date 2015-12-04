@@ -36,7 +36,6 @@ public class Login extends JFrame {
 	private JTextField txt_user;
 	private JPasswordField txt_pass;
 	private FundoDaTelaLogin frame1;
-	private JTextField TextTranferir;
 	private JButton btnLogar;
 	private JButton btnFechar;
 

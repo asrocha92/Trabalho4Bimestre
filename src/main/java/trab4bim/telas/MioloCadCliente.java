@@ -38,6 +38,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class MioloCadCliente extends JPanel {
@@ -224,6 +225,7 @@ public class MioloCadCliente extends JPanel {
 		add(cbx_genero, gbc_cbx_genero);
 
 		JButton btnNewButton = new JButton("CADASTRAR");
+		btnNewButton.setIcon(new ImageIcon(MioloCadCliente.class.getResource("/trab4bim/telas/ico/insert.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cadastrar();
@@ -237,6 +239,7 @@ public class MioloCadCliente extends JPanel {
 		add(btnNewButton, gbc_btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("ALTERAR");
+		btnNewButton_1.setIcon(new ImageIcon(MioloCadCliente.class.getResource("/trab4bim/telas/ico/change.png")));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				atualizar();
@@ -250,6 +253,7 @@ public class MioloCadCliente extends JPanel {
 		add(btnNewButton_1, gbc_btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("DELETAR");
+		btnNewButton_2.setIcon(new ImageIcon(MioloCadCliente.class.getResource("/trab4bim/telas/ico/delete.png")));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deletar();

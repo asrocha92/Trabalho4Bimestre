@@ -32,6 +32,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 /**
  * 
@@ -63,6 +65,8 @@ public class RelatorioCliente extends JPanel {
 		setLayout(gridBagLayout);
 
 		JButton btnNewButton = new JButton("EXPORTAR PRA PDF");
+		btnNewButton.setBorder(UIManager.getBorder("Button.border"));
+		btnNewButton.setIcon(new ImageIcon(RelatorioCliente.class.getResource("/trab4bim/telas/ico/pdf.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				exportarPdf();
@@ -117,7 +121,8 @@ public class RelatorioCliente extends JPanel {
 		gbc_cbx_cidade.gridy = 1;
 		add(cbx_cidade, gbc_cbx_cidade);
 
-		JButton btnEC = new JButton("FILTRO DE E.C.");
+		JButton btnEC = new JButton("FILTRO DE Est. Cid.");
+		btnEC.setIcon(new ImageIcon(RelatorioCliente.class.getResource("/trab4bim/telas/ico/seacher.png")));
 		btnEC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				filtroEC();
@@ -130,6 +135,7 @@ public class RelatorioCliente extends JPanel {
 		add(btnEC, gbc_btnEC);
 
 		JButton btnAtualizar = new JButton("ATUALIZAR");
+		btnAtualizar.setIcon(new ImageIcon(RelatorioCliente.class.getResource("/trab4bim/telas/ico/update.png")));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				modeloTable();
@@ -140,7 +146,7 @@ public class RelatorioCliente extends JPanel {
 		gbc_btnAtualizar.gridx = 5;
 		gbc_btnAtualizar.gridy = 1;
 		add(btnAtualizar, gbc_btnAtualizar);
-		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBackground(UIManager.getColor("Button.light"));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);

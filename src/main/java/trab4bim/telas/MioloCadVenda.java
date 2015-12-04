@@ -41,6 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class MioloCadVenda extends JPanel {
@@ -142,7 +143,6 @@ public class MioloCadVenda extends JPanel {
 
 		txt_vTotal = new JTextField();
 		GridBagConstraints gbc_txt_vTotal = new GridBagConstraints();
-		gbc_txt_vTotal.gridwidth = 2;
 		gbc_txt_vTotal.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_vTotal.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txt_vTotal.gridx = 1;
@@ -151,14 +151,15 @@ public class MioloCadVenda extends JPanel {
 		txt_vTotal.setColumns(10);
 		
 		JButton btnNewButton_3 = new JButton("Inf. Pagamento");
+		btnNewButton_3.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/trab4bim/telas/ico/pagamento.png")));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				fazerOsParanaesDasVenda();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_3.gridx = 3;
+		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_3.gridx = 2;
 		gbc_btnNewButton_3.gridy = 4;
 		add(btnNewButton_3, gbc_btnNewButton_3);
 
@@ -225,6 +226,7 @@ public class MioloCadVenda extends JPanel {
 		add(lblGenro, gbc_lblGenro);
 
 		JButton btnNewButton = new JButton("EFETUAR VENDA");
+		btnNewButton.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/trab4bim/telas/ico/efetuar_ved.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cadastrar();
@@ -248,6 +250,7 @@ public class MioloCadVenda extends JPanel {
 		add(btnNewButton, gbc_btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("ALTERAR");
+		btnNewButton_1.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/trab4bim/telas/ico/change.png")));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				atualizar();
@@ -261,12 +264,14 @@ public class MioloCadVenda extends JPanel {
 		add(btnNewButton_1, gbc_btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("DELETAR");
+		btnNewButton_2.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/trab4bim/telas/ico/delete.png")));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deletar();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton_2.gridx = 3;
 		gbc_btnNewButton_2.gridy = 9;

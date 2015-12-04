@@ -21,6 +21,7 @@ import trab4bim.telaLogin.Sistema;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class TelaPrincipal extends JFrame implements Sistema {
@@ -62,9 +63,11 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		setJMenuBar(menuBar);
 		
 		JMenu mnCadastro = new JMenu("Cadastro");
+		mnCadastro.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/cadastrar.png")));
 		menuBar.add(mnCadastro);
 		
 		JMenuItem mntmCliente = new JMenuItem("Cliente");
+		mntmCliente.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/cliente2.png")));
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirCadCliente();
@@ -74,6 +77,7 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		mnCadastro.add(mntmCliente);
 		
 		JMenuItem mntmProduto = new JMenuItem("Produto");
+		mntmProduto.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/product.png")));
 		mntmProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirTelaDoProd();
@@ -82,6 +86,7 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		mnCadastro.add(mntmProduto);
 		
 		JMenuItem mntmUsurio = new JMenuItem("Usu\u00E1rio");
+		mntmUsurio.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/user.png")));
 		mntmUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirTelaUsuario();
@@ -90,9 +95,11 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		mnCadastro.add(mntmUsurio);
 		
 		JMenu mnVenda = new JMenu("Venda");
+		mnVenda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/venda.png")));
 		menuBar.add(mnVenda);
 		
 		JMenuItem mntmEfetuarVenda = new JMenuItem("Efetuar venda");
+		mntmEfetuarVenda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/efetuar_comp2.png")));
 		mntmEfetuarVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirVenda();
@@ -101,9 +108,11 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		mnVenda.add(mntmEfetuarVenda);
 		
 		JMenu mnRelattio = new JMenu("Relat\u00F3rio");
+		mnRelattio.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/relatorio.png")));
 		menuBar.add(mnRelattio);
 		
 		JMenuItem mntmCliente_1 = new JMenuItem("Cliente");
+		mntmCliente_1.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/rel_clie.png")));
 		mntmCliente_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirRelatorioCliente();
@@ -112,6 +121,7 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		mnRelattio.add(mntmCliente_1);
 		
 		JMenuItem mntmProduto_1 = new JMenuItem("Produto");
+		mntmProduto_1.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/rel_prod.png")));
 		mntmProduto_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirRelProduto();
@@ -120,6 +130,7 @@ public class TelaPrincipal extends JFrame implements Sistema {
 		mnRelattio.add(mntmProduto_1);
 		
 		JMenuItem mntmVenda = new JMenuItem("Venda");
+		mntmVenda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/trab4bim/telas/ico/rel_ved.png")));
 		mntmVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirRelvenda();

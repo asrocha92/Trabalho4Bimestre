@@ -32,6 +32,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class MioloDoProduto extends JPanel {
@@ -197,12 +199,13 @@ public class MioloDoProduto extends JPanel {
 		txt_mLucro.setColumns(10);
 
 		btnNewButton = new JButton("CADASTRAR");
+		btnNewButton.setMnemonic(KeyEvent.VK_ENTER);
+		btnNewButton.setIcon(new ImageIcon(MioloDoProduto.class.getResource("/trab4bim/telas/ico/insert.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cadastrar();
 			}
 		});
-		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 2;
@@ -210,6 +213,7 @@ public class MioloDoProduto extends JPanel {
 		add(btnNewButton, gbc_btnNewButton);
 
 		btnNewButton_1 = new JButton("ALTERAR");
+		btnNewButton_1.setIcon(new ImageIcon(MioloDoProduto.class.getResource("/trab4bim/telas/ico/change.png")));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				atualizar();
@@ -223,6 +227,7 @@ public class MioloDoProduto extends JPanel {
 		add(btnNewButton_1, gbc_btnNewButton_1);
 
 		btnDeletar = new JButton("DELETAR");
+		btnDeletar.setIcon(new ImageIcon(MioloDoProduto.class.getResource("/trab4bim/telas/ico/delete.png")));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				deletar();

@@ -27,6 +27,7 @@ import trab4bim.tabelas.TableVenda;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class RelatorioVenda extends JPanel {
@@ -131,6 +132,7 @@ public class RelatorioVenda extends JPanel {
 		txt_cliente.setColumns(10);
 		
 		JButton btnNewButton = new JButton("FILTRAR");
+		btnNewButton.setIcon(new ImageIcon(RelatorioVenda.class.getResource("/trab4bim/telas/ico/seacher.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerarsql();
@@ -144,6 +146,7 @@ public class RelatorioVenda extends JPanel {
 		panel.add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnAtualizar = new JButton("ATUALIZAR");
+		btnAtualizar.setIcon(new ImageIcon(RelatorioVenda.class.getResource("/trab4bim/telas/ico/update.png")));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				modeloTable();
@@ -157,6 +160,7 @@ public class RelatorioVenda extends JPanel {
 		panel.add(btnAtualizar, gbc_btnAtualizar);
 		
 		JButton btnGerarRelatrio = new JButton("GERAR RELAT\u00D3RIO");
+		btnGerarRelatrio.setIcon(new ImageIcon(RelatorioVenda.class.getResource("/trab4bim/telas/ico/pdf.png")));
 		btnGerarRelatrio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exportarPdf();
