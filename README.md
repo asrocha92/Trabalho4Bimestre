@@ -114,6 +114,7 @@
 		
 		* - Procesador dual cor
 		* - 3G de memória
+		* - Espaço em disco 1G
 		* - O programa em execução chega a consumir até 98 mb de mémoria
 		* - Roda em qualquer plataforma de S.O. que tenha um abiente java instado.
 		* - Versão do java 7 até a versão atual.
