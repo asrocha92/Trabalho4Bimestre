@@ -97,3 +97,30 @@
 	*Teste JUnit da classe DaoVenda funcionando.
 	*Criado uma classe ResetarDaos(para testes)
 	*Teste JUnit da classse Produto o método calcularMarLucrP()	
+
+# 05 de dezembro de 2015
+	
+	* Foi  utilizado os padrãos de projeto 
+		*Singleton
+			-Para objet somente uma instância da classe conexão na onde implementamos o método conectar e desconectar e o singleton para retorna uma instância se já criada 
+		*Decoretor
+			-Usado para criar novos componentes de tipos diferentes, tipo: o jpanel de cadastrar cliente, usuário, produto e outras tela do projeto.			
+		*Proxy
+			-Implementado para controlar entrada de usuários.
+		*Dao
+		 	-Implementado para suprimir a interação dos objetos associados a um tipo para trabalhar com o crud(inclusão, alteração,seleção e exclusão), através da linguagem sql de um banco de dados 'mysql' ou outros.
+	
+	*Requisitos minimos para rodar o Sistema SGV(Sistema de gestão de vendas) e processos a instalar.
+		
+		* - Procesador dual cor
+		* - 3G de memória
+		* - O programa em execução chega a consumir até 98 mb de mémoria
+		* - Roda em qualquer plataforma de S.O. que tenha um abiente java instado.
+		* - Versão do java 7 até a versão atual.
+		* - Precisa ter um serviço Mysql rodando no micro, pois o sistema Desktop sem interação com a internet. Na instalação do msql coloque a senha: '123'
+		* - Em sua instação é preciso rodar o escript do banco de dados após ter instado o serviço para que o SGV possa trabalhar corretamente.
+		* - Por padrão o sistema já tem usuário admin e senha admin, funcionara após ter rodado o script do banco mysql 
+	
+	
+	
+# Commit final.
