@@ -151,7 +151,7 @@ public class Login extends JFrame {
 		frame1.setEnabled(false);
 		frame1.setVisible(true);
 		
-		new DaoUsuario().getCon();
+//		new DaoUsuario().getCon();
 		
 		
 		cofiguraPressListers();

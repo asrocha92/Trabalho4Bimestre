@@ -34,12 +34,12 @@ public class FundoDaTelaLogin extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lb_img = new JLabel("");
-		lb_img.setIcon(new ImageIcon("C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\imagem\\ENG.jpg"));
-		GridBagConstraints gbc_lb_img = new GridBagConstraints();
-		gbc_lb_img.gridx = 0;
-		gbc_lb_img.gridy = 0;
-		contentPane.add(lb_img, gbc_lb_img);
+//		JLabel lb_img = new JLabel("");
+////		lb_img.setIcon(new ImageIcon("C:\\Users\\Alex\\git\\Trabalho4Bimestre\\src\\main\\resources\\imagem\\ENG.jpg"));
+//		GridBagConstraints gbc_lb_img = new GridBagConstraints();
+//		gbc_lb_img.gridx = 0;
+//		gbc_lb_img.gridy = 0;
+//		contentPane.add(lb_img, gbc_lb_img);
 	}
 
 }
